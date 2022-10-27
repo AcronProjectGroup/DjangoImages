@@ -3,5 +3,5 @@ from .views import say_hello
 
 
 urlpatterns = [
-    path('/', say_hello, name="home"),
+    path('', say_hello, name="home"),
 ]
