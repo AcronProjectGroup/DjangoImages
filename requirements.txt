@@ -3,3 +3,4 @@ backports.zoneinfo==0.2.1
 Django==4.1.2
 python-decouple==3.6
 sqlparse==0.4.3
+python-decouple==3.6
