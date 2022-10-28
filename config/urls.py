@@ -21,3 +21,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('sinalalebakhsh/', include('sinalalebakhsh.urls')),
 ]
+
+
+
+## test
