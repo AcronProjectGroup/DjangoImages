@@ -4,9 +4,8 @@ from .views import i_am_sina
 
 
 urlpatterns = [
-    path('', i_am_sina, name="home"),
+    path('/', i_am_sina, name="sinalalebakhsh"),
 ]
 
-## test 123
 
 
