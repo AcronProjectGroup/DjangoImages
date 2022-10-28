@@ -4,7 +4,7 @@ from .views import i_am_sina
 
 
 urlpatterns = [
-    path('/', i_am_sina, name="sinalalebakhsh"),
+    path('', i_am_sina, name="sinalalebakhsh"),
 ]
 
 
