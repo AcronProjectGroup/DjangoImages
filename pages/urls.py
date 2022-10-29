@@ -3,7 +3,7 @@ from .views import say_hellos
 
 
 urlpatterns = [
-    path('', say_hellos, name="pages"),
+    path('pages/', say_hellos, name="pages"),
 ]
 
 
