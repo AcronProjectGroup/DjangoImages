@@ -4,7 +4,7 @@ from django.http import HttpResponse
 
 
 def home_view(request):
-    return render(request, 'acron_project.html')
+    return render(request, 'pages/acron_project.html')
 
 
 def about_view(request):
