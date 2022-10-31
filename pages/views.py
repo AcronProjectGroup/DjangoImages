@@ -7,7 +7,7 @@ def home_view(request):
         'Page_name': 'AcronProject-HomePage',
         'description': 'Acron project is for everyone of Consciousness.',
     }
-    return render(request, 'acron_project.html', context)
+    return render(request, 'pages/acron_project.html', context)
 
 
 
