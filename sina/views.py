@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 
 def intro_sina(request):
-    return HttpResponse('sina lalebakhsh is here')
+    return render(request, 'sina/lale.html')
