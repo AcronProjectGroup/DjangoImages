@@ -1,10 +1,10 @@
 from django.urls import path
-from .views import i_am_sina
+from . import views
 
 
 
 urlpatterns = [
-    path('', i_am_sina, name="sinalalebakhsh"),
+    path('', views.i_am_sina, name="sinalalebakhsh"),
 ]
 
 
