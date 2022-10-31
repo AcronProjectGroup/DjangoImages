@@ -10,6 +10,10 @@ def home_view(request):
     return render(request, 'pages/acron_project.html', context)
 
 
+def consciousness(request):
+    return render(request, 'pages/consciousness.html')
+
+
 
 
 
