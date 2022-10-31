@@ -3,6 +3,6 @@ from django.http import HttpResponse
 
 
 def i_am_sina(request):
-    return render(request, 'sinalalebakhsh.html', context)
+    return render(request, 'sinalalebakhsh.html')
 
 

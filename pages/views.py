@@ -11,11 +11,6 @@ def home_view(request):
     return render(request, 'acron_project.html', context)
 
 
-def about_view(request):
-    return  HttpResponse('ABOUT page 4U.')
 
-
-def contactus_view(request):
-    return  HttpResponse('Contactus = Sina,IRAN, Tehran.')
 
 
