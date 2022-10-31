@@ -1,20 +1,16 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>AcronProject</title>
-</head>
-<body>
-    <h1>{{ Page_name }}</h1>
+
+{% extends '_base.html' %}
+
+{% block page_title %}HOME{% endblock page_title %}
+
+
+
+{% block content %}
+
+    
     <p>{{ description }}</p>
-    <h2>WELCOME TO ACRON PROJECT</h2>
-    <br>
-    <h2>HOME page is here...[*]</h2>
-</body>
-    <script>
-        alert('Wellcome to this Web Application :)');
-    </script>
-</html>
+
+
+{% endblock content %}
+
+
