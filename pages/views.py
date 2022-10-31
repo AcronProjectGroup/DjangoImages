@@ -4,7 +4,10 @@ from django.http import HttpResponse
 
 
 def home_view(request):
-    return render(request, 'acron_project.html')
+    context = {
+        'Page_name': 'AcronProject-HomePage',
+    }
+    return render(request, 'acron_project.html', context)
 
 
 def about_view(request):
