@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 
 def i_am_sina(request):
-    return render(request, 'templates/sinalalebakhsh/sinalalebakhsh.html')
+    return render(request, 'sinalalebakhsh/sinalalebakhsh.html')
 
 
 
