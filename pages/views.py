@@ -14,6 +14,9 @@ def consciousness(request):
     return render(request, 'pages/consciousness.html')
 
 
+def manifest_consciousness(render):
+    return render(request, 'pages/manifest-consciousness.html')
+
 
 
 
