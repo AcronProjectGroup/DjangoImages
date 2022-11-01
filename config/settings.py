@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'pages',
-    'sina',
-]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
