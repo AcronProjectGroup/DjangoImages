@@ -1,7 +1,7 @@
 from django.test import TestCase
-
 from django.shortcuts import reverse
 
+from .models import Note
 
 class UrlsLinksTest(TestCase):
     def test_homepage_view_by_url_static(self):
@@ -27,6 +27,16 @@ class UrlsLinksTest(TestCase):
     def test_manifest_consciousness_view_by_name(self):
         response = self.client.get(reverse('manifest-consciousness'))
         self.assertEqual(response.status_code, 200)
+
+    def test_exist_title_in_page(self):
+        note = Note.objects.create(author='sina', text='sample is here.')
+        response = self.client.get(reverse('homepage'))
+        self.assertContains(response, 'sample is here.')
+
+
+
+
+
 
 
 
