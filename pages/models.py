@@ -6,7 +6,7 @@ class Note(models.Model):
     author = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.author
+        return f'{self.author}: {self.text}'
 
     
 

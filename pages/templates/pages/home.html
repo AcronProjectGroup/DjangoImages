@@ -7,8 +7,16 @@
 
 {% block content %}
 
-    
-    <p>{{ description }}</p>
+    <p>Page_name: {{ Page_name }}</p> 
+    <br>
+    <p>Description: {{ description }}</p>
+    <br>
+
+    {% for note in notes %}
+        <h2>{{ note.author }}</h2>
+        <p>{{ note.text }}</p>
+        <p>___________________</p>
+    {% endfor %}
 
 
 {% endblock content %}
