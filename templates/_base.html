@@ -7,10 +7,12 @@
     <title>{% block page_title %}{% endblock page_title %}</title>
 </head>
 <body>
-
-    <a href="{% url 'homepage' %}">Homepage</a>
-    <a href="{% url 'consciousness' %}">Consciousness</a>
-    <a href="{% url 'manifest-consciousness' %}">Manifest</a>
+    <h2> 
+        <a href="{% url 'homepage' %}">Homepage</a>
+        <a href="{% url 'consciousness' %}">Consciousness</a>
+        <a href="{% url 'manifest-consciousness' %}">Manifest</a>
+        <a href="{% url 'blog' %}">Blog</a>
+    </h2>
     
     {% block content %}
 
