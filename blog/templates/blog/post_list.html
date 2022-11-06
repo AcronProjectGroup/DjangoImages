@@ -1,0 +1,32 @@
+
+{% extends '_base.html' %}
+
+{% block page_title %}BLOG{% endblock page_title %}
+
+
+
+{% block content %}
+
+{% for post in post_list %}
+    {{ post.title }}
+    <br>
+    {{ post.text }}
+    <br>
+    {{ post.author }}
+    <br>
+    {{ post.date_time_created }}
+    <br>
+    {{ post.date_time_modified }}
+    <br>
+    {{ post.status }}
+{% endfor %} 
+
+{% endblock content %}
+
+
+
+
+
+
+
+
