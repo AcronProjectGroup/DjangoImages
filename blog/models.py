@@ -8,6 +8,7 @@ class Post(models.Model):
         ('drf', 'Draft'),
     )
     # photo = models.ImageField()
+    
     title = models.CharField(max_length=100)
     text = models.TextField()
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
