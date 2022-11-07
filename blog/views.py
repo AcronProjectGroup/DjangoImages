@@ -5,4 +5,4 @@ from .models import Post
 
 def blog_view(request):
     post_list = Post.objects.all()
-    return render(request,'blog/post_list.html', {'post_list': post_list})
+    return render(request,'blog/blog.html', {'post_list': post_list})
