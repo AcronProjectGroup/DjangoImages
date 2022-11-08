@@ -16,7 +16,7 @@
                     <h5 class="card-title">{{ post.title }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted small py-2">Created: {{ post.date_time_created }}</h6>
                     <p class="card-text py-1">{{ post.text }}</p>
-                    <p class="card-text py-1">author: {{ post.author }}</p>
+                    <p class="card-text py-1">By: {{ post.author }}</p>
                     <p class="card-text py-1">modified: {{ date_time_modified }}</p>
                     <div class="btn btn-bg btn-outline-success">
                         Read More
@@ -29,7 +29,7 @@
         <div class="col-4">
             <div class="card shadow my-1 ">
                 {% load static %}
-                <img src="{% static 'pages/women.jpg' %}">
+                <img src="{% static 'pages/2.jpg' %}">
                 <div class="card-body">
                     <h5 class="card-title">Manifest-بیانیه</h5>
                     <p class="card-text">حکومت مردمی فدرالیست به معنای شهر آزادی می باشد که تنها مسیر دسترسی به
