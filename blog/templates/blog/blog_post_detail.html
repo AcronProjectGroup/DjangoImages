@@ -44,11 +44,12 @@
         <div class="col-3">
 
                 <div class="card my-4">
-                    <h5 class="card-header">About</h5>
+                    <h5 class="card-header">Manifest</h5>
+                    {% load static %}
+                    <img src="{% static 'pages/2.jpg' %}">
                     <div class="card-body">
-                        <p class="card-text">We love python and django. So we created a blog site to share our
-                            thoughts</p>
-                        <a href="#"
+                        <p class="card-text">بیانیه راجع به حکومت مردمی فدرالیست در این قسمت به طور کامل توضیح داده شده است.</p>
+                        <a href="{% url 'manifest-consciousness' %}"
                            class="btn btn-sm btn-danger">
                             More...
                         </a>
