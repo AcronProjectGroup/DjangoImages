@@ -11,12 +11,10 @@
         <div class="col-9">
 
             <div class="card shadow my-3 p-5">
+                <p class="mt-2">Created: {{ post.date_time_created }} || Modified: {{ post.date_time_modified }}</p>
                 <h1>{{ post.title }}</h1>
                 <p class="small text-muted mt-2">By: {{ post.author }}</p>
                 <p class="mt-2">{{ post.text }}</p>
-                <p class="mt-2">Created: {{ post.date_time_created }}</p>
-                <p class="mt-2">Modified: {{ post.date_time_modified }}</p>
-                <p class="mt-2">Modified: {{ post.date_time_modified }}</p>
             </div>
         
             <div class="card shadow my-3 p-5">

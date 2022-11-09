@@ -9,5 +9,7 @@ def blog_view(request):
 
 
 def blog_detail_view(request, pk):
-    pass
+    get_pk_post_from_database = Post.objects.get(pk=pk)
+    return render(request, 'blog/blog_post_detail.html', {'post': get_pk_post_from_database})
+
 
