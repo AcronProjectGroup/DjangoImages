@@ -14,10 +14,9 @@
             <div class="card shadow my-1">
                 <div class="card-body">
                     <h5 class="card-title">{{ post.title }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted small py-2">Created: {{ post.date_time_created }}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted small py-2">Created: {{ post.date_time_created }} || modified: {{ post.date_time_modified }}</h6>
                     <p class="card-text py-1">{{ post.text }}</p>
                     <p class="card-text py-1">By: {{ post.author }}</p>
-                    <p class="card-text py-1">modified: {{ date_time_modified }}</p>
                     <div class="btn btn-bg btn-outline-success">
                         Read More
                     </div>
