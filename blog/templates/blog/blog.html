@@ -17,8 +17,8 @@
                     <h6 class="card-subtitle mb-2 text-muted small py-2">Created: {{ post.date_time_created }} || modified: {{ post.date_time_modified }}</h6>
                     <p class="card-text py-1">{{ post.text }}</p>
                     <p class="card-text py-1">By: {{ post.author }}</p>
-                    <a class="btn btn-bg btn-outline-success" href="/blog/{{ post.id }}">Read More</a>
-                    <button type="button" class="btn btn-bg btn-outline-dark">Dark</button>
+                    <a class="btn btn-bg btn-outline-success" href="{% url 'blog_detail_view' post.id %}">Read More</a>
+                    {% comment %} <button type="button" class="btn btn-bg btn-outline-dark">Dark</button> {% endcomment %}
                 </div>
             </div>
             {% endfor %} 
