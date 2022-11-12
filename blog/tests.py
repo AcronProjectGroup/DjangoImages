@@ -13,6 +13,12 @@ class BlogPostTest(TestCase):
             text =   'Some Test',
             status = Post.STATUS_CHOICES[0],
         )
+        self.post2 = Post.objects.create(
+            title  = '222 Post Title',
+            author = self.user,
+            text =   '222 ### Some Test',
+            status = Post.STATUS_CHOICES[0],
+        )
     #-------------------------------------------------
     def test_blog_view(self):
         response = self.client.get('/blog/')
@@ -53,6 +59,18 @@ class BlogPostTest(TestCase):
     def test_find_text_detail_view_post_by_id_Post(self):
         response = self.client.get(f'/blog/{self.post1.id}')
         self.assertContains(response, self.post1.text)
+    # ------------------------------------------------
+    def test_find__status_code_detail_post_2_URL(self):
+        response = self.client.get(f'/blog/{self.post2.id}')
+        self.assertEqual(response.status_code, 200)
+    # ------------------------------------------------
+    def test_find_status_code_detail_post_1_by_name(self):
+        response = self.client.get(reverse('blog_detail_view', args=[self.post1.id]))
+        self.assertEqual(response.status_code, 200)
+    # ------------------------------------------------
+    
+
+
 
 
 
