@@ -123,7 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/var/www/static/'
+STATIC_ROOT = config("STATIC_ROOT_ADDRESS")
 
 
 # Default primary key field type
