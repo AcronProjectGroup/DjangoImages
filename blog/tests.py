@@ -68,7 +68,9 @@ class BlogPostTest(TestCase):
         response = self.client.get(reverse('blog_detail_view', args=[self.post1.id]))
         self.assertEqual(response.status_code, 200)
     # ------------------------------------------------
-    
+    def test_find_status_code_404_if_post_id_not_exist(self):
+        response = self.client.get('/blog/'+ '123123asd')
+        self.assertEqual(response.status_code, 404)
 
 
 
