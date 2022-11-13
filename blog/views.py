@@ -5,7 +5,7 @@ from .models import Post
 
 
 def blog_view(request):
-    # post_list = Post.objects.all()  #ORM
+    # post_list = Post.objects.all()  #ORM  object-relational mapper
     post_list = Post.objects.filter(status='pub')
     return render(request,'blog/blog.html', {'post_list': post_list})
 

@@ -5,23 +5,25 @@ from django.shortcuts import reverse
 from .models import Post
 
 class BlogPostTest(TestCase):
-    def setUp(self):
-        self.user = User.objects.create(username='Sina')
-        self.post1 = Post.objects.create(
+    @classmethod
+    def setUpTestData(cls):
+    # def setUp(cls):
+        cls.user = User.objects.create(username='Sina')
+        cls.post1 = Post.objects.create(
             title  = 'Post Title',
-            author = self.user,
+            author = cls.user,
             text =   'Some Test',
             status = Post.STATUS_CHOICES[0][0],
         )
-        self.post2 = Post.objects.create(
+        cls.post2 = Post.objects.create(
             title  = '222 Post Title',
-            author = self.user,
+            author = cls.user,
             text =   '222 ### Some Test',
             status = Post.STATUS_CHOICES[0][0],
         )
-        self.post3 = Post.objects.create(
+        cls.post3 = Post.objects.create(
             title  = '3333 Post Title',
-            author = self.user,
+            author = cls.user,
             text =   '3333 ### Some Test',
             status = Post.STATUS_CHOICES[1][0],
         )
