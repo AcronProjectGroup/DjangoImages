@@ -11,13 +11,19 @@ class BlogPostTest(TestCase):
             title  = 'Post Title',
             author = self.user,
             text =   'Some Test',
-            status = Post.STATUS_CHOICES[0],
+            status = Post.STATUS_CHOICES[0][0],
         )
         self.post2 = Post.objects.create(
             title  = '222 Post Title',
             author = self.user,
             text =   '222 ### Some Test',
-            status = Post.STATUS_CHOICES[0],
+            status = Post.STATUS_CHOICES[0][0],
+        )
+        self.post3 = Post.objects.create(
+            title  = '3333 Post Title',
+            author = self.user,
+            text =   '3333 ### Some Test',
+            status = Post.STATUS_CHOICES[1][0],
         )
     #-------------------------------------------------
     def test_blog_view(self):
@@ -71,8 +77,11 @@ class BlogPostTest(TestCase):
     def test_find_status_code_404_if_post_id_not_exist(self):
         response = self.client.get('/blog/'+ '123123asd')
         self.assertEqual(response.status_code, 404)
-
-
+    # ------------------------------------------------
+    def test_draft_post_dont_show_in_blog(self): # TDD   Test Driven Development 
+        response= self.client.get(reverse('blog'))
+        self.assertContains(response, self.post1.title)        
+        self.assertNotContains(response, self.post3.title)        
 
 
 
