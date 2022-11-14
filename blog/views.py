@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.models import User
+
 
 from .models import Post
 
@@ -19,4 +21,12 @@ def blog_detail_view(request, pk):
 
 
 def post_new_post(request):
+    if request.method == 'POST':
+        post_title = request.POST.get('title')
+        post_text = request.POST.get('text')
+
+        user = User.objects.all()[0] #ORM  object-relational mapper
+        Post.objects.create(title=post_title, text=post_text, author=user, status='pub')
+    else:
+        print('GET')
     return render(request, 'blog/post_new_post.html')
