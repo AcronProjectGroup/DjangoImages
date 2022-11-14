@@ -16,3 +16,7 @@ def blog_detail_view(request, pk):
         return render(request, 'blog/blog_post_detail.html', {'post': get_pk_post_from_database})
     except ObjectDoesNotExist:
         return render(request, 'pages/page_404.html')
+
+
+def post_new_post(request):
+    return render(request, 'blog/post_new_post.html')
