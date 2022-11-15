@@ -8,7 +8,7 @@ from .forms import NewPostForm
 
 def blog_view(request):
     # post_list = Post.objects.all()  #ORM  object-relational mapper
-    post_list = Post.objects.filter(status='pub')
+    post_list = Post.objects.filter(status='pub').order_by("-date_time_modified")
     return render(request,'blog/blog.html', {'post_list': post_list})
 
 
