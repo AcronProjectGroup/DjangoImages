@@ -48,9 +48,15 @@ def update_post(request, pk):
         form.save()
         return redirect('blog')
 
-
     return render(request, 'blog/post_new_post.html', context={'form': form})
 
+def delete_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
 
+    if request.method == "POST":
+        post.delete()
+        return redirect('blog')
+
+    return render(request, 'blog/delete_post.html', context={'post': post})
 
 

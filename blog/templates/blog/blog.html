@@ -19,6 +19,8 @@
                     <p class="card-text py-1">By: {{ post.author }}</p>
                     <a class="btn btn-bg btn-outline-dark" href="{% url 'blog_detail_view' post.id %}">Read More</a>
                     <a class="btn btn-bg btn-outline-dark" href="{% url 'update_post' post.id %}">Edit</a>
+                    <a class="btn btn-bg btn-outline-danger" href="{% url 'delete_post' post.id %}">DELETE</a>
+
                     {% comment %} <button type="button" class="btn btn-bg btn-outline-dark">Dark</button> {% endcomment %}
                 </div>
             </div>

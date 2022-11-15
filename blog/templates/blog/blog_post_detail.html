@@ -11,15 +11,14 @@
         <div class="col-9">
 
             <div class="card shadow my-3 p-5">
-                <div>
-                <a class="btn btn-bg btn-outline-dark" href="{% url 'blog' %}">Back</a>
-                </div>
                 <p class="mt-2">Created: {{ post.date_time_created }} || Modified: {{ post.date_time_modified }}</p>
                 <h1>{{ post.title }}</h1>
                 <p class="small text-muted mt-2">By: {{ post.author }}</p>
                 <p class="mt-2">{{ post.text }}</p>
                 <div>
                     <a class="btn btn-bg btn-outline-dark" href="{% url 'blog' %}">Back</a>
+                    <a class="btn btn-bg btn-outline-danger" href="{% url 'delete_post' post.id %}">DELETE</a>
+                    
                 </div>
             </div>
         
