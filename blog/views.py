@@ -22,11 +22,14 @@ def blog_detail_view(request, pk):
 
 def post_new_post(request):
     if request.method == 'POST':
-        pass
+        submitted_form = NewPostForm(request.POST)
+        if submitted_form.is_valid():
+            submitted_form.save()
+            
     else: #GET request
-        form = NewPostForm()
+        submitted_form = NewPostForm()
     
-    return render(request, 'blog/post_new_post.html', context= {'form': form})
+    return render(request, 'blog/post_new_post.html', context= {'form': submitted_form})
 
     # if request.method == 'POST':
     #     post_title = request.POST.get('title')
