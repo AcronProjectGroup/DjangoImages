@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 from .models import Post
-
+from .forms import NewPostForm
 
 def blog_view(request):
     # post_list = Post.objects.all()  #ORM  object-relational mapper
@@ -22,11 +22,17 @@ def blog_detail_view(request, pk):
 
 def post_new_post(request):
     if request.method == 'POST':
-        post_title = request.POST.get('title')
-        post_text = request.POST.get('text')
+        pass
+    else: #GET request
+        form = NewPostForm()
+    
+    return render(request, 'blog/post_new_post.html', context= {'form': form})
 
-        user = User.objects.all()[0] #ORM  object-relational mapper
-        Post.objects.create(title=post_title, text=post_text, author=user, status='pub')
-    else:
-        print('GET')
-    return render(request, 'blog/post_new_post.html')
+    # if request.method == 'POST':
+    #     post_title = request.POST.get('title')
+    #     post_text = request.POST.get('text')
+    #     user = User.objects.all()[0] #ORM  object-relational mapper
+    #     Post.objects.create(title=post_title, text=post_text, author=user, status='pub')
+    # else:
+    #     print('GET')
+    # return render(request, 'blog/post_new_post.html')
