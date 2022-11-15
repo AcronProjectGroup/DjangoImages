@@ -17,7 +17,8 @@
                     <h6 class="card-subtitle mb-2 text-muted small py-2">Created: {{ post.date_time_created }} || modified: {{ post.date_time_modified }}</h6>
                     <p class="card-text py-1">{{ post.text }}</p>
                     <p class="card-text py-1">By: {{ post.author }}</p>
-                    <a class="btn btn-bg btn-outline-success" href="{% url 'blog_detail_view' post.id %}">Read More</a>
+                    <a class="btn btn-bg btn-outline-dark" href="{% url 'blog_detail_view' post.id %}">Read More</a>
+                    <a class="btn btn-bg btn-outline-dark" href="{% url 'update_post' post.id %}">Edit</a>
                     {% comment %} <button type="button" class="btn btn-bg btn-outline-dark">Dark</button> {% endcomment %}
                 </div>
             </div>
@@ -28,7 +29,7 @@
                 {% load static %}
                 <img src="{% static 'pages/2.jpg' %}">
                 <div class="card-body">
-                    <h5 class="card-title">Manifest-بیانیه</h5>
+                    <h5 class="card-title">Manifest</h5>
                     <p class="card-text">حکومت مردمی فدرالیست به معنای شهر آزادی می باشد که تنها مسیر دسترسی به
                         آن از جاده آگاهی می باشد.
                     </p>

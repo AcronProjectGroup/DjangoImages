@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 
@@ -26,12 +26,11 @@ def post_new_post(request):
         if submitted_form.is_valid():
             submitted_form.save()
             return redirect('blog')
-
     else: #GET request
         submitted_form = NewPostForm()
     
     return render(request, 'blog/post_new_post.html', context= {'form': submitted_form})
-
+    # -------------------------------------------------------------------------------------
     # if request.method == 'POST':
     #     post_title = request.POST.get('title')
     #     post_text = request.POST.get('text')
@@ -40,3 +39,18 @@ def post_new_post(request):
     # else:
     #     print('GET')
     # return render(request, 'blog/post_new_post.html')
+
+def update_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    form = NewPostForm(request.POST or None, instance=post)
+
+    if form.is_valid():
+        form.save()
+        return redirect('blog')
+
+
+    return render(request, 'blog/post_new_post.html', context={'form': form})
+
+
+
+

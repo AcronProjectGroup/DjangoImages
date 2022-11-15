@@ -13,7 +13,7 @@
                 <h3>Add new Post:</h3>
                     <form method="POST">
                         {% csrf_token %}
-                        {{ form }}
+                        {{ form.as_table }}
                         {% comment %} <a>
                         <div class="form-group py-2">
                             <label class="py-1">Enter post title</label>
@@ -25,7 +25,10 @@
                             <textarea class="form-control" name="text" rows="8" placeholder="Enter your post text here..."></textarea>
                         </div>
                          {% endcomment %}
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <br>
+                        <br>
+                        <button type="submit" class="btn btn-bg btn-outline-dark">Submit</button>
+                        <a class="btn btn-bg btn-outline-dark" href="{% url 'blog' %}">Back</a>
                     </form>
                 </div>
             </div>
