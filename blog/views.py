@@ -46,9 +46,9 @@ def update_post(request, pk):
 
     if form.is_valid():
         form.save()
-        return redirect('blog')
+        return redirect('blog_detail_view' ,form.id)
 
-    return render(request, 'blog/post_new_post.html', context={'form': form})
+    return render(request, 'blog/update_post.html', context={'form': form, 'post': post})
 
 def delete_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
