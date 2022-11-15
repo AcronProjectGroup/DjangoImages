@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 
@@ -25,7 +25,8 @@ def post_new_post(request):
         submitted_form = NewPostForm(request.POST)
         if submitted_form.is_valid():
             submitted_form.save()
-            
+            return redirect('blog')
+
     else: #GET request
         submitted_form = NewPostForm()
     
