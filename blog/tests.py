@@ -32,6 +32,12 @@ class BlogPostTest(TestCase):
         post = self.post1
         self.assertEqual(str(post), post.title)
     #-------------------------------------------------
+    def test_post_detail(self):
+        self.assertEqual(self.post1.title, 'Post Title')
+    #-------------------------------------------------
+    def test_post_detail_text(self):
+        self.assertEqual(self.post1.text, 'Some Test')
+    #-------------------------------------------------
     def test_blog_view(self):
         response = self.client.get('/blog/')
         self.assertEqual(response.status_code, 200)
