@@ -27,6 +27,10 @@ class BlogPostTest(TestCase):
             text =   '3333 ### Some Test',
             status = Post.STATUS_CHOICES[1][0],
         )
+    # ------------------------------------------------
+    def test_post_model_str(self):
+        post = self.post1
+        self.assertEqual(str(post), post.title)
     #-------------------------------------------------
     def test_blog_view(self):
         response = self.client.get('/blog/')
@@ -84,6 +88,8 @@ class BlogPostTest(TestCase):
         response= self.client.get(reverse('blog'))
         self.assertContains(response, self.post1.title)        
         self.assertNotContains(response, self.post3.title)        
+    # ------------------------------------------------
+
 
 
 
