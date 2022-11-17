@@ -28,6 +28,9 @@ class BlogPostTest(TestCase):
             status = Post.STATUS_CHOICES[1][0],
         )
     # ------------------------------------------------
+    def test_find_username(self):
+        self.assertEqual(self.post1.author, self.user)
+    # ------------------------------------------------
     def test_post_model_str(self):
         post = self.post1
         self.assertEqual(str(post), post.title)
