@@ -98,6 +98,24 @@ class BlogPostTest(TestCase):
         self.assertContains(response, self.post1.title)        
         self.assertNotContains(response, self.post3.title)        
     # ------------------------------------------------
+    # def test_update_post(self):
+    #     response = self.client.post(reverse('update_post', args=[self.post2.id]),{
+    #         'title': 'post is update',
+    #         'text': 'text is update',
+    #     })
+        # self.assertEqual(response.status_code, 302)
+        # self.assertEqual(Post.objects.last().title, 'post is update')
+        # self.assertEqual(Post.objects.last().text, 'text is update')
+    # ------------------------------------------------
+    # def test_post_create_view(self):
+    #     response = self.client.post(reverse('post_new_post'), {
+    #         'title': 'Some Title',
+    #         'text': 'Some Text...',
+    #         'status': 'pub',
+    #         'author': self.user,
+    #         })
+    #     self.assertEqual(response.title, "Some Title")
+    # ------------------------------------------------
 
 
 
