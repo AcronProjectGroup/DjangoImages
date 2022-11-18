@@ -24,6 +24,10 @@ class NewPostBlog(generic.CreateView):
     form_class = NewPostForm
     template_name = 'blog/post_new_post.html'
 
+class UpdatePostBlog(generic.UpdateView):
+    form_class = NewPostForm
+    template_name = 'blog/update_post.html'
+    model = Post
 # Functional View -------------------------------------------------------------------------------------
 # def blog_view(request):
     # post_list = Post.objects.all()  #ORM  object-relational mapper
@@ -56,13 +60,13 @@ class NewPostBlog(generic.CreateView):
     #     print('GET')
     # return render(request, 'blog/post_new_post.html')
 #--------------------------------------------------------------------------------------------------------
-def update_post(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    form = NewPostForm(request.POST or None, instance=post)
-    if form.is_valid():
-        form.save()
-        return redirect('blog_detail_view' ,form.id)
-    return render(request, 'blog/update_post.html', context={'form': form, 'post': post})
+# def update_post(request, pk):
+#     post = get_object_or_404(Post, pk=pk)
+#     form = NewPostForm(request.POST or None, instance=post)
+#     if form.is_valid():
+#         form.save()
+#         return redirect('blog_detail_view' ,form.id)
+#     return render(request, 'blog/update_post.html', context={'form': form, 'post': post})
 #--------------------------------------------------------------------------------------------------------
 def delete_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
