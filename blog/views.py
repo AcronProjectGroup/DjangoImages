@@ -5,7 +5,7 @@ from django.views import generic
 from django.urls import reverse_lazy
 
 from .models import Post
-from .forms import NewPostForm
+from .forms import PostFormModel
 
 
 # class-based view -------------------------------------------------------------------------------------
@@ -22,11 +22,11 @@ class BlogDetailView(generic.DetailView):
     context_object_name = 'post'
 
 class NewPostBlog(generic.CreateView):
-    form_class = NewPostForm
+    form_class = PostFormModel
     template_name = 'blog/post_new_post.html'
 
 class UpdatePostBlog(generic.UpdateView):
-    form_class = NewPostForm
+    form_class = PostFormModel
     template_name = 'blog/update_post.html'
     model = Post
 
@@ -51,12 +51,12 @@ class DeletePostBlog(generic.DeleteView):
 #--------------------------------------------------------------------------------------------------------
 # def post_new_post(request):
 #     if request.method == 'POST':
-#         submitted_form = NewPostForm(request.POST)
+#         submitted_form = PostFormModel(request.POST)
 #         if submitted_form.is_valid():
 #             submitted_form.save()
 #             return redirect('blog')
 #     else: #GET request
-#         submitted_form = NewPostForm()
+#         submitted_form = PostFormModel()
 #     return render(request, 'blog/post_new_post.html', context= {'form': submitted_form})
     # -------------------------------------------------------------------------------------
     # if request.method == 'POST':
@@ -70,7 +70,7 @@ class DeletePostBlog(generic.DeleteView):
 #--------------------------------------------------------------------------------------------------------
 # def update_post(request, pk):
 #     post = get_object_or_404(Post, pk=pk)
-#     form = NewPostForm(request.POST or None, instance=post)
+#     form = PostFormModel(request.POST or None, instance=post)
 #     if form.is_valid():
 #         form.save()
 #         return redirect('blog_detail_view' ,form.id)
