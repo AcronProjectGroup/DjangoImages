@@ -34,7 +34,7 @@
             {% if user.is_authenticated %}
               <p>{{ user.username }}  |  <a class="mx-2 text-white" href="{% url 'logout' %}">logout</a></p>
             {% else %}
-              <p ><a class="mx-2 text-white" href="{% url 'login' %}">Login</a></p>
+              <p ><a class="mx-2 text-white" href="{% url 'login' %}">Login</a>  |  <a class="mx-2 text-white"  href="{% url 'signup' %}">Signup</a></p>
             {% endif %}
           </div>
         </div>
