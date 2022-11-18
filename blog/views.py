@@ -15,15 +15,14 @@ class BlogView(generic.ListView):
     def get_queryset(self):
         return Post.objects.filter(status='pub').order_by("-date_time_modified")
     
-
 class BlogDetailView(generic.DetailView):
     template_name = 'blog/blog_post_detail.html'
     model = Post
     context_object_name = 'post'
 
-
-
-
+class NewPostBlog(generic.CreateView):
+    form_class = NewPostForm
+    template_name = 'blog/post_new_post.html'
 
 # Functional View -------------------------------------------------------------------------------------
 # def blog_view(request):
@@ -38,15 +37,15 @@ class BlogDetailView(generic.DetailView):
 #     except ObjectDoesNotExist:
 #         return render(request, 'pages/page_404.html')
 #--------------------------------------------------------------------------------------------------------
-def post_new_post(request):
-    if request.method == 'POST':
-        submitted_form = NewPostForm(request.POST)
-        if submitted_form.is_valid():
-            submitted_form.save()
-            return redirect('blog')
-    else: #GET request
-        submitted_form = NewPostForm()
-    return render(request, 'blog/post_new_post.html', context= {'form': submitted_form})
+# def post_new_post(request):
+#     if request.method == 'POST':
+#         submitted_form = NewPostForm(request.POST)
+#         if submitted_form.is_valid():
+#             submitted_form.save()
+#             return redirect('blog')
+#     else: #GET request
+#         submitted_form = NewPostForm()
+#     return render(request, 'blog/post_new_post.html', context= {'form': submitted_form})
     # -------------------------------------------------------------------------------------
     # if request.method == 'POST':
     #     post_title = request.POST.get('title')
