@@ -1,15 +1,33 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
-
+from django.views import generic
 
 from .models import Post
 from .forms import NewPostForm
 
-def blog_view(request):
+
+# class-based view -------------------------------------------------------------------------------------
+
+class BlogView(generic.ListView):
+    model = Post
+    template_name = 'blog/blog.html'
+    context_object_name = 'post_list'
+
+    def get_queryset(self):
+        return Post.objects.filter(status='pub').order_by("-date_time_modified")
+    
+
+
+
+
+
+# Functional View -------------------------------------------------------------------------------------
+
+# def blog_view(request):
     # post_list = Post.objects.all()  #ORM  object-relational mapper
-    post_list = Post.objects.filter(status='pub').order_by("-date_time_modified")
-    return render(request,'blog/blog.html', {'post_list': post_list})
+    # post_list = Post.objects.filter(status='pub').order_by("-date_time_modified")
+    # return render(request,'blog/blog.html', {'post_list': post_list})
 
 
 def blog_detail_view(request, pk):
