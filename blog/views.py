@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.views import generic
+from django.urls import reverse_lazy
 
 from .models import Post
 from .forms import NewPostForm
@@ -28,6 +29,13 @@ class UpdatePostBlog(generic.UpdateView):
     form_class = NewPostForm
     template_name = 'blog/update_post.html'
     model = Post
+
+class DeletePostBlog(generic.DeleteView):
+    model = Post
+    template_name = 'blog/delete_post.html'
+    success_url = reverse_lazy('blog')
+        
+
 # Functional View -------------------------------------------------------------------------------------
 # def blog_view(request):
     # post_list = Post.objects.all()  #ORM  object-relational mapper
@@ -68,11 +76,11 @@ class UpdatePostBlog(generic.UpdateView):
 #         return redirect('blog_detail_view' ,form.id)
 #     return render(request, 'blog/update_post.html', context={'form': form, 'post': post})
 #--------------------------------------------------------------------------------------------------------
-def delete_post(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    if request.method == "POST":
-        post.delete()
-        return redirect('blog')
-    return render(request, 'blog/delete_post.html', context={'post': post})
+# def delete_post(request, pk):
+#     post = get_object_or_404(Post, pk=pk)
+#     if request.method == "POST":
+#         post.delete()
+#         return redirect('blog')
+#     return render(request, 'blog/delete_post.html', context={'post': post})
 
 
