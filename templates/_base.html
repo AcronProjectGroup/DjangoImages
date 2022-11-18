@@ -6,7 +6,8 @@
     <title>{% block page_title %}{% endblock page_title %}</title>
     {% load static %}
    <link rel="icon" type="image/x-icon" href="{% static 'pages/logo.jpg'%}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link href="{% static 'accounts/_css.css'%}" rel="stylesheet">
 </head>
 <body>
 
@@ -28,6 +29,13 @@
                 <a class="nav-link" href="{% url 'post_new_post' %}">NewPost</a>
               </li>
             </ul>
+          </div>
+          <div class="mx-2 text-white">
+            {% if user.is_authenticated %}
+              <p>{{ user.username }}</p>
+            {% else %}
+              <p ><a class="mx-2 text-white" href="{% url 'login' %}">LOGIN</a></p>
+            {% endif %}
           </div>
         </div>
     </nav>

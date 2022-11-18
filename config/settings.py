@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'pages',
     'blog',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -131,7 +132,7 @@ STATIC_ROOT = config("STATIC_ROOT_ADDRESS")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+LOGIN_REDIRECT_URL = 'homepage'
 
 
 
