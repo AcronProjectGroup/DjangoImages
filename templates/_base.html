@@ -32,9 +32,9 @@
           </div>
           <div class="mx-2 text-white">
             {% if user.is_authenticated %}
-              <p>{{ user.username }}</p>
+              <p>{{ user.username }}  |  <a class="mx-2 text-white" href="{% url 'logout' %}">logout</a></p>
             {% else %}
-              <p ><a class="mx-2 text-white" href="{% url 'login' %}">LOGIN</a></p>
+              <p ><a class="mx-2 text-white" href="{% url 'login' %}">Login</a></p>
             {% endif %}
           </div>
         </div>
