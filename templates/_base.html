@@ -31,11 +31,11 @@
             </ul>
           </div>
           <div class="mx-2 text-white">
-            {% comment %} {% if user.is_authenticated %} {% endcomment %}
-              {% comment %} <p>{{ user.username }}  |  <a class="mx-2 text-white" href="{% url 'logout' %}">logout</a></p> {% endcomment %}
-            {% comment %} {% else %} {% endcomment %}
-              {% comment %} <p ><a class="mx-2 text-white" href="{% url 'login' %}">Login</a>  |  <a class="mx-2 text-white"  href="{% url 'signup' %}">Signup</a></p> {% endcomment %}
-            {% comment %} {% endif %} {% endcomment %}
+            {% if user.is_authenticated %}
+              <p>{{ user.username }}  |  <a class="mx-2 text-white" href="{% url 'logout' %}">logout</a></p>
+            {% else %}
+              <p ><a class="mx-2 text-white" href="{% url 'login' %}">Login</a>  |  <a class="mx-2 text-white"  href="#">Signup</a></p> {% comment "" %} {% url 'signup' %}   {% endcomment %}
+            {% endif %}
           </div>
         </div>
     </nav>
