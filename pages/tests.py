@@ -13,7 +13,7 @@ class HomePageTest(TestCase):
     
     def test_redirect_empty_url(self):
         response = self.client.get('/')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)
             
     def test_home_page_template_used(self):
         response = self.client.get(reverse('home'))
