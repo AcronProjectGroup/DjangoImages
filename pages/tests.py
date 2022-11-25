@@ -11,5 +11,9 @@ class HomePageTest(TestCase):
         response = self.client.get(reverse('home'))
         self.assertContains(response, 'Home')
     
+    def test_redirect_empty_url(self):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 302)
+            
 
 
