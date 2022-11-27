@@ -25,5 +25,9 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls')),
     path('books/', include('books.urls')),
+<<<<<<< HEAD
     # Don't Forget cama   ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+=======
+    # Don't forget cama ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+>>>>>>> book_app_ver2
 ]

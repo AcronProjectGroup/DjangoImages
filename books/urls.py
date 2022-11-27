@@ -4,4 +4,11 @@ from .views import BookListView
 
 urlpatterns = [
     path('', BookListView.as_view(), name="book_list_view"),
+<<<<<<< HEAD
 ]
+=======
+    #Don't forget cama ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+]
+
+
+>>>>>>> book_app_ver2
