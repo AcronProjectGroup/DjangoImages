@@ -13,13 +13,29 @@
 {% block content %}
 
     {% for book in books %}
+<<<<<<< HEAD
 >>>>>>> book_app_ver2
         <h1>{{ book.title }}</h1>
 
+=======
+        <br>
+        <a href="{{ book.get_absolute_url }}" ><h1>{{ book.title }}</h1></a>
+        <p>{{ book.book_description }}</p>
+        <a href="{{ book.get_absolute_url }}">Read More</a>
+        <br>
+        ________________________________________
+>>>>>>> book_app_ver2
     {% endfor %}
+    <br>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 {% endblock content %}
 =======
+{% endblock content %}
+>>>>>>> book_app_ver2
+=======
+    <a href="{% url 'home' %}" class="btn btn-bg btn-outline-primary mt-3 " >Back to home</a>
+    
 {% endblock content %}
 >>>>>>> book_app_ver2
