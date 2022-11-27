@@ -8,8 +8,15 @@
 {% block content %}
 
     {% for book in books %}
-        <h1>{{ book.title }}</h1>
-
+        <br>
+        <a href="{{ book.get_absolute_url }}" ><h1>{{ book.title }}</h1></a>
+        <p>{{ book.book_description }}</p>
+        <a href="{{ book.get_absolute_url }}">Read More</a>
+        <br>
+        ________________________________________
     {% endfor %}
+    <br>
 
+    <a href="{% url 'home' %}" class="btn btn-bg btn-outline-primary mt-3 " >Back to home</a>
+    
 {% endblock content %}
