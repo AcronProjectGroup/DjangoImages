@@ -1,0 +1,19 @@
+{% extends '_base.html' %}
+
+{% block page_title %}Detail: {{ book.title }}{% endblock page_title %}
+
+
+
+
+{% block content %}
+
+    <h1>{{ book.title }}</h1>
+    <p>{{ book.book_description }}</p>
+    <p>{{ book.bokk_author }}</p>
+    <p>{{ book.price }}</p>
+    
+    <a href="{% url 'book_list_view' %}" class="btn btn-bg btn-outline-dark mt-3 " >Back</a>
+
+    
+    
+{% endblock content %}
