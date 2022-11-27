@@ -6,3 +6,10 @@ class BookListView(generic.ListView):
     model = Book
     template_name = 'books/book_list_view.html'
     context_object_name = 'books'
+
+
+class BookDetailView(generic.DeleteView):
+    model = Book
+    template_name = 'books/book_detail_view.html'
+    context_object_name = 'book'
+
