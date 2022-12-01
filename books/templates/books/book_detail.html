@@ -12,6 +12,7 @@
         <p>Price: {{ book.price }}</p>
         <br>
         <a href="{% url 'book_edit' book.id %}">Edit this book</a>    
+        <a href="{% url 'book_delete' book.id %}">Delete this book</a>    
         <br>
         <a href="{% url 'book_list' %}">Back to Books</a>    
 
