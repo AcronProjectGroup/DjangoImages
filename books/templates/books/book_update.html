@@ -1,0 +1,16 @@
+{% extends '_base.html' %}
+
+{% block page_title %}Edit:{{ book.title }}{% endblock page_title %}
+
+
+{% block content %}
+    
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>    
+    </form>
+    <br>
+    <a href="{% url 'book_detail' book.id %}">Back</a>    
+
+{% endblock content %}
