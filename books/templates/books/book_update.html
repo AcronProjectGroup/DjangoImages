@@ -8,9 +8,9 @@
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Edit book</button>    
+        <button type="submit">Save</button>    
     </form>
     <br>
-    <a href="{% url 'book_list' %}">Back to Books</a>    
+    <a href="{% url 'book_detail' book.id %}">Back</a>    
 
 {% endblock content %}
