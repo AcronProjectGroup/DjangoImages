@@ -4,10 +4,34 @@
 
 
 {% block content %}
-    
-    {% for book in books  %}
-    <h1>{{ book.title | capfirst }}</h1>
-    <p>{{ book.description | truncatewords:8 }} <a href="{{ book.get_absolute_url }}">Read more</a></p>
+
+{% for book in books  %}
+
+<div class="container mt-4">
+    <div class="row flex-row-reverse justify-content-md-center">
+        <div class="card m-2" style="max-width: 45%">
+            <div class="row g-0 h-100" dir="rtl">
+                <div class="col-md-4">
+                    <img src="/static/pages/sinalalebakhsh.jpg"
+                         class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8 h-100">
+                    <div class="d-flex flex-column justify-content-between h-100">
+                        <div class="card-body">
+                            <h3 class="card-title"><strong>{{ book.title | capfirst }}</strong></h3>
+                            <p class="card-text pt-3">{{ book.description | truncatewords:8 }}
+                                <a href="{{ book.get_absolute_url }}">Read more</a>
+                            </p>
+                            <p class="text-muted">نویسنده: دارن هاردی</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
     
     {% endfor %}
 
