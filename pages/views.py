@@ -7,3 +7,11 @@ class HomeView(TemplateView):
 
 class SinaLaleBakhshPhoto(TemplateView):
     template_name = 'pages/sinalalebakhsh_photo.html'
+
+
+class Manifest(TemplateView):
+    template_name = 'pages/manifest.html'
+
+
+
+
