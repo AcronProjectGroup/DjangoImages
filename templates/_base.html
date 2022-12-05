@@ -41,7 +41,16 @@
                     <a class="nav-link" href="{% url 'book_create'%}">اضافه کردن کتاب</a>
                 </div>
             </div>
-            <div class="mx-2 text-white">خوش آمدی سینا لاله بخش | <a class="link-light text-decoration-none" href="#">خروج</a></div>
+            <div class="mx-2 text-white">
+                {% if user.is_authenticated %}            
+                    خوش آمدی {{ user.username }} | <a class="link-light text-decoration-none" href="{% url 'logout' %}">خروج</a>
+                {% else %}
+                <a href="{% url 'login' %}" class="link-light text-decoration-none">ورود</a> | 
+                <a href="{% url 'signup' %}" class="link-light text-decoration-none">ثبت نام</a>
+                {% endif %}
+                
+            
+            </div>
         </div>
     </nav>
 
