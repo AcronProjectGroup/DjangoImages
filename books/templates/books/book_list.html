@@ -20,7 +20,7 @@
                             <div class="card-body">
                                 <h3 class="card-title"><strong>{{ book.title | capfirst }}</strong></h3>
                                 <p class="card-text pt-3">{{ book.description | truncatewords:8 }}
-                                    <a href="{{ book.get_absolute_url }}">Read more</a>
+                                    <a class="text-decoration-none" href="{{ book.get_absolute_url }}">Read more</a>
                                 </p>
                                 <p class="text-muted">نویسنده: {{ book.author }}</p>
                             </div>
