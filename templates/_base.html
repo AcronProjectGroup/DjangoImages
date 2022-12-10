@@ -12,7 +12,8 @@
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <link rel="stylesheet" href="{% static 'css/style.css'%}">
-    <link rel="stylesheet" href="{% static 'pages/styles.css'%}">
+    {% block styles %}{% endblock styles %}
+    
     <link rel="icon" type="image/x-icon" href="{% static 'icons/logo.jpg'%}">
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" 
@@ -36,16 +37,22 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="manifest">بیانیه</a>
-                    <a class="nav-link" href="#">وبلاگ</a>
-                    <a class="nav-link" href="{% url 'book_create'%}">اضافه کردن کتاب</a>
+                    {% comment %} <a class="nav-link active" aria-current="page" href="manifest">بیانیه</a> {% endcomment %}
+                    {% comment %} <a class="nav-link" href="#">وبلاگ</a> {% endcomment %}
+                    <a class="nav-link" href="{% url 'book_list' %}">کتاب</a>
+                
+                    {% if user.is_authenticated %}    
+                        <a class="nav-link" href="{% url 'book_create'%}">اضافه کردن کتاب</a>
+                    {% endif %}
+    
                 </div>
             </div>
             <div class="mx-2 text-white">
                 {% if user.is_authenticated %}            
                     خوش آمدی {{ user.username }} | <a class="link-light text-decoration-none" href="{% url 'logout' %}">خروج</a>
                 {% else %}
-                <a href="{% url 'login' %}" class="link-light text-decoration-none">ورود</a> | 
+                <a href="{% url 'login' %}" class="link-light text-decoration-none">ورود</a>
+                <span> یا </span> 
                 <a href="{% url 'signup' %}" class="link-light text-decoration-none">ثبت نام</a>
                 {% endif %}
                 
