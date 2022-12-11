@@ -18,7 +18,9 @@ class Book(models.Model):
 
 
 class Comment(models.Model):
-    pass
+    text = models.TextField()
+
+    datetime_created = models.DateTimeField(auto_now_add=True)
 
 
 
