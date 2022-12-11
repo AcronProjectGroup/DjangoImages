@@ -16,3 +16,10 @@ class Book(models.Model):
     
 
 
+
+class Comment(models.Model):
+    pass
+
+
+
+
