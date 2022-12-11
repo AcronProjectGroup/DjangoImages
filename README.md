@@ -13,3 +13,4 @@ In version 1.1.17 I have implement a lot of things be like:
 - update signup system
 - Include css and pictures
 - upload system by user
+- add model for Comment in DataBase with Django ORM
