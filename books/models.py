@@ -28,7 +28,7 @@ class Comment(models.Model):
     datetime_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text
+        return f'{self.user}: {self.text}'
     
 
 
