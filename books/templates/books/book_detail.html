@@ -23,8 +23,15 @@
                             <h5 class="small my-1"><span class="text-muted">نویسنده: </span>{{ book.author }}</h5>
                             {% comment %} <h5 class="small my-1"><span class="text-muted">مترجم: </span>الهام خرسندی</h5> {% endcomment %}
                             {% comment %} <h5 class="small my-1"><span class="text-muted">انتشارات: </span>هوزمزد</h5> {% endcomment %}
-                            <a href="{% url 'book_edit' book.id %}" class="btn btn-bg btn-outline-dark mt-3">ویرایش این کتاب</a>                            
-                            <a href="{% url 'book_delete' book.id %}" class="btn btn-bg btn-outline-danger mt-3">حذف این کتاب</a>                            
+
+                            {% if user.is_authenticated %}
+                                {{ user.id }}
+                                {{ book.author }}
+                                <a href="{% url 'book_edit' book.id %}" class="btn btn-bg btn-outline-dark mt-3">ویرایش این کتاب</a>                            
+                                <a href="{% url 'book_delete' book.id %}" class="btn btn-bg btn-outline-danger mt-3">حذف این کتاب</a>                            
+                            {% endif %}
+
+
                             <a href="{% url 'book_list' %}" class="btn btn-bg btn-outline-dark mt-3">بازگشت</a>                            
                             
                         </div>
