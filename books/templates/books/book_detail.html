@@ -67,9 +67,8 @@
                         <h3>نظر خود را وارد کنید:</h3>
                         <form method="POST">
                             {% csrf_token %}
-                            {{ comment_form.as_p }}
-
-                            <button type="submit" class="btn btn-primary">ارسال</button>
+                            {{ comment_form|crispy }}
+                            <button type="submit" class="btn btn-dark mt-3">ارسال</button>
                         </form>
                     </div>
                 </div>
