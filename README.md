@@ -16,3 +16,6 @@ In version 1.1.23 I have implement a lot of things be like:
 - add model for Comment in DataBase with Django ORM
 - add recommendation a book items
 
+
+Special Thanks to:
+- Mr. Mohammad Hadi HajiHosseini
