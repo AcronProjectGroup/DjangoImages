@@ -53,6 +53,11 @@
                         {% for comment in comments  %}
                             <div class="border-bottom mb-3">
                                 <h5 class="mb-3">{{ comment.user.username }}</h5>
+                                {% if comment.recommend %}
+                                    <p style="color:blue;">این کتاب را توصیه میکنم</p>
+                                {% else %}
+                                    <p style="color:red;">این کتاب را توصیه نمیکنم</p>
+                                {% endif %}
                                 <p>
                                     {{ comment.text|linebreaks }}  
                                 </p>
