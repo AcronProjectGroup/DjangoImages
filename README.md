@@ -14,3 +14,5 @@ In version 1.1.17 I have implement a lot of things be like:
 - Include css and pictures
 - upload system by user
 - add model for Comment in DataBase with Django ORM
+- add recommendation a book items
+
