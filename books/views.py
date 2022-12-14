@@ -51,6 +51,8 @@ def book_detail_view(request, pk):
 
 
 
+
+
 class BookCreateView(generic.CreateView):
     model = Book
     fields = ['title', 'author', 'description', 'price', 'cover', ]
