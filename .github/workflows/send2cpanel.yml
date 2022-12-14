@@ -2,7 +2,7 @@ name: Publish Website to CPanel
 on:
   push:
     branches:
-      - send2cpanel
+      - XXX######
 jobs:
   FTP-Deploy-Action:
     name: FTP-Deploy-Action
@@ -14,6 +14,6 @@ jobs:
     - name: FTP-Deploy-Action
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
-        ftp-server: ${{ secrets.FTP_SERVER }}
-        ftp-username: ${{ secrets.FTP_USERNAME }}
-        ftp-password: ${{ secrets.FTP_PASSWORD }}
+        ftp-server: XXX##########
+        ftp-username: XXX######
+        ftp-password: XXX####
