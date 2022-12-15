@@ -20,7 +20,7 @@ class BookListView(LoginRequiredMixin, generic.ListView):
 #     model = Book
 #     template_name = 'books/book_detail.html'
 
-
+@login_required
 def book_detail_view(request, pk):
     # Get book object
     book = get_object_or_404(Book, pk=pk)
