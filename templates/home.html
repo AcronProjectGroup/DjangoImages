@@ -5,6 +5,55 @@
 
 {% block content %}
 
+
+<div class="container" >
+
+    <div class="d-flex justify-content-center">
+        <div class="card col-xl-6  col-lg-6 col-md-8 col-sm-10 col-xs-6 m-sm-5 border rounded pt-4 shadow" 
+            dir="rtl">
+            {% load static %}
+            <img src="{% static 'pages/1.jpg' %}">
+            <div class="card-body">
+                <h5 class="card-title">بلاگ</h5>
+                <p class="card-text">جهان بینی ، برداشت از واقعیت و هرآنچه که نظرم می باشد در اینجاست</p>
+                <a href="" class="btn btn-bg btn-outline-danger">Click here</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <div class="card col-xl-6  col-lg-6 col-md-8 col-sm-10 col-xs-6 m-sm-5 border rounded pt-4 shadow" 
+            dir="rtl">
+            {% load static %}
+            <img src="{% static 'pages/2.jpg' %}">
+            <div class="card-body">
+                <h5 class="card-title">بیانیه</h5>
+                <p class="card-text">حکومت مردمی فدرالیست به معنای شهر آزادی می باشد که تنها مسیر دسترسی به
+                    آن از جاده آگاهی می باشد.
+                </p>
+                <a href="{% url 'manifest' %}" class="btn btn-bg btn-outline-danger">Click here</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <div class="card col-xl-6  col-lg-6 col-md-8 col-sm-10 col-xs-6 m-sm-5 border rounded pt-4 shadow" 
+                dir="rtl">
+            {% load static %}
+            <img src="{% static 'pages/women.jpg' %}">
+            <div class="card-body">
+                <h5 class="card-title">زن-زندگی-آزادی</h5>
+                <p class="card-text">حکومت مردمی فدرالیست به معنای شهر آزادی می باشد که تنها مسیر دسترسی به
+                    آن از جاده آگاهی می باشد.
+                </p>
+                <a href="{% url 'manifest' %}" class="btn btn-bg btn-outline-danger">Click here</a>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
 {% endblock content %}
 
 
