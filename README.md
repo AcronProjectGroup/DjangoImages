@@ -15,6 +15,7 @@ In version 1.1.23 I have implement a lot of things be like:
 - upload system by user
 - add model for Comment in DataBase with Django ORM
 - add recommendation a book items
+- Create System for: User review based on login and registration
 
 The only way to reach the city of freedom is the way of awareness.
 
