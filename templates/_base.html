@@ -39,9 +39,9 @@
                 <div class="navbar-nav">
                     {% comment %} <a class="nav-link active" aria-current="page" href="manifest">بیانیه</a> {% endcomment %}
                     {% comment %} <a class="nav-link" href="#">وبلاگ</a> {% endcomment %}
-                    <a class="nav-link" href="{% url 'book_list' %}">کتاب</a>
-                
+                    
                     {% if user.is_authenticated %}    
+                        <a class="nav-link" href="{% url 'book_list' %}">کتاب</a>
                         <a class="nav-link" href="{% url 'book_create'%}">اضافه کردن کتاب</a>
                     {% endif %}
     
