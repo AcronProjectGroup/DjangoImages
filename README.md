@@ -16,6 +16,8 @@ In version 1.1.25 I have implement a lot of things be like:
 - add model for Comment in DataBase with Django ORM
 - add recommendation a book items
 - Create System for: User review based on login and registration
+- Debugging Useless links be like /accounts/ 
+    In future I will implement it.
 
 The only way to reach the city of freedom is the way of awareness.
 
