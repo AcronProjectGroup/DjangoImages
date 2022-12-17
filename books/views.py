@@ -59,7 +59,7 @@ class BookUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
 
     def test_func(self):
         obj = self.get_object()
-
+        return obj.user == self.request.user 
 
 
 class BookDeleteView(LoginRequiredMixin, generic.DeleteView):
