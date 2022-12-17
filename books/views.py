@@ -57,6 +57,10 @@ class BookUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
     fields = ['title', 'description', 'price', 'cover', ]
     template_name = 'books/book_update.html'
 
+    def test_func(self):
+        pass
+
+
 
 class BookDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Book
