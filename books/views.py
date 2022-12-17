@@ -62,7 +62,7 @@ class BookUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
         return obj.user == self.request.user 
 
 
-class BookDeleteView(LoginRequiredMixin, generic.DeleteView):
+class BookDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
     model = Book
     template_name = 'books/book_delete.html'
     success_url = reverse_lazy('book_list')
