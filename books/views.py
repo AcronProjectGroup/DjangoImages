@@ -58,7 +58,7 @@ class BookUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
     template_name = 'books/book_update.html'
 
     def test_func(self):
-        pass
+        obj = self.get_object()
 
 
 
