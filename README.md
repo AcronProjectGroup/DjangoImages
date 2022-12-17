@@ -19,6 +19,9 @@ In version 1.1.25 I have implement a lot of things be like:
 - Debugging Useless links be like /accounts/ 
     In future I will implement it.
 
+In (Tag)Version 1.1.28
+- Implement Authorization System
+
 The only way to reach the city of freedom is the way of awareness.
 
 It's not like we want to shorten this path.
