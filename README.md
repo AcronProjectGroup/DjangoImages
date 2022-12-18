@@ -22,6 +22,11 @@ In version 1.1.25 I have implement a lot of things be like:
 In (Tag)Version 1.1.28
 - Implement Authorization System
 
+In (Tag)Version 1.1.29
+- Implement Posts App
+- Delete Books app because it's not neccesery
+
+
 The only way to reach the city of freedom is the way of awareness.
 
 It's not like we want to shorten this path.
