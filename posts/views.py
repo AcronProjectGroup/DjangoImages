@@ -7,3 +7,11 @@ from django.contrib.auth.decorators import login_required
 
 
 
+class PostListView(LoginRequiredMixin, generic.ListView):
+    model = Book
+    paginate_by = 4
+    template_name = 'post/post_list.html'
+    context_object_name = 'posts'
+
+
+    
