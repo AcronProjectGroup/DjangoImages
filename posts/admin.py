@@ -1,3 +1,17 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Post, Comment
+
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('user', 'post', 'text', 'datetime_created', )
+
+
+@admin.register(Post)
+class BookAdmin(admin.ModelAdmin):
+    list_display = ('user', 'title', 'cover', )
+
+
+
