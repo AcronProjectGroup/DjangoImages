@@ -6,12 +6,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 
 from .models import Post
+from .forms import CommentForm
 
 
 class PostListView(LoginRequiredMixin, generic.ListView):
     model = Post
     paginate_by = 4
-    template_name = 'post/post_list.html'
+    template_name = 'posts/post_list.html'
     context_object_name = 'posts'
 
 
