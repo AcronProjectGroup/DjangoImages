@@ -27,6 +27,12 @@ In (Tag)Version 1.1.29
 - Delete Books app because it's not neccesery
 
 
+
+In (Tag)Version 1.1.31
+- Create Docker
+
+##################################################################################################################
+
 The only way to reach the city of freedom is the way of awareness.
 
 It's not like we want to shorten this path.
