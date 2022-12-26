@@ -39,6 +39,8 @@ In (Tag)Version 1.1.31
 In (Tag)Version 1.1.34
 - Docker Configuration 
 - Trying to Debugging docker compose
+- Implement Data-Base PostgreSQL
+
 
 ####################################################################################
 ####################################################################################
