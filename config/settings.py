@@ -93,6 +93,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
+        'USER': 'postgres',
+        
         
         
         # 'ENGINE': 'django.db.backends.sqlite3',
