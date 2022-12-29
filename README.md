@@ -9,7 +9,7 @@ I hope this project useful for every person. I try to write this with Python-Dja
 This Web Applicationwill produce desired outcomes, usefully ...
 
 
-In version 1.1.25 I have implement a lot of things be like:
+(Tag)Version 1.1.25, Implement a lot of things be like:
 - Better show HTML files
 - update signup system
 - Include css and pictures
@@ -21,25 +21,28 @@ In version 1.1.25 I have implement a lot of things be like:
     In future I will implement it.
 
 
-In (Tag)Version 1.1.28
+(Tag)Version 1.1.28
 - Implement Authorization System
 
 
-In (Tag)Version 1.1.29
+(Tag)Version 1.1.29
 - Implement Posts App
 - Delete Books app because it's not neccesery
 
 
-In (Tag)Version 1.1.31
+(Tag)Version 1.1.31
 - Create Docker
 - Implement PostgreSQL
 - Delete branch and restructure branch
 
 
-In (Tag)Version 1.1.34
+(Tag)Version 1.1.34
 - Docker Configuration 
 - Trying to Debugging docker compose
 - Implement Data-Base PostgreSQL
+
+(Tag)Version 1.1.35
+- Restructure docker's branch
 
 
 ####################################################################################
