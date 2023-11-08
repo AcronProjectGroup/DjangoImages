@@ -57,13 +57,6 @@ This path requires effort and study, daily performance.
 
 I want to base this path on this web application in my opinion.
 
-تنها راه رسیدن به شهر آزادی ، راه آگاهی هست. 
-
-به این شکل نیست که بخواهیم این مسیر را کوتاه تر کنیم.
-
-این مسیر نیاز به کوشش و مطالعه ، عملکرد روزانه دارد.
-
-این مسیر را به برداشت خودم می خواهم در این وب اپلیکیشن پایه گذاری کنم.
 
 
 ## For my learning:
