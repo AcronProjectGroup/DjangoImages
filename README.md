@@ -2,7 +2,6 @@
 
 ## My first realy project is this.
 
-## [Go online this project](https://acronproject.com/)
 
 I hope this project useful for every person. I try to write this with Python-Django without any others. 
 
