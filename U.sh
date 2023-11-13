@@ -1,4 +1,4 @@
 #!/bin/bash
 git add .
-git commit -m " example enumerate function + "
+git commit -m " update Rock Paper Scissors program "
 git push -u origin main 
