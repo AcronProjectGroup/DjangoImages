@@ -9,3 +9,15 @@ while userInput != 0:
     userInput = userInput // 10
 
 print(result)
+
+# --------------------------------------------------------------------
+# --------------------------------------------------------------------
+
+userInput = input('Enter Number:')
+
+result = 0
+
+for i in userInput:
+    result += int(i)    
+
+print(result)
