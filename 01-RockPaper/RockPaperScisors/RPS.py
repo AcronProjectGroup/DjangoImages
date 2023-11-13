@@ -1,10 +1,12 @@
-choices = ['r', 'p', 's']
+import random
 
-aiChoice = ''
+choicesList = ['r', 'p', 's']
+
+aiChoice = random.choice(choicesList)
 
 userInput = input('Rock, Paper, Scissors? (R P S) -> ')
 
-if userInput in choices:
+if userInput in choicesList:
     print(f'Your choice is {userInput}. AI choice is {aiChoice}')
     if userInput == aiChoice:
         print('Tie')
