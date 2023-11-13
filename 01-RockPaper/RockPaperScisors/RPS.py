@@ -5,6 +5,7 @@ aiChoice = ''
 userInput = input('Rock, Paper, Scissors? (R P S) -> ')
 
 if userInput in choices:
+    print(f'Your choice is {userInput}. AI choice is {aiChoice}')
     if userInput == aiChoice:
         print('Tie')
     elif userInput == 'r' and aiChoice == 's':
