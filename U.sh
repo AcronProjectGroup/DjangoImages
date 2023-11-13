@@ -1,4 +1,4 @@
 #!/bin/bash
 git add .
-git commit -m " Adding Multiplication table of numbers 1 to 1000 "
+git commit -m " Determining whether a number is prime "
 git push -u origin main 
