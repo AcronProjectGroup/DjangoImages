@@ -1,4 +1,4 @@
 #!/bin/bash
 git add .
-git commit -m " update Rock Paper Scissors program "
+git commit -m " Adding Multiplication table of numbers "
 git push -u origin main 
