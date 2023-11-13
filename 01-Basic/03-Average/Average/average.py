@@ -6,3 +6,5 @@ for i in scores:
     result += i
 
 print(result / len(scores))
+
+print(sum(scores) / len(scores))
