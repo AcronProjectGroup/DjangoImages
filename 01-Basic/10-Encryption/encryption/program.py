@@ -19,3 +19,11 @@ for i in Encryption:
 
 
 print(f'{Encryption} decrypted = {decrypted}.\n')
+
+
+def ReturnStringPlusInteger():
+    return "Sina", 1371
+
+First, Second = ReturnStringPlusInteger()
+print(First)
+print(Second)
