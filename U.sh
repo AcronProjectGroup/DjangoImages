@@ -1,4 +1,4 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 builtin function or method "
+git commit -m " 💠 Triple Quoted Strings"
 git push -u origin main 
