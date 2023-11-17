@@ -1,4 +1,4 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 Calculate Bank Investment of years "
+git commit -m " 💠 builtin function or method "
 git push -u origin main 
