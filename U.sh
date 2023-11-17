@@ -1,4 +1,4 @@
 #!/bin/bash
 git add .
-git commit -m " Tuple unpacking "
+git commit -m " Getting Infinite Arguments "
 git push -u origin main 
