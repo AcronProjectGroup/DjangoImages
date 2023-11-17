@@ -22,8 +22,10 @@ print(f'{Encryption} decrypted = {decrypted}.\n')
 
 
 def ReturnStringPlusInteger():
-    return "Sina", 1371
+    return "Sina", 1371, 'Lalehbakhsh', 12
 
-First, Second = ReturnStringPlusInteger()
+First, Second , third, fourth= ReturnStringPlusInteger()
 print(First)
 print(Second)
+print(third)
+print(fourth)
