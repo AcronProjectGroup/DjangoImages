@@ -7,13 +7,15 @@ print(f'\n{userInput} before encryption ...\n')
 Encryption = []
 
 for i in userInput:
-    Encryption.append(ord(i))  
+    Encryption.append((ord(i)+10)-5)  
 
 print(f'{userInput} encrypted = {Encryption}.\n')
 
+decrypted = []
 
-decrypted = ''
 for i in Encryption:
-    decrypted += chr(i)
+    first = (i-10)+5
+    decrypted.append(first)
+
 
 print(f'{Encryption} decrypted = {decrypted}.\n')
