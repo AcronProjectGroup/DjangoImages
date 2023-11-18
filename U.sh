@@ -1,4 +1,4 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 Map definition "
+git commit -m " 💠 Filter definition "
 git push -u origin main 
