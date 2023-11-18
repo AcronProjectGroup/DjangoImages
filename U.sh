@@ -1,4 +1,4 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 Number Guessing Game "
+git commit -m " 💠 Map definition "
 git push -u origin main 
