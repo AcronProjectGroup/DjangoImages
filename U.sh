@@ -1,5 +1,4 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 Logic of Variable Management about Pointers like
-Golang Pointers 💠💠"
+git commit -m " 💠 Avoid changing the list and dictionary in functions"
 git push -u origin main 
