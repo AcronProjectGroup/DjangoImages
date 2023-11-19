@@ -11,6 +11,13 @@ print(AddRecursive(1))
 
 
 # Recursive Functions
+def FactorialRecursive(number):
+    if number == 1 :
+        return 1
+    return number * FactorialRecursive(number-1)
+print(FactorialRecursive(5))
+# Output:
+    # 120
 
 
 
