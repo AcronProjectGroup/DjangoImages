@@ -17,7 +17,7 @@ def DrawRhombus(number):
     print()
     
 
-DrawRhombus(8)
+DrawRhombus(50)
 
      
 
