@@ -1,4 +1,4 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 Find Divide by for a number "
+git commit -m " 💠 Perfect Numbers "
 git push -u origin main 
