@@ -1,4 +1,4 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 OOP directory >> 03-Confluence of attributes "
+git commit -m " 💠 OOP directory >>  04-Circle Class "
 git push -u origin main 
