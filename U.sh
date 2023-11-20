@@ -1,4 +1,4 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 __main__ and __name__ definitions commit=2"
+git commit -m " 💠 PIP Installation commit=1"
 git push -u origin main 
