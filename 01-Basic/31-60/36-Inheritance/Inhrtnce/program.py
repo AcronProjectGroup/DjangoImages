@@ -7,27 +7,15 @@ class Person:
 
 
 
-class Student:
-    def __init__(self, FirstName, LastName, major, university):
-        self.FirstName = FirstName
-        self.LastName = LastName
-        self.major = major
-        self.university = university
-
-    def whoami(self):
-        print(f"{self.FirstName} {self.LastName}")
+class Student(Person):
+    pass
 
 class Teacher:
-    def __init__(self, FirstName, LastName, department, level):
-        self.FirstName = FirstName
-        self.LastName = LastName
-        self.department = department
-        self.level = level
-    def whoami(self):
-        print(f"{self.FirstName} {self.LastName}. {self.department}-{self.level}")
+    pass
 
 
-Student1 = Student("Sina", "Lalehbakhsh", "Programming", "Berlin")
+Student1 = Student("Sina", "Lalehbakhsh")
 Student1.whoami()
 
-Teacher1 = Teacher("Mina", "Jaleh", "Art", "Top Level")
+# Output:
+    # Sina Lalehbakhsh
