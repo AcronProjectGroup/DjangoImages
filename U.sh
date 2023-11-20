@@ -1,4 +1,4 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 OOP directory >>  04-Circle Class "
+git commit -m " 💠 36- Inheritance >> before  "
 git push -u origin main 
