@@ -26,8 +26,27 @@ class Deposit:
         if self.AmountOfMoney < amount:
             print("Not anough money.")
             return
+        if amount <= 0:
+            print(f'Deposit is positive')
+            return
         self.AmountOfMoney -= amount
         other.AmountOfMoney += amount
+
+    def deposit(self, amount):
+        if amount <= 0:
+            print(f'Deposit is positive')
+            return
+        self.AmountOfMoney += amount
+    
+    def withdraw(self, amount):
+        if amount <= 0:
+            print(f'Deposit is positive')
+            return
+        if self.AmountOfMoney < amount:
+            print("Not anough money.")
+            return
+        self.AmountOfMoney -= amount
+        return f"${amount} was deducted from {self.owner}'s account"
 
 Jina = Deposit('Jina', 1000)
 print(Jina)
@@ -55,3 +74,31 @@ print(Sina == Bina)
 # Output:
     # True
 
+Sina.Transfer(Bina, 10000)
+# Output:
+    # Not anough money.
+
+Sina.Transfer(Bina, 750)
+print(Sina)
+print(Bina)
+# Output:
+    # Owner: Sina | Amount: $8481 
+    # Owner: Bina | Amount: $9981 
+
+
+print("Before deposit:",Sina)
+Sina.deposit(1000)
+print("After deposit:",Sina)
+# Output:
+    # Before deposit: Owner: Sina | Amount: $8481 
+    # After deposit: Owner: Sina | Amount: $9481 
+
+print(f"Before Withdaw {Sina.owner}:", Sina.AmountOfMoney)
+print(Sina.withdraw(8000))
+print(f"After Withdaw {Sina.owner}:", Sina.AmountOfMoney)
+# Output:
+    # Before Withdaw Sina: 9481
+    # $8000 was deducted from Sina's account
+    # After Withdaw Sina: 1481
+
+    
