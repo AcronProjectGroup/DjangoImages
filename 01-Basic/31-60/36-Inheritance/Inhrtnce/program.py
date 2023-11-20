@@ -8,14 +8,18 @@ class Person:
 
 
 class Student(Person):
-    pass
+    def __init__(self, FirstName, LastName, major):
+        super().__init__(FirstName, LastName)
+        self.major = major
+    def whoami(self):
+        print(f"{self.FirstName} {self.LastName} {self.major}")
 
 class Teacher:
     pass
 
 
-Student1 = Student("Sina", "Lalehbakhsh")
+Student1 = Student("Sina", "Lalehbakhsh", "Programming")
 Student1.whoami()
-
+ 
 # Output:
-    # Sina Lalehbakhsh
+    # Sina Lalehbakhsh Programming
