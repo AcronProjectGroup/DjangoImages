@@ -1,4 +1,4 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 Add gitignore for __pycache__ directories"
+git commit -m " 💠 __main__ and __name__ definitions "
 git push -u origin main 
