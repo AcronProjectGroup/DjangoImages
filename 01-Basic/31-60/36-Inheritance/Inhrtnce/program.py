@@ -1,3 +1,12 @@
+class Person:
+    def __init__(self, FirstName, LastName):
+        self.FirstName = FirstName
+        self.LastName = LastName
+    def whoami(self):
+        print(f'{self.FirstName.title()} {self.LastName.title()}')
+
+
+
 class Student:
     def __init__(self, FirstName, LastName, major, university):
         self.FirstName = FirstName
