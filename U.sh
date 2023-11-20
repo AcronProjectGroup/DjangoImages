@@ -1,4 +1,4 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 Random Password Generator + "
+git commit -m " 💠 Object Oriented Programming "
 git push -u origin main 
