@@ -1,4 +1,4 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 Object Oriented Programming 4 Create a new method "
+git commit -m " 💠 OOP2 directory commetment=(5) "
 git push -u origin main 

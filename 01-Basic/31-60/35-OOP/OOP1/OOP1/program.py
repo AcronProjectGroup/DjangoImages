@@ -4,7 +4,7 @@ class Car:
         self.model = model
     def PrintDetails(self): # This is Method Creation
         """This is Method Creation
-        and shows Detail of Object created by Car"""
+        and Print Detail of Object created by Car"""
         print(f'Color: {self.color} Model: {self.model}')
 
 car1 = Car("Blue", "Mercedes G class") # Create a instance object
