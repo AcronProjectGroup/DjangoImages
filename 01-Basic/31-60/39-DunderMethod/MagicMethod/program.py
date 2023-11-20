@@ -8,24 +8,23 @@ class Square:
     def __len__(self):
         return self.SideLength
 
-    def __sina__(self):
-        print("Sina!!")
-
 square = Square(10)
+
+
 
 # Before definition __str__ 
 print(square)
 # Output
     # <__main__.Square object at 0x7f8d02cc2c90>
 
-# After definition __str__ 
+
+
 print(square)
+# After definition __str__ 
 # Output
     # This is Square shape with Side Length 10
+
 
 print(len(square))
 # Output:
     # 10
-
-# Magic Method Sina !
-square.sina()
