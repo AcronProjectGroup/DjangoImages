@@ -16,21 +16,21 @@ Settings = {
     "length": 8,
 }
 
+def GetYesOrNo(option, default):
+    while True:
+        UsrInput = input(f'Contain {option}? (Enter=Default={default}) y:Yes, n:No -> ')
+        if UsrInput == '':
+            return default
+        if UsrInput in ['y', 'n']:
+            return UsrInput == 'y'
+
+        print('Invalide input. Please write again.')
+
 def GetSetUser(Settings):
     for option, default in Settings.items():
         if option != 'length':
-            while True:
-                UsrInput = input(f'Contain {option}? (Default={default}) y:Yes, n:No -> ')
-                if UsrInput == 'y' or UsrInput == 'n' or UsrInput == '':
-                    if UsrInput == 'y':
-                        Settings[option] = True
-                    elif UsrInput == '':
-                        Settings[option] = Settings[option]
-                    else:
-                        Settings[option] = False    
-                    break
-                else:
-                    print('Invalide input. Please write again.')
+            GetYesOrNo(option, default)
+
 
 GetSetUser(Settings)
 
