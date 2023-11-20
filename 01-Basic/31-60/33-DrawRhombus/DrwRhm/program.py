@@ -1,4 +1,4 @@
-def SpaceBeforeStars(numberStar, TotalStars):
+def SpaceStars(numberStar, TotalStars):
     NumberSpaces = (TotalStars-numberStar) // 2
     print(f"{' ' * NumberSpaces}{'*' * numberStar}{' ' * NumberSpaces}")
      
@@ -11,9 +11,9 @@ def DrawRhombus(number):
     print()
     for i in range(number):
         if i < number / 2:
-            SpaceBeforeStars((i*2 + 1), number)
+            SpaceStars((i*2 + 1), number)
         else:
-            SpaceBeforeStars(((number-i)*2 - 1), number)
+            SpaceStars(((number-i)*2 - 1), number)
     print()
     
 
