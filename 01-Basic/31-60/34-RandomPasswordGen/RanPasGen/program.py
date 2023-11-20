@@ -1,5 +1,9 @@
 import random
 import string
+import os
+
+def Clear():
+    os.system('clear')
 
 Settings = {
     "lower": True,
@@ -78,7 +82,7 @@ def PassGen(Settings):
 
 
 
-
-GetSetUser(Settings)
-    
+Clear()
+GetSetUser(Settings)    
 print(PassGen(Settings))
+Clear()
