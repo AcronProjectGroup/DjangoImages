@@ -2,18 +2,13 @@ class Car:
     def __init__(self, color, model): # This is constructor 
         self.color = color # This is an "instance attribute"
         self.model = model
+    def PrintDetails(self): # This is Method Creation
+        """This is Method Creation
+        and shows Detail of Object created by Car"""
+        print(f'Color: {self.color} Model: {self.model}')
 
 car1 = Car("Blue", "Mercedes G class") # Create a instance object
-print(car1.color)
-print(car1.model)
-
-
-car2 = Car("Red", "Unimog U 5000")
-print(car2.color)
-print(car2.model)
+car1.PrintDetails()
 
 # Output:
-    # Blue
-    # Mercedes G class
-    # Red
-    # Unimog U 5000
+    # Color: Blue Model: Mercedes G class
