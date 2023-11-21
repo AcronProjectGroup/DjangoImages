@@ -1,4 +1,4 @@
-from Pack01.program import FunctionIn01Pack
+from B1.program import FunctionIn01Pack
 
 FunctionIn01Pack()
 # Output:
