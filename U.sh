@@ -1,4 +1,4 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 Virtual Environments - deactivate - commit=3"
+git commit -m " 💠 Virtual Environments - venv-2 - commit=4"
 git push -u origin main 
