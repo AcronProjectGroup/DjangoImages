@@ -82,4 +82,12 @@
     # Processing triggers for man-db (2.10.2-1) ...
 
 
-# in current directory:
+# command:
+#     pip list > VENVrequirements.txt
+    
+# Output:
+#     Package    Version
+#     ---------- -------
+#     pip        23.3.1
+#     setuptools 68.2.2
+#     wheel      0.41.2
