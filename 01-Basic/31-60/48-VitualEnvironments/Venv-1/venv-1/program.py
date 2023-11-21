@@ -92,6 +92,15 @@
         # (venv) sina@linux:~/01-Repo/6 DjangoWA/01-Basic/31-60/48-VitualEnvironments/Venv-1/venv-1$
 
 
+# for deactivation:
+# write in terminal:
+    # deactivate
+
+# Output:
+# remove (venv) to first command Terminal:
+        # sina@linux:~/01-Repo/6 DjangoWA/01-Basic/31-60/48-VitualEnvironments/Venv-1/venv-1$
+
+
 # command:
 #     pip list > VENVrequirements.txt
     
