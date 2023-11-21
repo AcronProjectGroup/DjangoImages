@@ -10,6 +10,9 @@ UsrInput = int(input("Income? "))
 
 try:
     print(CalcIncome(UsrInput))
-except Exception:
-    print("Exception")
+except Exception as Text:
+    print("Exception", Text)
 
+# Output:
+    # Income? -100 
+    # Exception Income should be positive
