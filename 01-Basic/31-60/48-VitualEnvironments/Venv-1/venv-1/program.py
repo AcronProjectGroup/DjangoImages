@@ -82,6 +82,16 @@
     # Processing triggers for man-db (2.10.2-1) ...
 
 
+# Create Virtual Environment:
+# Command:
+    # virtualenv venv 
+    # source ./venv/bin/activate
+
+# Output:
+    # will add (venv) to first command Terminal:
+        # (venv) sina@linux:~/01-Repo/6 DjangoWA/01-Basic/31-60/48-VitualEnvironments/Venv-1/venv-1$
+
+
 # command:
 #     pip list > VENVrequirements.txt
     
@@ -91,3 +101,6 @@
 #     pip        23.3.1
 #     setuptools 68.2.2
 #     wheel      0.41.2
+
+
+
