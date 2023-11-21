@@ -1,4 +1,4 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 52-Try Exception Definition  - commit=2"
+git commit -m " 💠 53-Specific error handling - commit=1"
 git push -u origin main 
