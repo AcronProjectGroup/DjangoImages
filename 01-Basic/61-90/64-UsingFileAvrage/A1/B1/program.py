@@ -29,6 +29,7 @@ with open("Scores.txt", "r") as reader:
     for i in SplitData:
         _, x2 = lambda x: print(x), i.split(" ")
         print(f"{x2[0]:8}{x2[1]}")
+
 # Output:
     # Sina    10
     # Mina    20
