@@ -2,12 +2,10 @@
 with open("AllNames.txt", "r") as reader:
 # It is equivalent to the bottom line
 # nameFile = open("AllNames.txt", "r")
-    AllNameVar = reader
+    nameFile = reader
     # after this line file is closed force.
+    AllNameVar = nameFile.read()
 
-AllNameVar = nameFile.read()
-
-nameFile.close()
 
 AllNameVar = AllNameVar.split("\n")
 
