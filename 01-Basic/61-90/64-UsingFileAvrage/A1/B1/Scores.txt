@@ -1,0 +1,7 @@
+Sina 10
+Mina 20
+Jina 14
+Lina 17
+Tina 12.5
+Bina 16.75
+Nina 17.05
