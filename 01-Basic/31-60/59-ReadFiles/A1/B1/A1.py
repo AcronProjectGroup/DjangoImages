@@ -8,4 +8,6 @@ print(FileNames.read())
     # Bina
     # Jina
     # Shina
-
+print(type(FileNames))
+# Output:
+    # <class '_io.TextIOWrapper'>
