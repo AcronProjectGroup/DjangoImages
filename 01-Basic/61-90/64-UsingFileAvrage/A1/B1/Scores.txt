@@ -5,3 +5,6 @@ Lina 17
 Tina 12.5
 Bina 16.75
 Nina 17.05
+Fardaad 10
+Baran 19.75
+Nima 13.55
