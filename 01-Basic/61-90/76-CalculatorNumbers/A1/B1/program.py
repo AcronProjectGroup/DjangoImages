@@ -17,7 +17,7 @@ def InsertNumberInLabal(btnText):
     if currentNumsOperators == "0":
         LBLCaclResult["text"] = btnText
     elif btnText == "=":
-        LBLCaclResult["text"] = eval(currentNumsOperators)
+        LBLCaclResult["text"] = str(eval(currentNumsOperators))
     else:
         LBLCaclResult["text"] += btnText
 
