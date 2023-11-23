@@ -6,10 +6,29 @@ window = tk.Tk()
 FahrenheitValue = tk.StringVar()    
 
 def ConverFunction():
-    UserInput = float(FahrenheitValue.get())
-    ResultLBL["text"] =  (UserInput-32)*5 /9
+    """
+    This function convert the User Input to Celsius number 
+    and will write it to label in below.
+    """
+    UserInput = FahrenheitValue.get()
+    try:
+        UserInput = float(UserInput)
+        # Converting is in this part
+        ResultLBL["text"] =  (UserInput-32)*5 /9
+    except ValueError:
+        if UserInput != "":
+            ResultLBL["text"] = "Just enter number"
+        else:
+            ResultLBL["text"] = "Can't be empty, whore!"
+
+
 
 def CloseWindow():
+    """
+    This function use in button.
+    Its function is to close the program.
+    So enjoy it ! :)
+    """
     window.quit()
 
 
