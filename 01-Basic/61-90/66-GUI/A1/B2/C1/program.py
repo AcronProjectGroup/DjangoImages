@@ -1,3 +1,5 @@
+# for run use python3.10 program.py
+
 import tkinter as tk
 
 window = tk.Tk()
