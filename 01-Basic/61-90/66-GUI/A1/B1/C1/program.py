@@ -18,10 +18,15 @@ text1 = tk.Label(
     master=window,
     text="First Name",
 )
+buttom = tk.Button(
+    master=window,
+    text="Click",
+    command=lambda: print("OK!"),
+)
+
 text1.pack(side=tk.LEFT)
 UserInput.pack(side=tk.LEFT)
-
 text.pack(side=tk.LEFT)
-
+buttom.pack(side=tk.BOTTOM)
 
 window.mainloop()
