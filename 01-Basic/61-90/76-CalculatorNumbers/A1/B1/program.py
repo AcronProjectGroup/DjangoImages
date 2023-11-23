@@ -19,7 +19,7 @@ def InsertNumberInLabal(btnText):
         LBLCaclResult["text"] = btnText
     elif btnText == "=":
         LBLCaclResult["text"] = str(eval(current))
-    elif btnText == "." and "." in current:
+    elif btnText == "." and current[-1] == ".":
         pass
     else:
         if btnText in ["+", "-", "*"]:                             # if btnText == "+" or btnText == "-" or btnText == "*":
