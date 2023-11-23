@@ -6,8 +6,8 @@ window = tk.Tk()
 FahrenheitValue = tk.StringVar()    
 
 def ConverFunction():
-    ResultLBL["text"] = FahrenheitValue.get()
-
+    UserInput = float(FahrenheitValue.get())
+    ResultLBL["text"] =  (UserInput-32)*5 /9
 
 def CloseWindow():
     window.quit()
