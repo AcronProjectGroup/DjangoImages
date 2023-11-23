@@ -12,14 +12,20 @@ LBLCaclResult = tk.Label(
 LBLCaclResult.grid(row=0, column=0, columnspan=4)
 
 def InsertNumberInLabal(btnText):
-    currentNumsOperators = LBLCaclResult["text"] 
+    current = LBLCaclResult["text"] 
 
-    if currentNumsOperators == "0":
+    if current == "0":
         LBLCaclResult["text"] = btnText
     elif btnText == "=":
-        LBLCaclResult["text"] = str(eval(currentNumsOperators))
+        LBLCaclResult["text"] = str(eval(current))
     else:
-        LBLCaclResult["text"] += btnText
+        if btnText in ["+", "-", "*"]:                             # if btnText == "+" or btnText == "-" or btnText == "*":
+            if current in ["+", "-", "*"]:                         # if current[-1] == "+" or current[-1] == "-" or current[-1]=="*":
+                LBLCaclResult["text"] = current[:-1] + btnText
+            else:
+                LBLCaclResult["text"] += btnText
+        else:
+            LBLCaclResult["text"] += btnText
 
 Keys = [
     {
