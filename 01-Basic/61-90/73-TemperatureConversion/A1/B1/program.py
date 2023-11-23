@@ -3,6 +3,16 @@ from tkinter import E, W, N, S
 
 window = tk.Tk()
 
+FahrenheitValue = tk.StringVar()    
+
+def ConverFunction():
+    ResultLBL["text"] = FahrenheitValue.get()
+
+
+def CloseWindow():
+    window.quit()
+
+
 FahrenLBL = tk.Label(
     master=window,
     text="Fahrenheit:"
@@ -10,10 +20,12 @@ FahrenLBL = tk.Label(
 FahrEntr = tk.Entry(
     master=window,
     width=50,
+    textvariable=FahrenheitValue,
 )
 CalcBTN = tk.Button(
     master=window,
     text="Calculate",
+    command=ConverFunction,
     fg="white",
     bg="#094260",
 )
@@ -22,15 +34,14 @@ CelsLBL = tk.Label(
     master=window,
     text="Celsius: ",
 )
+    
+
 ResultLBL = tk.Label(
     master=window,
     text="Result shows here ..."
 )
 
 
-
-def CloseWindow():
-    window.quit()
 CloseBtn = tk.Button(
     master=window,
     text="Close",
