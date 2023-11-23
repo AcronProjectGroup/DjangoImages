@@ -1,4 +1,4 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 74- GUI -> bind Enter to Enter Key commit=7"
+git commit -m " 💠 74- GUI -> ttk in tkinter commit=1"
 git push -u origin main 
