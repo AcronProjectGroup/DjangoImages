@@ -9,103 +9,78 @@ LBLCaclResult = tk.Label(
     width=30,
     height=3,
 )
-
-# btn7 = tk.Button(
-#     master=window,
-#     text="7",
-#     command=lambda: print("7"),
-# )
-
-# btn8 = tk.Button(
-#     master=window,
-#     text="8",
-#     command=lambda: print("8"),
-# )
-
-# btn9 = tk.Button(
-#     master=window,
-#     text="9",
-#     command=lambda: print("9"),
-# )
-
-# btnPlus = tk.Button(
-#     master=window,
-#     text="+",
-#     command=lambda: print("+"),
-# )
-
 LBLCaclResult.grid(row=0, column=0, columnspan=4)
-# btn7.grid(row=1, column=0, sticky=(E, W, N, S))
-# btn8.grid(row=1, column=1, sticky=(E, W, N, S))
-# btn9.grid(row=1, column=2, sticky=(E, W, N, S))
-# btnPlus.grid(row=1, column=3, sticky=(E, W, N, S))
+
+def InsertNumberInLabal(btnText):
+    LBLCaclResult["text"] = btnText
 
 Keys = [
     {
         "text": "7",
-        "command": lambda: print("7"),
+        "command": lambda: InsertNumberInLabal("7"),
     },
     {
         "text": "8",
-        "command": lambda: print("8"),
+        "command": lambda: InsertNumberInLabal("8"),
     },
     {
         "text": "9",
-        "command": lambda: print("9"),
+        "command": lambda: InsertNumberInLabal("9"),
     },
     {
         "text": "+",
-        "command": lambda: print("+"),
+        "command": lambda: InsertNumberInLabal("+"),
     },
     {
         "text": "4",
-        "command": lambda: print("4"),
+        "command": lambda: InsertNumberInLabal("4"),
     },
     {
         "text": "5",
-        "command": lambda: print("5"),
+        "command": lambda: InsertNumberInLabal("5"),
     },
     {
         "text": "6",
-        "command": lambda: print("6"),
+        "command": lambda: InsertNumberInLabal("6"),
     },
     {
         "text": "-",
-        "command": lambda: print("-"),
+        "command": lambda: InsertNumberInLabal("-"),
     },
     {
         "text": "1",
-        "command": lambda: print("1"),
+        "command": lambda: InsertNumberInLabal("1"),
     },
     {
         "text": "2",
-        "command": lambda: print("2"),
+        "command": lambda: InsertNumberInLabal("2"),
     },
     {
         "text": "3",
-        "command": lambda: print("3"),
+        "command": lambda: InsertNumberInLabal("3"),
     },
     {
         "text": "*",
-        "command": lambda: print("*"),
+        "command": lambda: InsertNumberInLabal("*"),
     },
     {
         "text": ".",
-        "command": lambda: print("."),
+        "command": lambda: InsertNumberInLabal("."),
     },
     {
         "text": "0",
-        "command": lambda: print("0"),
+        "command": lambda: InsertNumberInLabal("0"),
     },
     {
         "text": "CR",
-        "command": lambda: print("CR"),
+        "command": lambda: InsertNumberInLabal("CR"),
     },
     {
         "text": "=",
-        "command": lambda: print("="),
+        "command": lambda: InsertNumberInLabal("="),
     },
 ]
+
 
 KeysObjects = []
 
