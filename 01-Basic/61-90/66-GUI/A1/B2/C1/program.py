@@ -2,6 +2,9 @@ import tkinter as tk
 
 window = tk.Tk()
 
+def ButtonClicked():
+    ShowLabel["text"] = NameEntry.get()
+
 NameEntry = tk.Entry(
     master=window,
 )
@@ -9,6 +12,7 @@ NameEntry = tk.Entry(
 SubmitButton = tk.Button(
     master=window,
     text="Submit",
+    command=ButtonClicked,
 )
 
 ShowLabel = tk.Label(
@@ -20,4 +24,4 @@ NameEntry.pack()
 SubmitButton.pack()
 ShowLabel.pack()
 
-# window.mainloop()
+window.mainloop()
