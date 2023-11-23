@@ -14,13 +14,14 @@ UserInput = tk.Entry(
     master=window,
     textvariable=textVar,
 )
-UserInput.pack()
-text.pack()
-
 text1 = tk.Label(
     master=window,
-    text="SINA LALEHBAKHSH",
+    text="First Name",
 )
+text1.pack(side=tk.LEFT)
+UserInput.pack(side=tk.LEFT)
 
-text1.pack()
+text.pack(side=tk.LEFT)
+
+
 window.mainloop()
