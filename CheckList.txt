@@ -34,3 +34,9 @@ Create new app:
     7- restart server
   
     8- check in http://127.0.0.1:8000/
+
+Create templates html:
+    1- create templates directory
+    2- create same name of app in templates
+    3- e.g appName/templates/appName/hereIsFilehtml.html
+

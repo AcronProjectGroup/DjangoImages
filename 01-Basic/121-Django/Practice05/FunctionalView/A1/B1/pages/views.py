@@ -5,7 +5,7 @@ def home_page_view(request):
     return HttpResponse("home_page_view")
 
 def about_page_view(request):
-    return HttpResponse("about_page_view")
+    return render(request, "pages/about.html")
 
 def contactus_page_view(request):
     return HttpResponse("contactus_page_view")
