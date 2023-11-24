@@ -4,10 +4,10 @@ from django.http import HttpResponse
 
 def sayHello(request):
     return HttpResponse("""
-    <br>Hello
+    <br>Project
     
-    <br>Hello
+    <br>Django
     
-    <br>Hello
+    <br>Acron
     
-    <br>Hello""")
+    <br>Sina""")
