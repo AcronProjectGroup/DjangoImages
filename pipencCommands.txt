@@ -49,7 +49,6 @@ Attention! ->> python should installed on the OS(Operation System)
 Find Data pipenv and location:
     pipenv --venv
 
-for me: open ~/.local/share/virtualenvs
 
 Delete pipenv:
     pipenv --rm
@@ -70,3 +69,7 @@ if don't have
 Create Pipfile.lock 
 Command:
     pipenv lock
+
+for me: 
+    
+    open ~/.local/share/virtualenvs
