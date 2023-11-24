@@ -1,6 +1,6 @@
 {
   "workbench.colorTheme": "Bearded Theme Vivid Black",
-  "workbench.iconTheme": "material-icon-theme",
+  "workbench.iconTheme": "helium-icon-theme",
   "files.autoSave": "afterDelay",
   "workbench.colorCustomizations": {
     "editor.selectionBackground": "#003aff"
