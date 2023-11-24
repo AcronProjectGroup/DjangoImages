@@ -1,15 +1,15 @@
 {
-    "workbench.colorTheme": "Bearded Theme Vivid Black",
-    "files.autoSave": "afterDelay",
-    "workbench.colorCustomizations": {
-      "editor.selectionBackground": "#003aff"
-    },
-    "editor.tokenColorCustomizations": {
-      "comments": "#ffee00"
-    },
-    "explorer.confirmDelete": false,
-    "googleTranslateExt.languages": [
-        "fa"
-    ],
-    "workbench.iconTheme": "bearded-icons",
-  }
+  "workbench.colorTheme": "Bearded Theme Vivid Black",
+  "workbench.iconTheme": "material-icon-theme",
+  "files.autoSave": "afterDelay",
+  "workbench.colorCustomizations": {
+    "editor.selectionBackground": "#003aff"
+  },
+  "editor.tokenColorCustomizations": {
+    "comments": "#ffee00"
+  },
+  "explorer.confirmDelete": false,
+  "googleTranslateExt.languages": [
+    "fa"
+  ],
+}
