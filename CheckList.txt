@@ -40,3 +40,6 @@ Create templates html:
     2- create same name of app in templates
     3- e.g appName/templates/appName/hereIsFilehtml.html
 
+Create Root templates need import to config/settings.py:
+    TEMPLATES /-> 'DIRS' /->  str(BASE_DIR.joinpath("templates"))
+    
