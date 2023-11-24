@@ -1,4 +1,5 @@
 import tkinter as tk
+import os
 from tkinter import E, W, N, S
 
 window = tk.Tk()
@@ -11,24 +12,44 @@ LBLCaclResult = tk.Label(
 )
 LBLCaclResult.grid(row=0, column=0, columnspan=4)
 
+LastOpInx = -1
+LastDotInx = -1
+
 def InsertNumberInLabal(btnText):
     current = LBLCaclResult["text"] 
+
+    global LastOpInx, LastDotInx
+    if btnText in ["+", "*", "-"]:
+        LastOpInx = len(current)
+    elif btnText == ".":
+        LastDotInx = len(current)
+
+    print(LastOpInx, LastDotInx)
+    
+    if btnText == ".":
+        if LastDotInx > LastOpInx:
+            print(btnText)
+            pass
+        if current[-1] == ".":
+            print("Kosenanat!")
+            pass
+
     if btnText == "CR":
         LBLCaclResult["text"] = "0"
+        LastOpInx, LastDotInx = 0, 0
     elif current == "0":
         LBLCaclResult["text"] = btnText
     elif btnText == "=":
         LBLCaclResult["text"] = str(eval(current))
-    elif btnText == "." and current[-1] == ".":
-        pass
-    else:
-        if btnText in ["+", "-", "*"]:                             # if btnText == "+" or btnText == "-" or btnText == "*":
-            if current in ["+", "-", "*"]:                         # if current[-1] == "+" or current[-1] == "-" or current[-1]=="*":
-                LBLCaclResult["text"] = current[:-1] + btnText
-            else:
-                LBLCaclResult["text"] += btnText
+    
+    if btnText in ["+", "-", "*"]:                             # if btnText == "+" or btnText == "-" or btnText == "*":
+        if current in ["+", "-", "*"]:                         # if current[-1] == "+" or current[-1] == "-" or current[-1]=="*":
+            LBLCaclResult["text"] = current[:-1] + btnText
         else:
             LBLCaclResult["text"] += btnText
+    else:
+        LBLCaclResult["text"] += btnText
+
 
 Keys = [
     {
@@ -140,3 +161,5 @@ CloseBtn.grid(
 
 
 window.mainloop()
+
+os.system("clear")
