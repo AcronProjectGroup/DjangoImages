@@ -8,5 +8,5 @@ def about_page_view(request):
     return render(request, "pages/about.html")
 
 def contactus_page_view(request):
-    return HttpResponse("contactus_page_view")
+    return render(request, "pages/contactus.html")
 
