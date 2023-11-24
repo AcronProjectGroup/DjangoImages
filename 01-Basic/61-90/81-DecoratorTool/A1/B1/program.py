@@ -16,3 +16,10 @@ SayHello()
     # developed!
     # Hello
     # developed!
+
+def AnotherFunc():
+    print("Function is another")
+
+AnotherFunc()
+# Output:
+    # Function is another
