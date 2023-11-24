@@ -63,3 +63,8 @@
 # Command:
     # pipenv check
 
+
+# if don't have 
+# Create Pipfile.lock 
+# Command:
+    # pipenv lock
