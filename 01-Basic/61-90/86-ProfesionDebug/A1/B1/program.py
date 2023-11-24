@@ -18,3 +18,4 @@ p, q = 4, -1
 a = Dot(Sum2Nums(p, q), 2)
 b = Dot(10, 3)
 
+print(a + b)
