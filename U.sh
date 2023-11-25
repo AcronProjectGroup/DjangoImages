@@ -1,5 +1,4 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 121 >> Practice07 Image-3 Customize Admin Panel commit:8
-Django administration"
+git commit -m " 💠 121 >> Practice07 Image-4 Boostrap Designing commit:9"
 git push -u origin main 
