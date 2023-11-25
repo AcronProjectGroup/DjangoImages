@@ -1,0 +1,45 @@
+Start project:
+    1- pipenv install
+    2- pipenv install django
+    3- pipenv shell
+    4- pipenv requirements
+    5- Check is installed
+    6- pipenv requirements > requirements.txt
+    7- django-admin startproject config .
+    8- python manage.py runserver
+    9- Check in browser, Django should be installed
+
+Create new app:
+    1- python manage.py startapp NameApp(e.g Home)
+    2- add in config/settings.py/-> INSTALLED_APPS > NameApp(e.g Home)
+    3- create urls.py in NameApp(e.g Home) directory
+    4- add pathh from config/urls.py -> urlpatterns to Home/urls.py 
+    e.g: 
+        path("/", include("Home.urls"))
+
+    5- in Home/urls.py add 
+    e.g:
+        from django.urls import path
+        from .views import sayHello
+        urlpatterns = [
+            path("hi/", sayHello, name="Home")    
+        ]
+   
+    6- create sayHello Function in Home/views.py
+    e.g:
+        from django.http import HttpResponse
+        def sayHello(request):
+            return HttpResponse("Hello")
+  
+    7- restart server
+  
+    8- check in http://127.0.0.1:8000/
+
+Create templates html:
+    1- create templates directory
+    2- create same name of app in templates
+    3- e.g appName/templates/appName/hereIsFilehtml.html
+
+Create Root templates need import to config/settings.py:
+    TEMPLATES /-> 'DIRS' /->  str(BASE_DIR.joinpath("templates"))
+    
