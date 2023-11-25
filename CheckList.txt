@@ -43,3 +43,7 @@ Create templates html:
 Create Root templates need import to config/settings.py:
     TEMPLATES /-> 'DIRS' /->  str(BASE_DIR.joinpath("templates"))
     
+
+Migrations for specific App:
+    1- python manage.py makemigrations NameApp(e.g notes)
+    2- python manage.py migrate
