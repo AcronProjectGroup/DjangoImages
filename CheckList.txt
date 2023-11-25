@@ -51,3 +51,8 @@ Migrations for specific App:
 
 Super User:
     1- python manage.py createsuperuser
+
+Testing:
+    1- in any Apps use, Classes
+    2- write a test
+    3- in Terminal: python manage.py test
