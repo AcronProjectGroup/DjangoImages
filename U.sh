@@ -1,4 +1,4 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 121 >> Practice06 Image-7 setUp(self) for Testing = 8"
+git commit -m " 💠 121 >> Practice07 Image-2 Foreign Key commit:8"
 git push -u origin main 
