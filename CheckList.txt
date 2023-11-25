@@ -47,3 +47,7 @@ Create Root templates need import to config/settings.py:
 Migrations for specific App:
     1- python manage.py makemigrations NameApp(e.g notes)
     2- python manage.py migrate
+
+
+Super User:
+    1- python manage.py createsuperuser
