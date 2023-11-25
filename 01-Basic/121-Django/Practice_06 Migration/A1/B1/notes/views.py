@@ -1,3 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
-# Create your views here.
+def notes_list_view(resquest):
+    return render(resquest, "notes/notes_list.html")
