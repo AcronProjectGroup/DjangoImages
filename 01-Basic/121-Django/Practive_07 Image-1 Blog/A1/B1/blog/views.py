@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
+from django.shortcuts import redirect
 
 from .models import Post
 from .forms import NewPostForm
@@ -28,6 +29,7 @@ def post_add_view(request):
         if form.is_valid():
             form.save()
             form = NewPostForm()
+            return redirect("posts_list")
     else:
         form = NewPostForm()
     return render(request, "blog/post_create.html", context={"form": form})
