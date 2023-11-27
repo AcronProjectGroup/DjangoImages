@@ -1,7 +1,6 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 121 >> Practice07 Image-23 Delete Post
-create post for two factor athenticate of deleting
+git commit -m " 💠 121 >> Practice07 Image-24 Add Test
 ATTENTION!
 This is before Authentication.
 "
