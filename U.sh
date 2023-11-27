@@ -1,7 +1,7 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 121 >> Practice07 Image-22 Update 
-.order_by('-datatime_modified')
+git commit -m " 💠 121 >> Practice07 Image-23 Delete Post
+create post for two factor athenticate of deleting
 ATTENTION!
 This is before Authentication.
 "
