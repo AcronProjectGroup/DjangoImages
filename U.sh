@@ -1,6 +1,6 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 121 >> Practice07 Image-24 Add Test
+git commit -m " 💠 121 >> Practice07 Image-25 Add Test
 ATTENTION!
 This is before Authentication.
 "
