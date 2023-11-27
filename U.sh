@@ -1,8 +1,7 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 121 >> Practice07 Image-21 Update Post
-Add Edit Button.
-Develop Button
+git commit -m " 💠 121 >> Practice07 Image-22 Update 
+.order_by('-datatime_modified')
 ATTENTION!
 This is before Authentication.
 "
