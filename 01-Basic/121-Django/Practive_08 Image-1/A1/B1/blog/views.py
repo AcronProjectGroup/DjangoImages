@@ -6,7 +6,7 @@ from django.views import generic
 from django.urls import reverse_lazy
 
 from .models import Post
-from .forms import NewPostForm
+from .forms import PostForm
 
 
 # Functional View --------------------------------Function List View---------------------------
@@ -37,14 +37,14 @@ class PostDetailView(generic.DetailView):
 # Functional View --------------------------------Function List View---------------------------
 def post_add_view(request):
     if request.method == "POST":
-        form = NewPostForm(request.POST)
+        form = PostForm(request.POST)
         if form.is_valid():
             form.save()
-            form = NewPostForm()
+            form = PostForm()
             post = Post.objects.last()
             return render(request, "blog/post_detail.html", {"post": post})
     else:
-        form = NewPostForm()
+        form = PostForm()
     return render(request, "blog/post_create.html", context={"form": form})
     # if request.method == 'POST': #  <--------------- This aproach have validation problems
     #     post_title = request.POST.get('title')
@@ -56,7 +56,7 @@ def post_add_view(request):
     # return render(request, "blog/post_create.html")
 # Class based view ===============================Class List View===============================
 class PostCreateView(generic.CreateView):
-    form_class = NewPostForm
+    form_class = PostForm
     template_name = "blog/post_create.html"
     
 # Functional View --------------------------------Function List View---------------------------
@@ -64,7 +64,7 @@ class PostCreateView(generic.CreateView):
 # blog/1/update  OR blog/13/update
 def post_update_view(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    form = NewPostForm(request.POST or None,instance=post)
+    form = PostForm(request.POST or None,instance=post)
     if form.is_valid():
         form.save()
         return render(request, "blog/post_detail.html", {"post": post})
@@ -72,7 +72,7 @@ def post_update_view(request, pk):
 # Class based view ===============================Class List View===============================
 class PostUpdateView(generic.UpdateView):
     model = Post
-    form_class = NewPostForm
+    form_class = PostForm
     template_name = "blog/post_create.html"
 # Functional View --------------------------------Function List View---------------------------
 def post_delete_view(request, pk):

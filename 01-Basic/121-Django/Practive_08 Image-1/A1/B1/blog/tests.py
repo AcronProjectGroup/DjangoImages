@@ -94,7 +94,7 @@ class BlogPostTest(TestCase):
             "status": "pub",
             "author": self.user.id,
         })
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
         self.assertEqual(Post.objects.last().title, "Some Title")
         self.assertEqual(Post.objects.last().text, "Some Text")
     # 13
@@ -105,7 +105,7 @@ class BlogPostTest(TestCase):
             "status": "pub",
             "author": self.post2.author.id,
         })
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
         self.assertEqual(Post.objects.last().title, "PostUpdated")
         self.assertEqual(Post.objects.last().text,  "textUpdated")
     # 14
