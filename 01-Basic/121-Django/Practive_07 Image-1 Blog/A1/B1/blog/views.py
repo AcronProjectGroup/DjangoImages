@@ -2,17 +2,25 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
+from django.views import generic
 
 from .models import Post
 from .forms import NewPostForm
 
 
+# Functional View --------------------------------Function List View---------------------------
 def post_list_view(request):
     # posts_list = Post.objects.all()
     posts_list = Post.objects.filter(status="pub").order_by("-datatime_modified")
     return render(request, "blog/posts_list.html", {"posts_list": posts_list})
-
-
+# Class based view ===============================Class List View===============================
+class PostListView(generic.ListView):
+    model = Post
+    template_name = "blog/posts_list.html"
+    context_object_name = "posts_list"
+    def get_queryset(self):
+        return Post.objects.filter(status="pub").order_by("-datatime_modified")
+# Functional View --------------------------------Function List View---------------------------
 def post_detail_view(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, "blog/post_detail.html", {"post": post})
@@ -21,8 +29,11 @@ def post_detail_view(request, pk):
     # except ObjectDoesNotExist:
     # except Post.DoesNotExist:
     #     post = None
-
-
+# Class based view ===============================Class List View===============================
+class PostDetailView(generic.DetailView):
+    model = Post
+    template_name = "blog/post_detail.html"
+# Functional View --------------------------------Function List View---------------------------
 def post_add_view(request):
     if request.method == "POST":
         form = NewPostForm(request.POST)
@@ -34,37 +45,39 @@ def post_add_view(request):
     else:
         form = NewPostForm()
     return render(request, "blog/post_create.html", context={"form": form})
-
     # if request.method == 'POST': #  <--------------- This aproach have validation problems
     #     post_title = request.POST.get('title')
     #     post_text = request.POST.get('text')
     #     user = User.objects.all()[0] # Django ORM work in here
     #     Post.objects.create(title=post_title, text=post_text, author=user, status='pub')
-
     # else:
     #     print('get request')
     # return render(request, "blog/post_create.html")
-
+# Class based view ===============================Class List View===============================
+class PostCreateView(generic.CreateView):
+    form_class = NewPostForm
+    template_name = "blog/post_create.html"
+    
+# Functional View --------------------------------Function List View---------------------------
 # send this example to below:
 # blog/1/update  OR blog/13/update
 def post_update_view(request, pk):
     post = get_object_or_404(Post, pk=pk)
     form = NewPostForm(request.POST or None,instance=post)
-
-    
     if form.is_valid():
         form.save()
         return render(request, "blog/post_detail.html", {"post": post})
-    
-
     return render(request, "blog/post_create.html", context={"form": form, "post": post})
-
-
+# Class based view ===============================Class List View===============================
+# Functional View --------------------------------Function List View---------------------------
 def post_delete_view(request, pk):
     post = get_object_or_404(Post, pk=pk)
-
     if request.method == "POST":
         post.delete()
         return redirect("posts_list")
-
     return render(request, "blog/post_delete.html", context={"post": post,})
+
+
+
+
+

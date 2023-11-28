@@ -7,6 +7,12 @@
 
 Welcome to the Awesome Django Project repository! 🚀 In this centralized hub, you'll find a collection of diverse Django applications and components that come together to build powerful web solutions.
 
+
+# Demo:
+
+![]()
+
+
 ## Project Overview
 
 This repository houses various Django projects, each designed to showcase specific functionalities and features. Here's a quick glance at what you'll find:
