@@ -18,7 +18,7 @@ Welcome to the Awesome Django Project repository! 🚀 In this centralized hub, 
     <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Practice_01-30/Practive_07%20Image-17%20Django%20Form%20with%20demo%20png/A1/B1/Screenshot%20from%202023-11-27%2005-15-23.png" width="250" alt="Image 2">
     <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Practice_01-30/Practive_07%20Image-18%20Django%20Form/A1/B1/ezgif.com-video-to-gif.gif" width="250" alt="Image 3">
   </p>
-<details>
+</details>
 
 <details>
   <summary>
