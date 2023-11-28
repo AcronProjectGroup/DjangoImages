@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.shortcuts import reverse
 
 class Post(models.Model):
     # Status Should be just two case
@@ -22,5 +22,8 @@ class Post(models.Model):
 
     def __str__(self):
         return f"{self.author}:{self.title}"
+
+    def get_absolute_url(self):
+        return reverse("post_detail", args=[self.id]) # for example : blog/1 OR blog/23
     
     
