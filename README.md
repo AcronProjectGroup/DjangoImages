@@ -10,7 +10,7 @@ Welcome to the Awesome Django Project repository! 🚀 In this centralized hub, 
 
 # Demo:
 
-![]()
+![](https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Screenshot%20from%202023-11-28%2000-25-39.png)
 
 
 ## Project Overview
