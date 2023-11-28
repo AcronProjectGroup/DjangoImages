@@ -11,7 +11,7 @@ Welcome to the Awesome Django Project repository! 🚀 In this centralized hub, 
 # Demo:
 <details>
   <summary>
-    <h2>DjangoImage:Practice7 (1to24)</h2>
+    <h4>DjangoImage:Practice7 (1to24)</h4>
   </summary>
   <p align="center">
     <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Screenshot%20from%202023-11-28%2000-25-39.png" width="250" alt="Image 1">
@@ -22,7 +22,7 @@ Welcome to the Awesome Django Project repository! 🚀 In this centralized hub, 
 
 <details>
   <summary>
-    <h2>DjangoImage:Practice8 Authentication System (1-...)</h2>
+    <h4>DjangoImage:Practice8 Authentication System (1-...)</h4>
   </summary>
   <p align="center">
     <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Practice_01-30/Practive_08%20Image-01%20Authentication%20System%20_Login/A1/B1/Screenshot%20from%202023-11-28%2014-45-28.png" width="250" alt="Image 1">
