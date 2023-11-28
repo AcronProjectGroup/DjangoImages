@@ -1,6 +1,6 @@
 #!/bin/bash
 git add .
-git commit -m " 💠💠💠 121 >> Practice07 Image-27 Last for Views 💠💠💠 
+git commit -m " 💠💠💠 121 >> Practice08 Image-01 Authentication System 💠💠💠 
 
 ATTENTION!
 This is before Authentication.
