@@ -1,0 +1,35 @@
+{% extends "_base.html" %}
+
+{% block page_title %}
+{% if user.is_authenticated %}
+    🧭
+{% else %}
+    😊
+{% endif %}
+    Signup
+{% endblock page_title %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-9">
+            <div class="card shadow my-3 p-5">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-sm btn-warning" >Signup</button>
+                </form>
+            </div>
+            <a href="{% url 'posts_list' %}" class="btn btn-sm btn-success">Back</a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+
+
+
+
