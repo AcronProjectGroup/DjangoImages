@@ -1,0 +1,310 @@
+{% extends 'html/base.html' %}
+
+{% block title %}Home{% endblock title %}
+{% block content %}
+    <section>
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card" id="chat3"
+                     style="border-radius: 15px; height: 600px; border-color: white; background: black">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
+
+                                <div class="p-3">
+                                    <div class="input-group rounded mb-3">
+                                        <input type="search" class="form-control rounded" placeholder="Search"
+                                               aria-label="Search"
+                                               aria-describedby="search-addon"
+                                               id="formSearch"/>
+                                        <span class="input-group-text border-0" id="search-addon"
+                                              style="background: black;cursor: pointer">
+                      <i class="fas fa-search" style="color: white"></i>
+                    </span>
+                                    </div>
+
+                                    <div data-mdb-perfect-scrollbar="true"
+                                         style="position: relative; height: 450px;overflow-y: scroll;">
+                                        <ul class="list-unstyled mb-0" id="channels" style="padding-right: 5%;">
+                                        </ul>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6 col-lg-7 col-xl-8">
+                                <div role="group" aria-label="Basic example" id="buttons">
+                                </div>
+                                <div class="pt-3 pe-3" data-mdb-perfect-scrollbar="true"
+                                     style="position: relative; height: 520px;overflow-y: scroll;" id="posts">
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <script>
+        let focused_channel = null;
+
+        function init_channels() {
+            fetch('/channels/', {
+                method: "GET",
+            }).then(function (response) {
+                // The API call was successful!
+                if (response.ok) {
+                    return response.json();
+                }
+                // There was an error
+                return Promise.reject(response);
+            }).then(function (data) {
+                let channels_div = document.getElementById("channels")
+                channels_div.innerHTML = ''
+                for (const item of data.channels) {
+                    const elm = makeChannels(item.channel_id, item.channel_name, item.last_message, item.time);
+                    channels_div.appendChild(elm)
+                }
+            }).catch(function (err) {
+                // There was an error
+                console.warn('Something went wrong.', err);
+            });
+        }
+
+        init_channels();
+
+        function getChannelDetail(channel_id) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/channels/' + channel_id + '/detail');
+            xhr.timeout = 1000;
+            xhr.send();
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var data = JSON.parse(this.responseText);
+                    var role = data["role"];
+                    var posts = data["posts"];
+                    var posts_div = document.getElementById("posts");
+                    posts_div.textContent = ""
+                    for (var i = 0; i < posts.length; i++) {
+                        elm = makePost(channel_id, posts[i][0], posts[i][1], posts[i][2], posts[i][3], posts[i][4]);
+                        posts_div.appendChild(elm)
+                    }
+
+                    adjust_buttons(role, channel_id, data['expiration'])
+                    posts_div.scrollTo(0, posts_div.scrollHeight);
+                }
+                xhr.onerror = function () {
+                }
+                xhr.ontimeout = function () {
+                }
+            }
+        }
+
+        function adjust_buttons(role, channel_id, expiration) {
+            var buttons_div = document.getElementById("buttons");
+            buttons_div.textContent = ""
+
+            var base_button = document.createElement('a');
+            base_button.setAttribute("class", "btn btn-warning btn-sm");
+            base_button.style.width = "20%"
+            base_button.style.margin = "0 0 0 2%"
+
+            var expire = base_button.cloneNode(false);
+            expire.innerHTML = 'Ends in ' + expiration + ' <i class="fa-solid fa-hourglass-end"></i>'
+
+            var members = base_button.cloneNode(false);
+            members.setAttribute("href", "/channels/" + channel_id + "/members")
+            members.innerHTML = 'Members <i class="fas fa-search"></i>'
+
+            var admins = base_button.cloneNode(false);
+            admins.setAttribute("href", "/channels/" + channel_id + "/admins")
+            admins.innerHTML = 'Admins <i class="fa-solid fa-user-tie"></i>'
+
+            var plans = base_button.cloneNode(false);
+            plans.setAttribute("href", "/channels/" + channel_id + "/plans")
+            plans.innerHTML = 'Plans <i class="fa-solid fa-gear"></i>'
+
+            var post = base_button.cloneNode(false);
+            post.setAttribute("href", "/channels/" + channel_id + "/post")
+            post.innerHTML = 'Post <i class="fas fa-paper-plane"></i>'
+
+            var premium = base_button.cloneNode(false);
+            premium.setAttribute("href", "/channels/" + channel_id + "/subscribe")
+            premium.innerHTML = 'Subscribe <i class="fa-solid fa-star"></i>'
+
+            var leave = base_button.cloneNode(false);
+            leave.onclick = function () {
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', "/channels/" + channel_id + '/leave');
+                xhr.timeout = 1000;
+                xhr.send();
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        getChannelDetail(channel_id);
+                    }
+                }
+            }
+            leave.innerHTML = 'Leave <i class="fa-solid fa-arrow-right-from-bracket"></i>'
+
+            var join = base_button.cloneNode(false);
+            join.onclick = function () {
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', "/channels/" + channel_id + '/join');
+                xhr.timeout = 1000;
+                xhr.send();
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        getChannelDetail(channel_id);
+                    }
+                }
+            }
+            join.innerHTML = 'Join <i class="fa-solid fa-arrow-right-to-bracket"></i>'
+
+            var chosen_buttons;
+            if (role === 'owner') {
+                chosen_buttons = [members, admins, plans, post]
+            } else if (role === 'admin') {
+                chosen_buttons = [post, leave]
+            } else if (role === 'vip') {
+                chosen_buttons = [expire, leave]
+            } else if (role === 'normal') {
+                chosen_buttons = [premium, leave]
+            } else {
+                chosen_buttons = [join]
+            }
+            chosen_buttons[0].style.margin = "0 0 0 " + (51 - chosen_buttons.length * 11) + "%";
+            for (var i = 0; i < chosen_buttons.length; i++) {
+                buttons_div.appendChild(chosen_buttons[i]);
+            }
+        }
+
+        function makePost(channel_id, post_id, title, body, purchasable, time) {
+            var outer_div = document.createElement("div");
+            outer_div.setAttribute("class", "d-flex flex-row justify-content-start");
+
+
+            var inner_div = document.createElement('div');
+            inner_div.setAttribute("class", "small p-2 ms-1 mb-2 rounded-3");
+            inner_div.style.borderStyle = "inset";
+            inner_div.style.borderWidth = "1px";
+            inner_div.style.width = "100%";
+            outer_div.appendChild(inner_div);
+
+            if (title !== null) {
+                var title_elm = document.createElement('p');
+                title_elm.style.backgroundColor = "black";
+                title_elm.style.fontSize = "16px";
+                title_elm.style.fontWeight = "bold";
+                title_elm.innerText = title;
+                inner_div.appendChild(title_elm);
+            }
+
+            var body_elm = document.createElement('p');
+            body_elm.setAttribute("class", "ms-2");
+            body_elm.style.backgroundColor = "black";
+            body_elm.innerText = body;
+            inner_div.appendChild(body_elm);
+
+            if (purchasable) {
+                var purchase = document.createElement('a');
+                purchase.setAttribute("class", "ms-2");
+                purchase.setAttribute("href", "/channels/" + channel_id + "/posts/" + post_id + "/purchase");
+                purchase.innerText = 'purchase';
+                inner_div.appendChild(purchase);
+            }
+
+            var time_elm = document.createElement('p');
+            time_elm.setAttribute("class", "ms-2 text-muted float-end");
+            time_elm.innerText = time;
+            inner_div.appendChild(time_elm);
+
+            return outer_div;
+        }
+
+        function makeChannels(channel_id, channel_name, last_message, time) {
+            var li = document.createElement("li");
+            li.setAttribute("class", "p-2 border-bottom");
+            li.style.cursor = 'pointer';
+
+            var a = document.createElement('a');
+            a.setAttribute("class", "d-flex justify-content-between");
+            a.onclick = function () {
+                if (focused_channel != null) {
+                    focused_channel.style.color = '#fad932';
+                }
+                this.style.color = 'white';
+                focused_channel = this;
+                getChannelDetail(channel_id);
+            }
+
+            li.appendChild(a)
+
+
+            var outer_div = document.createElement("div");
+            outer_div.setAttribute("class", "d-flex flex-row");
+            a.appendChild(outer_div)
+
+            var inner_div = document.createElement('div');
+            inner_div.setAttribute("class", "pt-1");
+            outer_div.appendChild(inner_div);
+
+
+            var name = document.createElement("p");
+            name.setAttribute("class", "fw-bold mb-0");
+            name.innerText = channel_name;
+            inner_div.appendChild(name)
+
+            var message = document.createElement("p");
+            message.setAttribute("class", "small text-muted");
+            message.innerText = last_message;
+            inner_div.appendChild(message)
+
+            inner_div = document.createElement('div');
+            inner_div.setAttribute("class", "pt-1");
+            a.appendChild(inner_div);
+
+            var time_elm = document.createElement('p');
+            time_elm.setAttribute("class", "small text-muted mb-1");
+            time_elm.innerText = time;
+            inner_div.appendChild(time_elm);
+
+            return li;
+        }
+
+        let searchTest = document.getElementById('formSearch')
+        searchTest.oninput = function (e) {
+            if (e.target.value === '') {
+                init_channels();
+            } else {
+                fetch('/channels/search/' + e.target.value, {
+                    method: "GET",
+                }).then(function (response) {
+                    // The API call was successful!
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    // There was an error
+                    return Promise.reject(response);
+                }).then(function (data) {
+                    let channels_div = document.getElementById("channels")
+                    channels_div.innerHTML = ''
+                    for (const item of data.channels) {
+                        const elm = makeChannels(item.channel_id, item.channel_name, item.last_message, item.time);
+                        channels_div.appendChild(elm)
+                    }
+                }).catch(function (err) {
+                    // There was an error
+                    console.warn('Something went wrong.', err);
+                });
+            }
+        }
+
+    </script>
+{% endblock content %}
