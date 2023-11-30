@@ -1,6 +1,10 @@
 #!/bin/bash
 git add .
-git commit -m " Practice00 Image1
+git commit -m " 💠 121 >> Practice08 Image-03 Authentication  Signup System
+Signup System  
+Add Login button and Emojy 
+ATTENTION!
+This is before Authentication.
 "
 git push -u origin main 
 
