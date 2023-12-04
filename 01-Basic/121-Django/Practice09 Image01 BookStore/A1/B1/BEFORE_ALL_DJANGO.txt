@@ -1,11 +1,15 @@
 1-  django-admin startproject config .
 
-2-  before migration and migrate
+2-  before migration and migrate ************** <<<<<<<------
     python manage.py startapp accounts
 
 3-  add this app to settings.py
 
-4-  
+4-  create Custom User in accounts/models.py
+
+5-  
+
+
 
 
 
