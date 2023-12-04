@@ -15,3 +15,4 @@ class CustomUser(AbstractUser):
                                     #  |
                                     #  |________> null is for database side
 
+# User -> Form -> SignUp/Admin

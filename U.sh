@@ -2,8 +2,8 @@
 git add .
 git commit -m " 💠 121 >> Practice09 Image01 Book Store Application
 
-blank is for user validation input
-null is for database side
+UserCreationForm for SignUp
+UserChangeForm for Admin
 
 "
 git push -u origin main 
