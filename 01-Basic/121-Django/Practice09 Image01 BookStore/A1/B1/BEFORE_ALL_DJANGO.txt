@@ -10,9 +10,11 @@
 5-  After Create and Config In Terminal:
     python manage.py makemigrations accounts
 
+6-  Now in Terminal again:
+    python manage.py migrate
 
-
-
+7-  Create Super User:
+    python manage.py createsuperuser
 
 
 
