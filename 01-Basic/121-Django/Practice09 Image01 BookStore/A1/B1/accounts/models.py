@@ -9,6 +9,9 @@ from django.contrib.auth.models import AbstractUser
 
 
 class CustomUser(AbstractUser):
-    age = models.PositiveIntegerField()
-
+    age = models.PositiveIntegerField(null=True, blank=True)
+                                    #  |          |
+                                    #  |          |___> blank is for user validation input
+                                    #  |
+                                    #  |________> null is for database side
 
