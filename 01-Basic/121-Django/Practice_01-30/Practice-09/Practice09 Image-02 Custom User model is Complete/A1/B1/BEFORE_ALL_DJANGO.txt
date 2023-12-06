@@ -1,0 +1,24 @@
+1-  django-admin startproject config .
+
+2-  before migration and migrate ************** <<<<<<<------
+    python manage.py startapp accounts
+
+3-  add this app to settings.py
+
+4-  create Custom User in accounts/models.py
+
+5-  After Create and Config In Terminal:
+    python manage.py makemigrations accounts
+
+6-  Now in Terminal again:
+    python manage.py migrate
+
+7-  Create Super User:
+    python manage.py createsuperuser
+
+
+
+
+
+
+

@@ -1,0 +1,29 @@
+{% extends "_base.html" %}
+{% block page_title %}
+{% if user.is_authenticated %}
+    🧭
+{% else %}
+    😊
+{% endif %}
+    Deleting...
+{% endblock page_title %}
+
+{% block content %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-9">
+                <div class="card shadow my-3 p-5">
+                    <h2 >🚨 Are you sure to delete ❗❓</h2>
+                    <p style="color:rgb(162, 2, 117);" >Title Post: "{{ post.title }}"</p>
+                </div>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <input class="btn btn- btn-danger" type="submit" value="Delete for ever">
+                </form>
+                <br>
+                <a href="{% url 'posts_list' %}" class="btn btn- btn-success">Back</a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+

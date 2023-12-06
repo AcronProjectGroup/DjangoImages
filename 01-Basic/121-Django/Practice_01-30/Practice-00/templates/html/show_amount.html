@@ -1,0 +1,34 @@
+{% extends 'html/base.html' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wallet</title>
+</head>
+<body>
+
+    {% block content %}
+    {% block p %} amount: {{ balance }} $ {% endblock p %}
+
+    <form method="post" action="{% url 'charge' %}">
+        {% csrf_token %}
+        {{ charge_form }}
+        <button type="submit">charge</button>
+    </form>
+
+    <form method="post" action="{% url 'withdraw' %}">
+        {% csrf_token %}
+        {{ withdraw_form }}
+        <button type="submit">withdraw</button>
+    </form>
+
+    {% if request.GET.message == 'charge_success' %}
+        <p>The charging operation was completed successfully.</p>
+    {% elif request.GET.message == 'withdraw_success' %}
+        <p>The withdrawal was successful.</p>
+    {% elif request.GET.message == 'withdraw_faild' %}
+        <p>Insufficient inventory!</p>
+    {% endif %}
+    {% endblock content %}
+</body>
+</html>

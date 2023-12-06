@@ -1,0 +1,55 @@
+for active in vscode:
+    search bar:
+        > python interpreter
+
+-----> usually is last one about pipenv
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+source:
+    https://pipenv.pypa.io/en/latest/workflows.html
+
+Pipenv Workflows
+
+
+Clone / create project repository:
+    > cd myproject
+
+Install from Pipfile.lock, if there is one:
+    > pipenv sync
+
+Add a package to your project, recalibrating entire lock file using the Pipfile specifiers:
+    > pipenv install <package>
+
+Update everything (equivalent to pipenv lock && pipenv sync):
+    > pipenv update
+
+Update and install just the relevant package and its sub-dependencies:
+    > pipenv update <package>
+
+Update in the Pipfile/lockfile just the relevant package and its sub-dependencies:
+    > pipenv upgrade <package>
+
+Find out what’s changed upstream:
+    > pipenv update --outdated
+
+Determine the virtualenv PATH:
+    > pipenv --venv
+
+Activate the Pipenv shell:
+    > pipenv shell
+
+Note: This will spawn a new shell subprocess, which can be deactivated by using exit.
+
+
