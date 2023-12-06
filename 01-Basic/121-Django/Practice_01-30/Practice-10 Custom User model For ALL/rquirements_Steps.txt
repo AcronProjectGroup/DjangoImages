@@ -1,0 +1,90 @@
+*BEFORE: In this Image use virtualenv.
+
+1- python3.12 -m venv venv
+2- source ./venv/bin/activate
+3- pip install django
+4- pip freeze >> requirements.txt
+5- django-admin startproject config .
+6- python manage.py startapp accounts
+7- Add "accounts" in settings.py/--> INSTALLED_APPS
+8- Create CustomUser in accounts/models.py
+9- Create forms.py file in accounts
+10- In forms.py create CustomUserCreationForm class
+11- In forms.py create CustomUserChangeForm class
+12- In accounts/admin.py create CustomUserAdmin class
+13- In Terminal python manage.py makemigrations accounts
+Output:
+    Migrations for 'accounts':
+    accounts/migrations/0001_initial.py
+        - Create model CustomUser
+14-In Terminal python manage.py migrate
+Output:
+    Operations to perform:
+    Apply all migrations: accounts, admin, auth, contenttypes, sessions
+    Running migrations:
+    Applying contenttypes.0001_initial... OK
+    Applying contenttypes.0002_remove_content_type_name... OK
+    Applying auth.0001_initial... OK
+    Applying auth.0002_alter_permission_name_max_length... OK
+    Applying auth.0003_alter_user_email_max_length... OK
+    Applying auth.0004_alter_user_username_opts... OK
+    Applying auth.0005_alter_user_last_login_null... OK
+    Applying auth.0006_require_contenttypes_0002... OK
+    Applying auth.0007_alter_validators_add_error_messages... OK
+    Applying auth.0008_alter_user_username_max_length... OK
+    Applying auth.0009_alter_user_last_name_max_length... OK
+    Applying auth.0010_alter_group_name_max_length... OK
+    Applying auth.0011_update_proxy_permissions... OK
+    Applying auth.0012_alter_user_first_name_max_length... OK
+    Applying accounts.0001_initial... OK
+    Applying admin.0001_initial... OK
+    Applying admin.0002_logentry_remove_auto_add... OK
+    Applying admin.0003_logentry_add_action_flag_choices... OK
+    Applying sessions.0001_initial... OK
+15- python manage.py createsuperuser
+16- python manage.py runserver
+17- Check user > admin user details > shouldn't be age shows = True
+18- In admin.py add fieldsets = UserAdmin.fieldsets + ((None, {'fields': ('age', )}),) in CustomUserAdmin class
+19- Check browser age should be shows
+20- In browser > admin panel > ADD USER button => shouldn't be age 
+21- In admin.py add add_fieldsets = UserAdmin.add_fieldsets + ((None, {'fields': ('age', )}),) in CustomUserAdmin class
+22- Check browser > refresh - should be added age field
+23- In admin.py add list_display = = ['username', 'email', 'age', 'is_staff'] in CustomUserAdmin class
+24- 
+25-
+26-
+27-
+28-
+29-
+30-
+31-
+32-
+33-
+34-
+35-
+36-
+37-
+38-
+39-
+40-
+41-
+42-
+43-
+44-
+45-
+46-
+47-
+48-
+49-
+50-
+51-
+52-
+
+
+
+
+
+
+
+
+
