@@ -1,0 +1,276 @@
+*BEFORE: In this Image use virtualenv.
+
+1- 
+python3.12 -m venv venv
+
+2- 
+source ./venv/bin/activate
+
+3- 
+pip install django
+
+4- 
+pip freeze > requirements.txt
+
+5- 
+django-admin startproject config .
+
+6- 
+python manage.py startapp accounts
+
+7- Add "accounts" in settings.py/--> INSTALLED_APPS
+'accounts',
+
+8- In END > config/settings.py
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+9- Create CustomUser in accounts/models.py
+from django.contrib.auth.models import AbstractUser
+class CustomUser(AbstractUser):
+    age = models.IntegerField(null=True, blank=True)
+
+10- Create forms.py file in accounts
+forms.py
+
+11- In forms.py create CustomUserCreationForm class
+12- In forms.py create CustomUserChangeForm class
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from .models import CustomUser
+class CustomUserCreationForm(UserCreationForm):
+    class Meta:
+        model = CustomUser
+        fields = UserCreationForm.Meta.fields + ('age' , )
+class CustomUserChangeForm(UserChangeForm):
+    class Meta:
+        model = CustomUser
+        fields = UserChangeForm.Meta.fields
+
+13- In accounts/admin.py create CustomUserAdmin class
+from django.contrib.auth.admin import UserAdmin
+from .forms import CustomUserChangeForm, CustomUserCreationForm
+from .models import CustomUser
+class CustomUserAdmin(UserAdmin):
+    add_form = CustomUserCreationForm
+    form = CustomUserChangeForm
+    model = CustomUser
+admin.site.register(CustomUser, CustomUserAdmin)
+
+
+14- In Terminal 
+python manage.py makemigrations accounts
+Output:
+    Migrations for 'accounts':
+    accounts/migrations/0001_initial.py
+        - Create model CustomUser
+
+15-In Terminal 
+python manage.py migrate
+Output:
+    Operations to perform:
+    Apply all migrations: accounts, admin, auth, contenttypes, sessions
+    Running migrations:
+    Applying contenttypes.0001_initial... OK
+    Applying contenttypes.0002_remove_content_type_name... OK
+    Applying auth.0001_initial... OK
+    Applying auth.0002_alter_permission_name_max_length... OK
+    Applying auth.0003_alter_user_email_max_length... OK
+    Applying auth.0004_alter_user_username_opts... OK
+    Applying auth.0005_alter_user_last_login_null... OK
+    Applying auth.0006_require_contenttypes_0002... OK
+    Applying auth.0007_alter_validators_add_error_messages... OK
+    Applying auth.0008_alter_user_username_max_length... OK
+    Applying auth.0009_alter_user_last_name_max_length... OK
+    Applying auth.0010_alter_group_name_max_length... OK
+    Applying auth.0011_update_proxy_permissions... OK
+    Applying auth.0012_alter_user_first_name_max_length... OK
+    Applying accounts.0001_initial... OK
+    Applying admin.0001_initial... OK
+    Applying admin.0002_logentry_remove_auto_add... OK
+    Applying admin.0003_logentry_add_action_flag_choices... OK
+    Applying sessions.0001_initial... OK
+
+16- Create super user
+python manage.py createsuperuser
+
+17- Run server
+python manage.py runserver
+
+18- Check browser user > admin user details > shouldn't be age shows = True
+
+
+19- In admin.py add fieldsets in CustomUserAdmin class
+fieldsets = UserAdmin.fieldsets + ((None, {'fields': ('age', )}),) 
+
+20- Refresh browser / Check in end of Link, age should be shows
+http://127.0.0.1:8000/admin/accounts/customuser/1/change/ 
+
+21- In browser > admin panel > ADD USER button => shouldn't be age 
+http://127.0.0.1:8000/admin/accounts/customuser/add/
+
+22- In admin.py add add_fieldsets, in CustomUserAdmin class
+add_fieldsets = UserAdmin.add_fieldsets + ((None, {'fields': ('age', )}),) 
+
+23- Refresh browser > check 'age' field, should be added. 
+http://127.0.0.1:8000/admin/accounts/customuser/add/
+
+24- In admin.py add list_display in CustomUserAdmin class
+list_display = ['username', 'email', 'age', 'is_staff'] 
+
+25- Refresh browser > check 'age' field, should be added.
+http://127.0.0.1:8000/admin/accounts/customuser/
+
+26- In config/urls.py create > in urlpatterns
+from django.urls import path, include
+# ...ATTENTION.. here is another python code
+path('accounts/', include('django.contrib.auth.urls')), 
+
+
+27- In config/urls.py create > in urlpatterns
+path('accounts/', include('accounts.urls')),
+
+28- Create urls.py in accounts directory
+
+29- In accounts/urls > 
+from django.urls import path
+urlpatterns = [
+    # path('signup/', views.SignUpView.as_view(), name='signup'),
+]
+
+30- In current directory project create templates/registration/login.html
+templates/registration/login.html
+
+31- In current directory project create templates/_base.html
+_base.html
+
+
+32- Add these in _base.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block page_title %}{% endblock %}</title>
+</head>
+<body>
+    {% block content%}
+    {% endblock %}
+</body>
+</html>
+
+33- Add these in login.html 
+{% extends '_base.html' %}
+{% block page_title %}
+Login-eingeben
+{% endblock %}
+{% block content%}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+{% endblock %}
+
+
+34- In Terminal 
+python manage.py runserver
+
+35- Go to this Link , Check in browser > should get this error > TemplateDoesNotExist at /accounts/login/
+http://127.0.0.1:8000/accounts/login/
+
+
+36- In config/settings.py add in TEMPLATES > in 'DIRS'  =>  [str(BASE_DIR.joinpath('templates'))],
+
+37- In config/settings.py add 
+LOGIN_REDIRECT_URL = 'home'
+
+38- In config/settings.py add 
+LOGOUT_REDIRECT_URL = 'home'
+
+39- In config/urls.py import this 
+from django.views.generic.base import TemplateView
+
+40- In config/urls.py add this path 
+path('home/', TemplateView.as_view(template_name='home.html'), name='home'),
+
+41- In current directory project create templates/home.html
+home.html
+
+42- Add these codes in home.html
+{% extends '_base.html' %}
+{% block page_title %}
+Homepage-Startseite
+{% endblock %}
+{% block content%}
+    <h1>Homepage-Startseite</h1>
+    {% if user.is_authenticated %}
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p>Welcome {{ user.username }} - <button type="submit">Logout</button>
+            </p>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a> - Signup
+    {% endif %}
+{% endblock %}
+
+43- uncomment path signup in accounts/url.py
+
+44- In accounts/url.py import
+from . import views
+
+45- Create SignUpView class in accounts/views.py
+from django.views import generic
+from django.urls import reverse_lazy
+from .forms import CustomUserCreationForm
+class SignUpView(generic.CreateView):
+    form_class = CustomUserCreationForm
+    template_name = 'registration/signup.html'
+    success_url = reverse_lazy('login')
+
+46- In home.html Change this line
+<a href="{% url 'login' %}">Login</a> - <a href="{% url 'signup' %}">Signup</a>
+
+47- Create registration/signup.html file
+signup.html
+
+48- Add these codes in signup.html
+{% extends '_base.html' %}
+{% block page_title %}
+Signup-Anmeldung
+{% endblock %}
+{% block content%}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Sigup</button>
+    </form>
+{% endblock %}
+
+
+49- In this link Check everything. should be shows signup table
+http://localhost:8000/accounts/signup/
+
+50- In accounts/forms.py Change this line for class CustomUserCreationForm
+fields = ('username', 'age', 'email', )
+
+51- In accounts/forms.py Change this line for class CustomUserChangeForm
+fields = ('username', 'age', 'email', )
+
+52- Refresh browser and check should be add email field
+http://localhost:8000/accounts/signup/
+
+53- Go to admin panel and check user added
+
+54- 
+
+55- 
+
+
+
+
+
+
+
+
+
