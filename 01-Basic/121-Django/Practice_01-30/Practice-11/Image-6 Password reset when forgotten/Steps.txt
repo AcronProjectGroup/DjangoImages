@@ -732,15 +732,25 @@ Login-eingeben
         {{ form|crispy }}
         <button class="btn btn-success mt-3" type="submit">Login</button>
     </form>
+    <a href="{% url 'password_reset'%}" class="btn btn-sm btn-warning mt-3">Forgot password?</a>
 {% endblock %}
+
 
 
 116- check this link should be changed to previous code
 http://127.0.0.1:8000/accounts/login/
 
 
-117- 
-118-
+117- add this to after form to signup.html
+...
+<a href="{% url 'login'%}" class="btn btn-sm btn-warning mt-3">Login</a>
+...
+
+
+118- check this link should be changed
+http://127.0.0.1:8000/accounts/signup/
+
+
 119-
 120-
 121-
