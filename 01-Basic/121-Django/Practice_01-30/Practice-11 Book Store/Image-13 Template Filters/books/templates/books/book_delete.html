@@ -1,0 +1,18 @@
+{% extends '_base.html' %}
+
+{% block page_title %}Delete: {{book.title}}{% endblock %}
+
+{% block content%}
+    
+    <form action="" method="post" class="mt-3">
+        {% csrf_token %}
+        <h1>Delete: "{{book.title}}" Book</h1>
+        <h3 class="mt-3" style='color:#ff00c8;'>Are you sure ?</h3>
+        <button class="btn btn-danger mt-3" type="submit">Delete - Löschen</button>
+    </form>
+    <br>
+    <a href="{% url 'book_list' %}" class="btn btn-success">Back - zurück kommen</a>
+
+{% endblock %}
+
+

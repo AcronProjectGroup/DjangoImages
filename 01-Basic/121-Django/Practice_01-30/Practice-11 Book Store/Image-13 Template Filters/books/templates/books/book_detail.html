@@ -1,0 +1,16 @@
+{% extends '_base.html' %}
+
+{% block page_title %}{{book.title}}{% endblock %}
+
+{% block content%}
+    
+    <h1 class="mt-3">{{ book.title|capfirst }}</h1>
+    <p>Author: {{book.author|title}}</p>
+    <p>Description: {{book.description|linebreaks}}</p>
+    <p>Price: {{book.price}}</p>
+    <br>
+    <a href="{% url 'book_update' book.id %}" class="btn btn-warning">Edit - bearbeiten</a>
+    <a href="{% url 'book_delete' book.id %}" class="btn btn-danger">Delete - Löschen</a>
+    <a href="{% url 'book_list' %}" class="btn btn-success">Back - zurück kommen</a>
+
+{% endblock %}
