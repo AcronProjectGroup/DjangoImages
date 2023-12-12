@@ -1,0 +1,1088 @@
+*BEFORE: In this Image use virtualenv.
+
+1- 
+python3.12 -m venv venv
+python3.10 -m venv venv
+
+2- 
+source ./venv/bin/activate
+
+3- 
+pip install django
+
+4- 
+pip freeze > requirements.txt
+
+5- 
+django-admin startproject config .
+
+6- 
+python manage.py startapp accounts
+
+7- Add "accounts" in settings.py/--> INSTALLED_APPS
+'accounts',
+
+8- In END > config/settings.py
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+9- Create CustomUser in accounts/models.py
+from django.contrib.auth.models import AbstractUser
+class CustomUser(AbstractUser):
+    age = models.IntegerField(null=True, blank=True)
+
+10- Create forms.py file in accounts
+forms.py
+
+11- In forms.py create CustomUserCreationForm class
+12- In forms.py create CustomUserChangeForm class
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from .models import CustomUser
+class CustomUserCreationForm(UserCreationForm):
+    class Meta:
+        model = CustomUser
+        fields = UserCreationForm.Meta.fields + ('age' , )
+class CustomUserChangeForm(UserChangeForm):
+    class Meta:
+        model = CustomUser
+        fields = UserChangeForm.Meta.fields
+
+13- In accounts/admin.py create CustomUserAdmin class
+from django.contrib.auth.admin import UserAdmin
+from .forms import CustomUserChangeForm, CustomUserCreationForm
+from .models import CustomUser
+class CustomUserAdmin(UserAdmin):
+    add_form = CustomUserCreationForm
+    form = CustomUserChangeForm
+    model = CustomUser
+admin.site.register(CustomUser, CustomUserAdmin)
+
+
+14- In Terminal 
+python manage.py makemigrations accounts
+Output:
+    Migrations for 'accounts':
+    accounts/migrations/0001_initial.py
+        - Create model CustomUser
+
+15-In Terminal 
+python manage.py migrate
+Output:
+    Operations to perform:
+    Apply all migrations: accounts, admin, auth, contenttypes, sessions
+    Running migrations:
+    Applying contenttypes.0001_initial... OK
+    Applying contenttypes.0002_remove_content_type_name... OK
+    Applying auth.0001_initial... OK
+    Applying auth.0002_alter_permission_name_max_length... OK
+    Applying auth.0003_alter_user_email_max_length... OK
+    Applying auth.0004_alter_user_username_opts... OK
+    Applying auth.0005_alter_user_last_login_null... OK
+    Applying auth.0006_require_contenttypes_0002... OK
+    Applying auth.0007_alter_validators_add_error_messages... OK
+    Applying auth.0008_alter_user_username_max_length... OK
+    Applying auth.0009_alter_user_last_name_max_length... OK
+    Applying auth.0010_alter_group_name_max_length... OK
+    Applying auth.0011_update_proxy_permissions... OK
+    Applying auth.0012_alter_user_first_name_max_length... OK
+    Applying accounts.0001_initial... OK
+    Applying admin.0001_initial... OK
+    Applying admin.0002_logentry_remove_auto_add... OK
+    Applying admin.0003_logentry_add_action_flag_choices... OK
+    Applying sessions.0001_initial... OK
+
+16- Create super user
+python manage.py createsuperuser
+
+17- Run server
+python manage.py runserver
+
+18- Check browser user > admin user details > shouldn't be age shows = True
+
+
+19- In admin.py add fieldsets in CustomUserAdmin class
+fieldsets = UserAdmin.fieldsets + ((None, {'fields': ('age', )}),) 
+
+20- Refresh browser / Check in end of Link, age should be shows
+http://127.0.0.1:8000/admin/accounts/customuser/1/change/ 
+
+21- In browser > admin panel > ADD USER button => shouldn't be age 
+http://127.0.0.1:8000/admin/accounts/customuser/add/
+
+22- In admin.py add add_fieldsets, in CustomUserAdmin class
+add_fieldsets = UserAdmin.add_fieldsets + ((None, {'fields': ('age', )}),) 
+
+23- Refresh browser > check 'age' field, should be added. 
+http://127.0.0.1:8000/admin/accounts/customuser/add/
+
+24- In admin.py add list_display in CustomUserAdmin class
+list_display = ['username', 'email', 'age', 'is_staff'] 
+
+25- Refresh browser > check 'age' field, should be added.
+http://127.0.0.1:8000/admin/accounts/customuser/
+
+26- In config/urls.py create > in urlpatterns
+from django.urls import path, include
+# ...ATTENTION.. here is another python code
+path('accounts/', include('django.contrib.auth.urls')), 
+
+
+27- In config/urls.py create > in urlpatterns
+path('accounts/', include('accounts.urls')),
+
+28- Create urls.py in accounts directory
+
+29- In accounts/urls > 
+from django.urls import path
+urlpatterns = [
+    # path('signup/', views.SignUpView.as_view(), name='signup'),
+]
+
+30- In current directory project create templates/registration/login.html
+templates/registration/login.html
+
+31- In current directory project create templates/_base.html
+_base.html
+
+
+32- Add these in _base.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block page_title %}{% endblock %}</title>
+</head>
+<body>
+    {% block content%}
+    {% endblock %}
+</body>
+</html>
+
+33- Add these in login.html 
+{% extends '_base.html' %}
+{% block page_title %}
+Login-eingeben
+{% endblock %}
+{% block content%}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+{% endblock %}
+
+
+34- In Terminal 
+python manage.py runserver
+
+35- Go to this Link , Check in browser > should get this error > TemplateDoesNotExist at /accounts/login/
+http://127.0.0.1:8000/accounts/login/
+
+
+36- In config/settings.py add in TEMPLATES > in 'DIRS'  =>  [str(BASE_DIR.joinpath('templates'))],
+
+37- In config/settings.py add 
+LOGIN_REDIRECT_URL = 'home'
+
+38- In config/settings.py add 
+LOGOUT_REDIRECT_URL = 'home'
+
+39- In config/urls.py import this 
+from django.views.generic.base import TemplateView
+
+40- In config/urls.py add this path 
+path('home/', TemplateView.as_view(template_name='home.html'), name='home'),
+
+41- In current directory project create templates/home.html
+home.html
+
+42- Add these codes in home.html
+{% extends '_base.html' %}
+{% block page_title %}
+Homepage-Startseite
+{% endblock %}
+{% block content%}
+    <h1>Homepage-Startseite</h1>
+    {% if user.is_authenticated %}
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p>Welcome {{ user.username }} - <button type="submit">Logout</button>
+            </p>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a> - Signup
+    {% endif %}
+{% endblock %}
+
+43- uncomment path signup in accounts/url.py
+
+44- In accounts/url.py import
+from . import views
+
+45- Create SignUpView class in accounts/views.py
+from django.views import generic
+from django.urls import reverse_lazy
+from .forms import CustomUserCreationForm
+class SignUpView(generic.CreateView):
+    form_class = CustomUserCreationForm
+    template_name = 'registration/signup.html'
+    success_url = reverse_lazy('login')
+
+46- In home.html Change this line
+<a href="{% url 'login' %}">Login</a> - <a href="{% url 'signup' %}">Signup</a>
+
+47- Create registration/signup.html file
+signup.html
+
+48- Add these codes in signup.html
+{% extends '_base.html' %}
+{% block page_title %}
+Signup-Anmeldung
+{% endblock %}
+{% block content%}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Sigup</button>
+    </form>
+{% endblock %}
+
+
+49- In this link Check everything. should be shows signup table
+http://localhost:8000/accounts/signup/
+
+50- In accounts/forms.py Change this line for class CustomUserCreationForm
+fields = ('username', 'age', 'email', )
+
+51- In accounts/forms.py Change this line for class CustomUserChangeForm
+fields = ('username', 'age', 'email', )
+
+52- Refresh browser and check should be add email field
+http://localhost:8000/accounts/signup/
+
+53- Go to admin panel and check user added
+
+54- create new app > In Terminal
+python manage.py startapp pages
+
+55- Add to INSTALLED_APPS
+'pages',
+
+56- create in pages/urls.py file 
+urls.py
+
+57- in config/urls.py Add this line
+path('', include('pages.urls')),
+
+58- in config/urls.py Cut this line 
+path('home/', TemplateView.as_view(template_name='home.html'), name='home'),
+
+
+59- in pages/urls.py Paste clipboard
+from django.urls import path
+urlpatterns = [
+    path('', TemplateView.as_view(template_name='home.html'), name='home'),
+]
+
+
+60- in pages/views.py
+from django.views.generic.base import TemplateView
+class HomePageView(TemplateView):
+    template_name = 'home.html'
+
+
+61- in pages/tests.py
+from django.test import TestCase
+from django.urls import reverse
+class HomePageTests(TestCase):
+    def test_home_page_url_by_name(self):
+        response = self.client.get(reverse('home'))
+        self.assertEqual(response.status_code, 200)
+
+62- in Terminal write this and should be "OK"
+python manage.py test
+Output:
+    Found 1 test(s).
+    Creating test database for alias 'default'...
+    System check identified no issues (0 silenced).
+    .
+    ----------------------------------------------------------------------
+    Ran 1 test in 0.008s
+    OK
+    Destroying test database for alias 'default'...
+
+63- another test in pages/tests.py in previous class
+    ...
+    def test_home_page_content(self):
+        response = self.client.get(reverse('home'))
+        self.assertContains(response, 'Homepage-Startseite')
+
+64- in Terminal write this and should be "OK"
+python manage.py test
+Output:
+    Found 2 test(s).
+    Creating test database for alias 'default'...
+    System check identified no issues (0 silenced).
+    ..
+    ----------------------------------------------------------------------
+    Ran 2 tests in 0.009s
+    OK
+    Destroying test database for alias 'default'...
+
+65- another test in pages/tests.py in previous class
+    ...
+    def test_home_page_url(self):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+
+66- in Terminal write this and should be "OK"
+python manage.py test
+Output:
+    Found 3 test(s).
+    Creating test database for alias 'default'...
+    System check identified no issues (0 silenced).
+    ...
+    ----------------------------------------------------------------------
+    Ran 3 tests in 0.010s
+    OK
+    Destroying test database for alias 'default'...
+
+67- another test in pages/tests.py in previous class
+    ...
+    def test_home_page_template_used(self):
+        response = self.client.get(reverse('home'))
+        self.assertTemplateUsed(response, 'home.html')   
+
+68- in Terminal write this and should be "OK"
+python manage.py test
+Output:
+    Found 4 test(s).
+    Creating test database for alias 'default'...
+    System check identified no issues (0 silenced).
+    ....
+    ----------------------------------------------------------------------
+    Ran 4 tests in 0.015s
+    OK
+    Destroying test database for alias 'default'...
+
+69- in accounts/tests.py 
+from django.test import TestCase
+from django.urls import reverse
+class SignUpPageTests(TestCase):
+    def test_signup_url_bu_name(self):
+        response = self.client.get(reverse('signup'))
+        self.assertEqual(response.status_code, 200)
+        
+70- in Terminal write this and should be "OK"
+python manage.py test
+Output:
+    Found 5 test(s).
+    Creating test database for alias 'default'...
+    System check identified no issues (0 silenced).
+    .....
+    ----------------------------------------------------------------------
+    Ran 5 tests in 0.031s
+    OK
+    Destroying test database for alias 'default'...
+
+71- another test in accounts/tests.py in previous class
+    ...
+    def test_signup_url(self):
+        response = self.client.get('/accounts/signup/')
+        self.assertEqual(response.status_code, 200)
+
+72- in Terminal write this and should be "OK"
+python manage.py test
+Output:
+    Found 6 test(s).
+    Creating test database for alias 'default'...
+    System check identified no issues (0 silenced).
+    ......
+    ----------------------------------------------------------------------
+    Ran 6 tests in 0.036s
+    OK
+    Destroying test database for alias 'default'...
+
+73- import to accounts/tests.py
+from django.contrib.auth import get_user_model
+
+74- another test in accounts/tests.py in previous class
+    ...
+    def test_signup_form(self):
+        user = get_user_model().objects.create_user(
+            'SINA',
+            'email@gmail.com',
+        )
+        self.assertEqual(get_user_model().objects.all().count(), 1)
+        self.assertEqual(get_user_model().objects.all()[0].username, 'SINA')
+        self.assertEqual(get_user_model().objects.all()[0].email, 'email@gmail.com')
+
+75- in Terminal write this and should be "OK"
+python manage.py test
+Output:
+    Found 7 test(s).
+    Creating test database for alias 'default'...
+    System check identified no issues (0 silenced).
+    .......
+    ----------------------------------------------------------------------
+    Ran 7 tests in 0.050s
+    OK
+    Destroying test database for alias 'default'...
+
+76- First -> in accounts/tests.py in previous class
+    username = 'SINA'
+    email = 'email@gmail.com'
+    ...
+
+77- Change in test method with name test_signup_form(self) 
+    ...
+    def test_signup_form(self):
+        user = get_user_model().objects.create_user(
+            self.username,
+            self.email,
+        )
+        self.assertEqual(get_user_model().objects.all().count(), 1)
+        self.assertEqual(get_user_model().objects.all()[0].username, self.username)
+        self.assertEqual(get_user_model().objects.all()[0].email, self.email)
+
+78- in Terminal write this and should be "OK"
+python manage.py test
+Output:
+    ...
+    Ran 7 tests in 0.038s
+    OK
+    ...
+
+79- in Terminal write
+pipenv install django-crispy-forms
+
+80- in Terminal write
+pipenv requirements > requirements.txt 
+
+81- Check requirements.txt should like this
+-i https://pypi.org/simple
+asgiref==3.7.2; python_version >= '3.7'
+django==5.0; python_version >= '3.10'
+django-crispy-forms==2.1; python_version >= '3.8'
+sqlparse==0.4.4; python_version >= '3.5'
+typing-extensions==4.9.0; python_version < '3.11'
+
+
+82- Change INSTALLED_APPS in config/settings.py like this
+INSTALLED_APPS = [
+    # Django Original
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    # Created
+    'accounts',
+    'pages',
+    # Imported OR third party
+    'crispy_forms',
+]
+
+
+83- add this end of config/settings.py
+# crispy forms settings
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+84- in Terminal write
+pipenv install crispy-bootstrap4
+
+# Source: https://pypi.org/project/crispy-bootstrap4/
+
+
+85- add this in INSTALLED_APPS > config/settings.py
+...
+'crispy_bootstrap4',
+
+
+86- in templates/registration/signup.html
+{% load crispy_forms_tags %}
+
+87- Change line number 10, (form) in templates/registration/signup.html
+{{ form|crispy }}
+
+88- Check site should change in this link:
+http://127.0.0.1:8000/accounts/signup/
+
+
+89- Add this code in templates/_base.html in Head tag
+...
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+...
+
+
+90- Check site should change in this link:
+http://127.0.0.1:8000/accounts/signup/
+
+91- Change this in _base.html
+...
+<body>
+<div class="container">
+    {% block content%}
+    {% endblock %}
+</div>
+</body>
+...
+
+92- Check site should change in this link:
+http://127.0.0.1:8000/accounts/signup/
+
+93- in signup.html add class to button
+...
+<button class="btn btn-success" type="submit">Sigup</button>
+...
+
+############ Password reset #####################################################
+
+94- create in templates/registration/password_change_form.html
+password_change_form.html
+
+95- Add sample text in password_change_form.html
+{% extends '_base.html' %}
+{% block content%}
+Password Change Here Sina!
+{% endblock %}
+
+
+96- Login to site ++ Check this link should be explosion
+http://127.0.0.1:8000/accounts/password_change/
+Output:
+    Password Change Here Sina! 
+
+
+97- add this to config/urls.py
+# For reading this madule
+# from django.contrib.auth import urls
+
+
+98- Logout from site ++ Check this link should see django default reset password with email.
+http://127.0.0.1:8000/accounts/password_reset/ 
+
+
+99- Change code in templates/registration/password_change_form.html
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% block page_title %}
+Password Change
+{% endblock %}
+{% block content%}
+    <h1 class="mt-3">Password Change - Kennwort ändern</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button class="btn btn-success mt-3" type="submit">Confirm</button>
+    </form>
+{% endblock %}
+
+
+100- Check this link should be change
+http://127.0.0.1:8000/accounts/password_change/
+
+
+101- Create tis file in templates/registration/password_change_done.html
+password_change_done.html
+
+102- add this code to password_change_done.html
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% block page_title %}
+Pass Changed 
+{% endblock %}
+{% block content%}
+    <h1>Password Changed :)</h1>
+{% endblock %}
+
+
+103- in end of config/settings.py
+# Email config
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBack
+
+# Source https://docs.djangoproject.com/en/5.0/topics/email/
+# another source: https://github.com/wsvincent/django-auth-tutorial
+# another source: https://ruddra.com/implementation-of-forgot-reset-password-feature-in-django/
+
+
+104- Logout and Go in browser:
+http://127.0.0.1:8000/accounts/password_reset/
+Output:
+    [11/Dec/2023 10:45:14] "GET /accounts/password_reset/ HTTP/1.1" 200 4053
+    Content-Type: text/plain; charset="utf-8"
+    MIME-Version: 1.0
+    Content-Transfer-Encoding: 8bit
+    Subject: Password reset on 127.0.0.1:8000
+    From: webmaster@localhost
+    To: sina@sina.com
+    Date: Mon, 11 Dec 2023 10:45:24 -0000
+    Message-ID: <170229152453.18092.4455898355979210504@linux>
+    You're receiving this email because you requested a password reset for your user account at 127.0.0.1:8000.
+    Please go to the following page and choose a new password:
+    http://127.0.0.1:8000/accounts/reset/MQ/bz1hvo-39177a48e37fc48fd39308541826be5e/
+    Your username, in case you’ve forgotten: sina
+    Thanks for using our site!
+    The 127.0.0.1:8000 team
+    -------------------------------------------------------------------------------
+    [11/Dec/2023 10:45:24] "POST /accounts/password_reset/ HTTP/1.1" 302 0
+    [11/Dec/2023 10:45:24] "GET /accounts/password_reset/done/ HTTP/1.1" 200 3623
+
+
+105- Click on the link created in Terminal , like this
+http://127.0.0.1:8000/accounts/reset/MQ/set-password/
+
+106- Change password , if you change with true parameters browser will redirect to
+http://127.0.0.1:8000/accounts/reset/done/
+
+
+107- create this file in templates/registration/...
+password_reset_form.html
+password_reset_done.html
+password_reset_confirm.html
+password_reset_complete.html
+
+
+108- add this to password_change_form.html
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% block page_title %}
+Password Reset
+{% endblock %}
+{% block content%}
+    <h1 class="mt-3">Password Reset - Passwort zurücksetzen</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button class="btn btn-success mt-3" type="submit">Send Email</button>
+    </form>
+{% endblock %}
+
+
+109- Check this link should be change , followed by above codes
+http://127.0.0.1:8000/accounts/password_reset/
+
+
+110- add this to password_reset_done.html
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% block page_title %}
+Password Reset
+{% endblock %}
+{% block content%}
+    <h1 class="mt-3">Link Sent to your address.</h1>
+    <h1 class="mt-3">Link wird an Ihre Adresse gesendet.</h1>
+{% endblock %}
+
+
+
+111- Check this link should be change you wrote above code
+http://127.0.0.1:8000/accounts/password_reset/done/
+
+
+112- add this to password_reset_confirm.html
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% block page_title %}
+Set new password
+{% endblock %}
+{% block content%}
+    <h1 class="mt-3">Set new password - Kennwort ändern</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button class="btn btn-success mt-3" type="submit">Set new password</button>
+    </form>
+{% endblock %}
+
+
+113- add this to password_reset_complete.html
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% block page_title %}
+Password Reset
+{% endblock %}
+{% block content%}
+    <h1 class="mt-3">Password reset complete</h1>
+    <h1 class="mt-3">Passwort-Reset abgeschlossen</h1>
+    <p>You can login now <a href="{% url 'login'%}">Login</a></p>
+{% endblock %}
+
+
+
+114- after write good password you redirect to this link. should changed like previous code
+http://127.0.0.1:8000/accounts/reset/done/
+
+
+115- change this for login.html
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% block page_title %}
+Login-eingeben
+{% endblock %}
+{% block content%}
+    <h1 class="mt-3">Login</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button class="btn btn-success mt-3" type="submit">Login</button>
+    </form>
+    <a href="{% url 'password_reset'%}" class="btn btn-sm btn-warning mt-3">Forgot password?</a>
+{% endblock %}
+
+
+
+116- check this link should be changed to previous code
+http://127.0.0.1:8000/accounts/login/
+
+
+117- add this to after form to signup.html
+...
+<a href="{% url 'login'%}" class="btn btn-sm btn-warning mt-3">Login</a>
+...
+
+
+118- check this link should be changed
+http://127.0.0.1:8000/accounts/signup/
+
+
+119- create this file in templates/registration/password_reset_email.html
+password_reset_email.html
+
+
+120- add this code to password_reset_email.html
+Hello, {{ user.username }}
+Someone just asked for password reset of this email: {{ email }}
+if it was true:
+{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
+if you forgot your username: {{ user.username }}
+
+
+121- email reset again, check Terminal logs should be like this
+Output:
+    Content-Type: text/plain; charset="utf-8"
+    MIME-Version: 1.0
+    Content-Transfer-Encoding: 7bit
+    Subject: Password reset on 127.0.0.1:8000
+    From: webmaster@localhost
+    To: sina@sina.com
+    Date: Mon, 11 Dec 2023 13:07:45 -0000
+    Message-ID: <111.111.1111@linux>
+    Hello, sina
+    Someone just asked for password reset of this email: sina@sina.com
+    if it was true:
+    http://127.0.0.1:8000/accounts/reset/MQ/bz1ogx-86a93b0aa7151fb7c0474e7d12eb5c17/
+    if you forgot your username: sina
+    ------------------------------------------------------------------------------- 
+
+######################### Create Book Model ##################################################
+
+122- in Terminal
+python manage.py startapp books
+
+
+123- add it to config/settings.py > INSTALLED_APPS list
+'books',
+
+
+124- create new model in books/models.py
+...
+class Book(models.Model):
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=200)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=5, decimal_places=2) 
+    def __str__(self):
+        return self.title
+
+125- in terminal for this [ Model+(migrations) > migration+(migrate) > DB ]
+python manage.py makemigrations books 
+Output:
+    Migrations for 'books':
+    books/migrations/0001_initial.py
+        - Create model Book
+
+126- Check books/migrations/0001_initial.py like this
+# Generated by Django 5.0 on 2023-12-11 13:41
+from django.db import migrations, models
+class Migration(migrations.Migration):
+    initial = True
+    dependencies = [
+    ]
+    operations = [
+        migrations.CreateModel(
+            name='Book',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('title', models.CharField(max_length=200)),
+                ('author', models.CharField(max_length=200)),
+                ('description', models.TextField()),
+                ('price', models.DecimalField(decimal_places=2, max_digits=5)),
+            ],
+        ),
+    ]
+
+
+127- in terminal write
+python manage.py migrate
+Output:
+    Operations to perform:
+        Apply all migrations: accounts, admin, auth, books, contenttypes, sessions
+    Running migrations:
+        Applying books.0001_initial... OK
+
+
+128- add this to books/admin.py
+from django.contrib import admin
+from .models import Book
+admin.site.register(Book)
+
+
+129- check admin panel should be added
+http://127.0.0.1:8000/admin/
+
+
+130- add a book from admin panel 
+
+
+131- add this in books/views.py
+from django.shortcuts import render
+from django.views import generic
+from .models import Book
+class BookListView(generic.ListView):
+    model = Book
+    template_name = 'books/book_list.html'
+    context_object_name = 'books'
+
+
+132- create urls.py in books directory
+urls.py
+
+
+133-add this in books/urls.py
+from django.urls import path
+from .views import BookListView
+urlpatterns = [
+    path('', BookListView.as_view(), name='book_list'),
+]
+
+
+134- add this path to config/settings.py
+...
+path('books/', include('books.urls')),
+
+
+135- Create in books/templates/books/book_list.html
+
+
+136- add this code to book_list.html
+{% extends '_base.html' %}
+{% block page_title %}Book list{% endblock %}
+{% block content%}
+    {% for book in books %}
+        <h1>book.title</h1>
+        <p>{{book.description}}</p>
+        <br>
+    {% endfor %}
+{% endblock %}
+
+
+137- add another book in 
+http://127.0.0.1:8000/admin/books/book/
+
+
+138- Check this link should be shows two title books
+http://127.0.0.1:8000/books/
+
+
+139- create this class to books/views.py  
+class BookDetailView(generic.DeleteView):
+    model = Book
+    template_name = 'books/book_detail.html'
+    
+
+140- create this file books/templates/books/book_detail.html
+book_detail.html
+
+
+141- add these codes to book_detail.html
+{% extends '_base.html' %}
+{% block page_title %}{{book.title}}{% endblock %}
+{% block content%}
+    <h1 class="mt-3">{{book.title}}</h1>
+    <p>Author: {{book.author}}</p>
+    <p>Description: {{book.description}}</p>
+    <p>Price: {{book.price}}</p>
+    <br>
+{% endblock %}
+
+
+142- add this path to books/urls.py
+...
+from .views import BookDetailView
+...
+path('<int:pk>/', BookDetailView.as_view(), name='book_detail'),
+
+
+143- Check in browser this link, should be shows detail of book added
+http://127.0.0.1:8000/books/1/
+OR
+http://127.0.0.1:8000/books/2/
+
+
+144- Check in title bar browser this link, should be change with title of book 
+http://127.0.0.1:8000/books/1/
+OR
+http://127.0.0.1:8000/books/2/
+
+
+145- import to books/models.py
+from django.urls import reverse
+
+
+146- add this in class Book model > books/models.py
+...
+def get_absolute_url(self):
+    return reverse('book_detail', args=[self.id])
+
+
+147- change this part of book_list.html
+...
+<a href="{{ book.get_absolute_url }}">
+    <h1 class="mt-3">{{book.title}}</h1>
+</a>
+...
+
+
+148- create class for create view in books/views.py
+...
+class BookCreateView(generic.CreateView):
+    model = Book
+    template_name = 'books/book_create.html'     
+
+
+149- Create this file books/templates/books/book_create.html
+book_create.html
+
+
+150- add path to books/urls.py
+...
+path('create/', BookCreateView.as_view(), name="book_create"),
+
+
+151- add these to end of the book_list.html
+...
+<a href="{% url 'book_create' %}" class="btn btn-success">Create New Book</a>
+
+
+152- add this in book_create.html
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% block page_title %}Edit: {{book.title}}{% endblock %}
+{% block content%}
+    <form action="" method="post" class="mt-3">
+        {% csrf_token %}
+        {{form|crispy}}
+    </form>
+    <br>
+    <a href="{% url 'book_list' %}" class="btn btn-success">Back - zurück kommen</a>
+{% endblock %}
+
+
+153- add new book with this link ++ after created should be redirect
+http://127.0.0.1:8000/books/new/
+
+
+154- create class for update view in books/views.py
+...
+class BookUpdateView(generic.UpdateView):
+    model = Book
+    fields = ['title', 'author', 'description']
+    template_name = 'books/book_update.html'
+    
+
+155- create file books/templates/books/book_update.html
+book_update.html
+
+
+156- add these to book_update.html
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% block page_title %}Edit: {{book.title}}{% endblock %}
+{% block content%}
+    <form action="" method="post" class="mt-3">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button class="btn btn-success mt-3" type="submit">Edit</button>
+    </form>
+    <br>
+    <a href="{% url 'book_list' %}" class="btn btn-success">Back - zurück kommen</a>
+{% endblock %}
+
+
+157- import this in books/urls.py
+from .views import BookUpdateView
+
+
+158- add path to books/urls.py
+path('<int:pk>/edit', BookUpdateView.as_view(), name="book_update"),
+
+
+159- add button in book_detail.html
+...
+<a href="{% url 'book_update' book.id %}" class="btn btn-warning">Edit - bearbeiten</a>
+...
+
+
+160- import this in first books/views.py
+from django.urls import reverse_lazy
+
+
+161- Create class Delete view in books/views.py
+class BookDeleteView(generic.DeleteView):
+    model = Book
+    template_name = 'books/book_delete.html'
+    success_url = reverse_lazy('book_list')
+
+
+162- Create this file books/templates/books/book_delete.html
+book_delete.html
+
+
+163- add these codes to book_delete.html
+{% extends '_base.html' %}
+{% block page_title %}Delete: {{book.title}}{% endblock %}
+{% block content%}
+    <form action="" method="post" class="mt-3">
+        {% csrf_token %}
+        <h1>Delete: "{{book.title}}" Book</h1>
+        <h3 class="mt-3" style='color:#ff00c8;'>Are you sure ?</h3>
+        <button class="btn btn-danger mt-3" type="submit">Delete - Löschen</button>
+    </form>
+    <br>
+    <a href="{% url 'book_list' %}" class="btn btn-success">Back - zurück kommen</a>
+{% endblock %}
+
+
+164- add path to books/urls.py
+path('<int:pk>/delete/', BookDeleteView.as_view(), name='book_delete'),
+
+
+165- 
+
+
+
+166-
+167-
+168-
+
+
+
+
+
+
