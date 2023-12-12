@@ -28,8 +28,8 @@ Welcome to the Awesome Django Project repository! 🚀 In this centralized hub, 
     </summary>
     <p align="center">
       <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Practice_01-30/Practice-11%20Book%20Store/Image-15%20The%20site%20Beautification/Screenshot%20from%202023-12-12%2014-32-55.png" width="250" alt="Image 2">
-      <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Practice_01-30/Practice-11%20Book%20Store/Image-15%20The%20site%20Beautification/Screenshot%20from%202023-12-12%2014-32-55.png" width="250" alt="Image 3">
-      <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Practice_01-30/Practice-11%20Book%20Store/Image-15%20The%20site%20Beautification/Screenshot%20from%202023-12-12%2014-32-55.png" width="250" alt="Image 3">
+      <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Practice_01-30/Practice-11%20Book%20Store/Image-15%20The%20site%20Beautification/Screenshot%20from%202023-12-12%2014-49-08.png" width="250" alt="Image 3">
+      <img src="" width="250" alt="Image 3">
     </p>
   </details>
 </details>
