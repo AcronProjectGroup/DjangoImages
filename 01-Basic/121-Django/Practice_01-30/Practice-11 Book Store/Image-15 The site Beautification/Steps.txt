@@ -1457,7 +1457,7 @@ http://localhost:8000/books/2/
 
 
 204- check this link in navbar should shows this text
-Welcome YourCustomUserName | Logout 
+Welcome YourCustomUserName 😎 Logout 
 
 
 
