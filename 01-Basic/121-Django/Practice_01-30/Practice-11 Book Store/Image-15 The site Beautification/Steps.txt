@@ -1461,7 +1461,20 @@ Welcome YourCustomUserName 😎 Logout
 
 
 
-205-
+205- Rechange this in _base.html
+{% if user.is_authenticated %}
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p>Welcome {{ user.username }} - <button type="submit">Logout</button>
+        </p>
+    </form>
+{% else %}
+    <a href="{% url 'login' %}">Login</a> - <a href="{% url 'signup' %}">Signup</a>
+{% endif %}
+
+
+
 206-
 207-
 208-
