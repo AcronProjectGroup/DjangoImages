@@ -29,12 +29,16 @@
                     <a class="nav-link" href="{% url 'book_create' %}">Add a new book</a>
                 </div>
             </div>
-            <div class="mx-2 text-white">
-                {% if user.is_authenticated %}
-                    <p><a href="{% url 'logout' %}">Log Out</a></p>
-                    Welcome {{user.username}}
-                {% endif %}
-            </div>
+            {% if user.is_authenticated %}
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <p>Welcome {{ user.username }} - <button type="submit">Logout</button>
+                    </p>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a> - <a href="{% url 'signup' %}">Signup</a>
+            {% endif %}
         </div>
     </nav>
     
