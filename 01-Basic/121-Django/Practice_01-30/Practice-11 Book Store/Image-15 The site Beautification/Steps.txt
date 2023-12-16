@@ -1475,14 +1475,128 @@ Welcome YourCustomUserName 😎 Logout
 
 
 
-206-
-207-
-208-
-209-
-210-
-211-
-212-
-213-
+206- Rechange this with login.html
+
+
+
+207- Rechange this for signup.html
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% block page_title %}
+Signup-Anmeldung
+{% endblock %}
+{% block content%}
+    <div class="d-flex justify-content-center mt-5" dir="rtl">
+        <div class="col-xl-3 col-lg-4 col-md-5 col-sm-5 col-xs-6 bg-white m-3 m-sm-5 border rounded px-4 pt-4 pb-3 shadow">
+            <form method="post">
+                <h1 class="text-center">Signup</h1>
+                {% csrf_token %}
+                {{ form|crispy }}
+        
+                <button type="submit" class="btn btn-success mt-3 w-100">Sigup</button>
+            </form>
+            <div class="line-with-middle-sep">
+                <span>
+                    OR
+                </span>
+                <a href="{% url 'login'%}" class="btn btn-primary mt-2 mb-3 w-100">Login</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+208- Rechange in login.html
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% block page_title %}
+Login-eingeben
+{% endblock %}
+{% block content%}
+    <div class="d-flex justify-content-center mt-5" dir="rtl">
+        <div class="col-xl-3 col-lg-4 col-md-5 col-sm-5 col-xs-6 bg-white m-3 m-sm-5 border rounded px-4 pt-4 pb-3 shadow">
+            <form method="post">
+                <h1 class="text-center">Login</h1>
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="mt-2">
+                        <a class="text-decoration-none" href="{% url 'password_reset'%}">?Forgot password</a>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success mt-3 w-100">Login</button>
+                <div class="line-with-middle-sep">
+                    <span>
+                        یا
+                    </span>
+                </div>
+                <a href="{% url 'signup' %}" class="btn btn-primary mt-2 mb-3 w-100">Sigup</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+209- add this in head tag _base.html
+{% block styles %}
+{% endblock %}
+
+
+
+210- add this is login.html
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+
+
+
+211- add this in first login.html
+{% load static %}
+
+
+212- Rechange password_reset_form.html
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+{% block page_title %}
+Login-eingeben
+{% endblock %}
+{% block content%}
+    <div class="d-flex justify-content-center mt-5" dir="rtl">
+        <div class="col-xl-3 col-lg-4 col-md-5 col-sm-5 col-xs-6 bg-white m-3 m-sm-5 border rounded px-4 pt-4 pb-3 shadow">
+            <form method="post">
+                <h6 class="mt-3">Password Change</h6>
+                <h6 class="mt-3">Kennwort ändern</h6>
+                <h6 class="mt-3"></h6>
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button class="btn btn-success mt-3" type="submit">Confirm</button>
+
+                <div class="mt-3 line-with-middle-sep">
+                    <span>
+                        یا
+                    </span>
+                </div>
+                <button type="submit" class="btn btn-success mt-4 w-100">Login</button>
+                <a href="{% url 'signup' %}" class="btn btn-primary mt-2 mb-3 w-100">Sigup</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+213- 
 214-
 215-
 216-
