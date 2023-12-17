@@ -26,8 +26,8 @@ Welcome to the Awesome Django Project repository! 🚀 In this centralized hub, 
 
   <p align="center">
       <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Practice_01-30/Practice-11%20Book%20Store/Image-16%20Add%20Image%20to%20Web%20App/Screenshot%20from%202023-12-17%2006-46-55.png" width="250" alt="Image 2">
-      <img src="" width="250" alt="">
-      <img src="" width="250" alt="">
+      <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Practice_01-30/Practice-11%20Book%20Store/Image-17%20Upload%20Image%20from%20User/Screenshot%20from%202023-12-17%2013-02-54.png" width="250" alt="Create New Book">
+      <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Practice_01-30/Practice-11%20Book%20Store/Image-17%20Upload%20Image%20from%20User/Screenshot%20from%202023-12-17%2013-02-59.png" width="250" alt="Edit Book">
       <img src="" width="250" alt="">
   </p>
 
