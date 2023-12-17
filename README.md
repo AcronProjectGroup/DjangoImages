@@ -10,28 +10,27 @@ Welcome to the Awesome Django Project repository! 🚀 In this centralized hub, 
 
 <details>
   <summary>
-    <h1>🔻🔻 Demo and Image Version</h>
+    <h1>🔻🔻 Demo of Images</h>
   </summary>
 
 
-  <summary>
-    <h4>DjangoImage:Practice7 (1to24)</h4>
-  </summary>
 
   <p align="center">
     <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Screenshot%20from%202023-11-28%2000-25-39.png" width="250" alt="Image 1">
-    <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Practice_01-30/Practive_07%20Image-18%20Django%20Form/A1/B1/ezgif.com-video-to-gif.gif" width="250" alt="Image 3">
+    <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Practice_01-30/Practice-08/Practive_08%20Image-01%20Authentication%20System%20_Login/A1/B1/Screenshot%20from%202023-11-28%2012-19-58.png" width="250" alt="Image 2">
+    <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Practice_01-30/Practice-08/Practive_08%20Image-01%20Authentication%20System%20_Login/A1/B1/Screenshot%20from%202023-11-28%2014-45-28.png" width="250" alt="Image 3">
   </p>
 
 
-  <summary>
-    <h4>DjangoImage:Practice8 Authentication System (1-...)</h4>
-  </summary>
+
+
   <p align="center">
-    <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Practice_01-30/Practice-11%20Book%20Store/Image-15%20The%20site%20Beautification/Screenshot%20from%202023-12-12%2014-32-55.png" width="250" alt="Image 2">
-    <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Practice_01-30/Practice-11%20Book%20Store/Image-15%20The%20site%20Beautification/Screenshot%20from%202023-12-12%2014-49-08.png" width="250" alt="Image 3">
-    <img src="" width="250" alt="Image 3">
+      <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Practice_01-30/Practice-11%20Book%20Store/Image-16%20Add%20Image%20to%20Web%20App/Screenshot%20from%202023-12-17%2006-46-55.png" width="250" alt="Image 2">
+      <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Practice_01-30/Practice-11%20Book%20Store/Image-17%20Upload%20Image%20from%20User/Screenshot%20from%202023-12-17%2013-02-54.png" width="250" alt="Create New Book">
+      <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Practice_01-30/Practice-11%20Book%20Store/Image-17%20Upload%20Image%20from%20User/Screenshot%20from%202023-12-17%2013-02-59.png" width="250" alt="Edit Book">
+      <img src="" width="250" alt="">
   </p>
+
 
 </details>
 
