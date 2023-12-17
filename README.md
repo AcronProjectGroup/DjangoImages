@@ -32,6 +32,14 @@ Welcome to the Awesome Django Project repository! 🚀 In this centralized hub, 
     <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Practice_01-30/Practice-08/Practive_08%20Image-01%20Authentication%20System%20_Login/A1/B1/Screenshot%20from%202023-11-28%2014-45-28.png" width="250" alt="Image 3">
     <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Practice_01-30/Practice-11%20Book%20Store/Image-15%20The%20site%20Beautification/Screenshot%20from%202023-12-16%2006-13-01.png" width="250" alt="Image 3">
   </p>
+  <p align="center">
+      💠 121 >> Practice11 Image-16 Add Image to Web App 
+      <img src="https://github.com/sinalalebakhsh/DjangoImages/blob/main/01-Basic/121-Django/Practice_01-30/Practice-11%20Book%20Store/Image-16%20Add%20Image%20to%20Web%20App/Screenshot%20from%202023-12-17%2006-46-55.png" width="250" alt="Image 2">
+      <img src="" width="250" alt="Image 2">
+      <img src="" width="250" alt="Image 2">
+      <img src="" width="250" alt="Image 2">
+  </p>
+
 
 </details>
 
