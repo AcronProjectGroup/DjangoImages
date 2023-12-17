@@ -10,7 +10,7 @@ Welcome to the Awesome Django Project repository! 🚀 In this centralized hub, 
 
 <details>
   <summary>
-    <h1>🔻🔻 Demo and Image Version</h>
+    <h1>🔻🔻 Demo of Images</h>
   </summary>
 
 
