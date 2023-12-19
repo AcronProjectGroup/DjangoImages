@@ -4,6 +4,7 @@ from .models import Book
 from .models import Comment
 
 
+@admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('user', 'book', 'text', 'datetime_created', )
 
@@ -11,7 +12,7 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Book)
-admin.site.register(Comment, CommentAdmin)
+# admin.site.register(Comment, CommentAdmin)
 
 
 
