@@ -2994,43 +2994,157 @@ Output:
 
 
 
-================================================================================================================
-254- 
-
-
-
-
 
 ================================================================================================================
-255-
+254- Convert this class to text in books/views.py
+
+# class BookDetailView(generic.DeleteView):
+#     model = Book
+#     template_name = 'books/book_detail.html'
 
 
 
-
-
-================================================================================================================
-256-
 
 
 
 
 
 ================================================================================================================
-257-
+255- import this to books/views.py
+from django.shortcuts import get_object_or_404
+from django.shortcuts import render
+
+
+
+
+
+
+
+================================================================================================================
+256- add this function after line class BookDetailView
+
+def book_detail_view(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+
+    return render(request, 'books/book_detail.html', {'book': book})
+
+
+
+
 
 
 ================================================================================================================
-258-
+257- Change like this, this line in books/urls.py
+# from .views import BookDetailView
+from .views import book_detail_view
+
+...
+path('<int:pk>/', book_detail_view, name='book_detail'),
+...
+
+
+
+
+
+
+
+
+
 ================================================================================================================
-259-
+258- Check the site by run server in Terminal to browser
+python manage.py runserver
+
+
+
+
+
+
+
 ================================================================================================================
-260-
+259- add this lines to book_detail_view 
+
+def book_detail_view(request, pk):
+    # get book object
+    book = get_object_or_404(Book, pk=pk)
+    # get book comments
+    book_comments = book.comments.all()
+
+    return render(request, 'books/book_detail.html', {'book': book, 'comments': book_comments})
+
+
+
+
+
+
+
 ================================================================================================================
-261-
+260- delete repeated code from book_detail.html
+ <div class="border-bottom mb-3">
+    <h5 class="mb-3">نوشین توکلی</h5>
+    <p>با سلام چند تا نکته میخواستم بگم اول اینکه من جزء دسته از آدمایی بودم که میگفتم کتاب خوندن لذتش
+        به اینه که آدم کتابو بگیره دستش و بخونه اما واقعا میگم فیدیبو تو زمینه کاری خودش داره خوب عمل
+        میکنه امیدوارم روز به روز موفق تر بشه ممنون بابت کتابهای خوبی که میزارید چونکه خیلی به روزه</p>
+</div>
+<div>
+    <h5 class="mb-3">نوشین توکلی</h5>
+    <p>با سلام چند تا نکته میخواستم بگم اول اینکه من جزء دسته از آدمایی بودم که میگفتم کتاب خوندن لذتش
+        به اینه که آدم کتابو بگیره دستش و بخونه اما واقعا میگم فیدیبو تو زمینه کاری خودش داره خوب عمل
+        میکنه امیدوارم روز به روز موفق تر بشه ممنون بابت کتابهای خوبی که میزارید چونکه خیلی به روزه</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 ================================================================================================================
-262-
+261- Change this to book_detail.html
+<div class="d-flex justify-content-center">
+    <div class="card shadow my-3 p-5 w-sm-75 w-100">
+        <h2 class="mb-5">Comment:</h2>
+
+        {% for comment in comments %}
+                <div class="border-bottom mb-3">
+                    <h5 class="mb-3">{{ comment.user.username }}</h5>
+                    <p>{{ comment.text|linebreaks }}</p>
+                </div>
+        {% endfor %}
+        
+    </div>
+</div>
+
+
+
+
+
+
+
 ================================================================================================================
-263-
+262- Check a book you create comment before. this should be shows comments from database
+http://localhost:8000/books/1/
+http://localhost:8000/books/2/
+
+
+
+
+
+
+
+
+
+
+
+================================================================================================================
+263- 
+
+
+
+
 ================================================================================================================
 264-
 ================================================================================================================
