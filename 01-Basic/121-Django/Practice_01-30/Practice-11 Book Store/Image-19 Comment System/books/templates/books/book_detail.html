@@ -49,10 +49,18 @@
                         <h2 class="mb-5">Comment:</h2>
 
                         {% for comment in comments %}
+                            {% if comment.is_active %}
                                 <div class="border-bottom mb-3">
-                                    <h5 class="mb-3">{{ comment.user.username }}</h5>
+                                    
+                                    {% if comment.recommend %}
+                                        <h5 class="mb-3">👍 {{ comment.user.username }}</h5>
+                                    {% else %}
+                                        <h5 class="mb-3">👎  {{ comment.user.username }}</h5>
+                                    {% endif %}
+
                                     <p>{{ comment.text|linebreaks }}</p>
                                 </div>
+                            {% endif %}
                         {% endfor %}
                        
                     </div>

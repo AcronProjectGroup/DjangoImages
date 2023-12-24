@@ -3331,43 +3331,323 @@ http://localhost:8000/books/1/
 
 
 ================================================================================================================
-275-
+275- add this to books/models.py
+...
+class Comment(models.Model):
+    ...
+    is_active = models.BooleanField(default=True)
+    recommend = models.BooleanField(default=True)
+    ...
+...
+
+
+
+
+
+
+
+
+
 ================================================================================================================
-276-
+276- in Terminal write
+python manage.py makemigrations
+
+Output:
+    Migrations for 'books':
+      books/migrations/0005_comment_is_active_comment_recommend.py
+        - Add field is_active to comment
+        - Add field recommend to comment
+
+
+
+
+
+
+
+
+
 ================================================================================================================
-277-
+277- in Terminal write
+python manage.py migrate
+
+Output:
+    Operations to perform:
+      Apply all migrations: accounts, admin, auth, books, contenttypes, sessions
+    Running migrations:
+      Applying books.0005_comment_is_active_comment_recommend... OK
+
+
+
+
+
+
+
+
+
 ================================================================================================================
-278-
+278- Check admin panel in this link > it should have is active and Recommend active bu default
+
+http://127.0.0.1:8000/admin/books/comment/1/change/
+
+OR another comment in this link
+
+http://127.0.0.1:8000/admin/books/comment/
+
+
+
+
+
+
+
+
+
+
+
 ================================================================================================================
-279-
+279- add this in book_detail.html
+...
+ {% for comment in comments %}
+        <div class="border-bottom mb-3">
+            <h5 class="mb-3">{{ comment.user.username }}</h5>
+   
+            {% if comment.recommend %}
+                <p>I recommend this :)</p>
+            {% else %}
+                <p>I don't think so, this is good!</p>
+            {% endif %}
+
+            <p>{{ comment.text|linebreaks }}</p>
+        </div>
+{% endfor %}
+...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ================================================================================================================
-280-
+280- Check this link should added in comments this text => "I recommend this :)"
+http://127.0.0.1:8000/books/1/
+OR
+http://127.0.0.1:8000/books/2/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ================================================================================================================
-281-
+281- add this in books/forms.py
+
+...
+class CommentForm(forms.ModelForm):
+    ...
+    fields = ('text', 'recommend', ) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ================================================================================================================
-282-
+282- Change this lines in book_detail.html
+...
+    <p>Like 👍</p>
+{% else %}
+    <p>👎</p>
+...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ================================================================================================================
-283-
+283- Check again this link 
+127.0.0.1:8000/books/1/
+
+
+
+
+
 ================================================================================================================
-284-
+284- change this lines in book_detail.html
+...
+{% if comment.recommend %}
+    <h5 class="mb-3">👍 {{ comment.user.username }}</h5>
+{% else %}
+    <h5 class="mb-3">👎  {{ comment.user.username }}</h5>
+{% endif %}
+...
+
+
 ================================================================================================================
-285-
+285- Check again this link 
+127.0.0.1:8000/books/1/
+
+
+
+
+
+
 ================================================================================================================
-286-
+286- write "unethical" comment in this link
+127.0.0.1:8000/books/1/
+
+example:
+unethical 🎃 
+bad words...
+xxxxxx
+⛔
+⛔
+
+
+
+
+
+
 ================================================================================================================
-287-
+287- go to this link
+http://127.0.0.1:8000/admin/books/comment/
+
+
+
+
 ================================================================================================================
-288-
+288- unsign this: Is active for that specific comment
+
+
+
+
+
 ================================================================================================================
-289-
+289- change this code in book_detail.html
+
+...
+{% for comment in comments %}
+    {% if comment.is_active %}
+        <div class="border-bottom mb-3">
+            
+            {% if comment.recommend %}
+                <h5 class="mb-3">👍 {{ comment.user.username }}</h5>
+            {% else %}
+                <h5 class="mb-3">👎  {{ comment.user.username }}</h5>
+            {% endif %}
+
+            <p>{{ comment.text|linebreaks }}</p>
+        </div>
+    {% endif %}
+{% endfor %}
+...
+
+
+
+
+
+
+
+
 ================================================================================================================
-290-
+290- check this link, should be hedden.
+http://127.0.0.1:8000/books/1/
+
+
+
+
+
+
+
+
+
 ================================================================================================================
-291-
+291- add this to books/admin.py
+...
+list_display = ('user', 'book', 'text', 'datetime_created', 'recommend', 'is_active', )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ================================================================================================================
-292-
+292- Check this link should be shows these two > 'recommend', 'is_active' on the columns 
+http://127.0.0.1:8000/admin/books/comment/
+
+
+
+
+
+
+
+
+
+
+
+
+
 ================================================================================================================
-293-
+293- 
+
+
+
+
+
+
+
+
+
+
 ================================================================================================================
 294-
 ================================================================================================================
