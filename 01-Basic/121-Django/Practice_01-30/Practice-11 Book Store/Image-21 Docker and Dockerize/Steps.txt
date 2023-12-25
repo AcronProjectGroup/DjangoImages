@@ -3959,13 +3959,112 @@ This book's owner for example is Lina:
 
 
 
+############################
+############################
+############################
+############################
+############################
+############################   Image-21 Docker and Dockerize
+############################
+############################
+############################
+############################
+############################
+
+First Install Docker than go to the next steps
+https://www.docker.com/
+https://docs.docker.com/
+https://docs.docker.com/get-docker/
+
+
+
+
+================================================================================================================
+321- Create Dockerfile in current directory project
+Dockerfile
+
+
+
+
+
+
+
 
 
 
 
 
 ================================================================================================================
-321-
+322- add these to Dockerfile
+FROM python:3.10
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+WORKDIR /code
+COPY requirements.txt /code/
+RUN pip install -r requirements.txt
+COPY . /code/
+
+
+
+
+
+
+================================================================================================================
+323- Create .dockerignore in current directory project
+
+
+
+
+================================================================================================================
+324- write these in .dockerignore
+
+
+
+
+
+
+================================================================================================================
+325- in Terminal
+docker build .
+
+Output:
+    [+] Building 175.9s (11/11) FINISHED                                                                                                                     docker:rootless
+    => [internal] load build definition from Dockerfile                                                                                                                0.1s
+    => => transferring dockerfile: 227B                                                                                                                                0.0s
+    => [internal] load .dockerignore                                                                                                                                   0.1s
+    => => transferring context: 45B                                                                                                                                    0.0s
+    => [internal] load metadata for docker.io/library/python:3.10                                                                                                      5.5s
+    => [auth] library/python:pull token for registry-1.docker.io                                                                                                       0.0s
+    => [internal] load build context                                                                                                                                   0.2s
+    => => transferring context: 2.71MB                                                                                                                                 0.0s
+    => [1/5] FROM docker.io/library/python:3.10@sha256:ba7e6f1feea05621dec8a6525e1bb9edf30a3897bc6fd047d72f860ff0b73706                                              147.6s
+    => => resolve docker.io/library/python:3.10@sha256:ba7e6f1feea05621dec8a6525e1bb9edf30a3897bc6fd047d72f860ff0b73706                                                0.1s
+    => => sha256:ba7e6f1feea05621dec8a6525e1bb9edf30a3897bc6fd047d72f860ff0b73706 1.65kB / 1.65kB                                                                      0.0s
+    => => sha256:bc0734b949dcdcabe5bfdf0c8b9f44491e0fce04cb10c9c6e76282b9f6abdf01 49.56MB / 49.56MB                                                                   38.7s
+    => => sha256:b3f22817b332547c7757a39f47f0c4a221d07ef7b079435819fa63b3a8e9e94f 2.01kB / 2.01kB                                                                      0.0s
+    => => sha256:c9a36876f4e4c133e47ecde425a3ea50f608a07694412188535680c24ea2a053 7.53kB / 7.53kB                                                                      0.0s
+    => => sha256:b5de22c0f5cd2ea2bb6c0524478db95bff5a294c99419ccd4a9d3ccc9873bad9 24.05MB / 24.05MB                                                                   24.2s
+    => => sha256:917ee5330e73737d6095a802333d311648959399ff2c067150890162e720f863 64.13MB / 64.13MB                                                                   92.3s
+    => => sha256:b43bd898d5fbe0e1606380820047fd1e8b421722c9e69ac12757474305bd6702 211.10MB / 211.10MB                                                                139.6s
+    => => extracting sha256:bc0734b949dcdcabe5bfdf0c8b9f44491e0fce04cb10c9c6e76282b9f6abdf01                                                                           1.2s
+    => => sha256:7fad4bffde2444237b82386b9b704d8ac48a54eee2c992e377a3a28da49b98d3 6.39MB / 6.39MB                                                                     43.4s
+    => => extracting sha256:b5de22c0f5cd2ea2bb6c0524478db95bff5a294c99419ccd4a9d3ccc9873bad9                                                                           0.4s
+    => => sha256:6ae8bd1942a2f1d9fb2331d04819e196bc876fc7cc5b3f5064196465cec2a402 17.15MB / 17.15MB                                                                   54.4s
+    => => sha256:7a7849a795a3b4bb5bc8c71e4795722ed08fa77956f81abcdf24a5573d8ac6bb 242B / 242B                                                                         56.5s
+    => => sha256:e2f45fa6aa0ffb40284233b2ff7959d8c3d1d5c87da7502700b1f8d8b8fadc4a 3.08MB / 3.08MB                                                                     58.4s
+    => => extracting sha256:917ee5330e73737d6095a802333d311648959399ff2c067150890162e720f863                                                                           1.6s
+    => => extracting sha256:b43bd898d5fbe0e1606380820047fd1e8b421722c9e69ac12757474305bd6702                                                                           4.2s
+    => => extracting sha256:7fad4bffde2444237b82386b9b704d8ac48a54eee2c992e377a3a28da49b98d3                                                                           0.2s
+    => => extracting sha256:6ae8bd1942a2f1d9fb2331d04819e196bc876fc7cc5b3f5064196465cec2a402                                                                           0.4s
+    => => extracting sha256:7a7849a795a3b4bb5bc8c71e4795722ed08fa77956f81abcdf24a5573d8ac6bb                                                                           0.0s
+    => => extracting sha256:e2f45fa6aa0ffb40284233b2ff7959d8c3d1d5c87da7502700b1f8d8b8fadc4a                                                                           0.2s
+    => [2/5] WORKDIR /code                                                                                                                                             0.1s
+    => [3/5] COPY requirements.txt /code/                                                                                                                              0.1s
+    => [4/5] RUN pip install -r requirements.txt                                                                                                                      20.3s
+    => [5/5] COPY . /code/                                                                                                                                             0.2s
+    => exporting to image                                                                                                                                              1.8s
+    => => exporting layers                                                                                                                                             1.8s
+    => => writing image sha256:7a0705a47148c3594c616802bdab87278a916c6dcfc7a43a0052d634607f929d 
 
 
 
@@ -3973,24 +4072,143 @@ This book's owner for example is Lina:
 
 
 
+
+
+
+
 ================================================================================================================
-322-
+326- Create docker-compose.yml file in current directory
+docker-compose.yml
+
+
+
+
+
+
+
+
+
+
+
 ================================================================================================================
-323-
+327- writre in terminal 
+
+docker compose version
+
+Output: like this (You should installed Docker before this line)
+    Docker Compose version v2.21.0
+
+
+
+
+
+
+
+
+
+
+
+
+
 ================================================================================================================
-324-
+328- write these in docker-compose.yml > Based on the composed version
+
+version: 'v2.21.0'
+
+services:
+  web:
+    build: .
+    command: python /code/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - 8000:8000
+      
+
+
+
+
+
+
+
+
+
+
 ================================================================================================================
-325-
+329- write in Terminal
+docker compose up 
+
+
+
+
+Output:
+    [+] Building 4.1s (11/11) FINISHED                                                                                           docker:rootless
+    => [web internal] load .dockerignore                                                                                                   0.0s
+    => => transferring context: 45B                                                                                                        0.0s
+    => [web internal] load build definition from Dockerfile                                                                                0.0s
+    => => transferring dockerfile: 227B                                                                                                    0.0s
+    => [web internal] load metadata for docker.io/library/python:3.10                                                                      2.5s
+    => [web auth] library/python:pull token for registry-1.docker.io                                                                       0.0s
+    => [web internal] load build context                                                                                                   0.0s
+    => => transferring context: 133.81kB                                                                                                   0.0s
+    => [web 1/5] FROM docker.io/library/python:3.10@sha256:ba7e6f1feea05621dec8a6525e1bb9edf30a3897bc6fd047d72f860ff0b73706                0.0s
+    => CACHED [web 2/5] WORKDIR /code                                                                                                      0.0s
+    => CACHED [web 3/5] COPY requirements.txt /code/                                                                                       0.0s
+    => CACHED [web 4/5] RUN pip install -r requirements.txt                                                                                0.0s
+    => [web 5/5] COPY . /code/                                                                                                             0.2s
+    => [web] exporting to image                                                                                                            1.2s
+    => => exporting layers                                                                                                                 1.2s
+    => => writing image sha256:20f4289328bf9ba193a5a2263537092678432a50e7a133721579d7087dc0bb01                                            0.0s
+    => => naming to docker.io/library/1-djangohajihosseini-web                                                                             0.0s
+    [+] Running 2/2
+    ✔ Network 1-djangohajihosseini_default  Created                                                                                        0.1s 
+    ✔ Container 1-djangohajihosseini-web-1  Created                                                                                        0.1s 
+    Attaching to 1-djangohajihosseini-web-1
+    1-djangohajihosseini-web-1  | Watching for file changes with StatReloader
+    1-djangohajihosseini-web-1  | Performing system checks...
+    1-djangohajihosseini-web-1  | 
+    1-djangohajihosseini-web-1  | System check identified no issues (0 silenced).
+    1-djangohajihosseini-web-1  | December 25, 2023 - 06:10:11
+    1-djangohajihosseini-web-1  | Django version 5.0, using settings 'config.settings'
+    1-djangohajihosseini-web-1  | Starting development server at http://0.0.0.0:8000/
+    1-djangohajihosseini-web-1  | Quit the server with CONTROL-C.
+    1-djangohajihosseini-web-1  | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ================================================================================================================
-326-
-================================================================================================================
-327-
-================================================================================================================
-328-
-================================================================================================================
-329-
-================================================================================================================
-330-
+330- check in browser this link should be shows the site 
+http://127.0.0.1:8000/
+http://127.0.0.1:8000/admin/books/book/
+http://127.0.0.1:8000/books/1/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ================================================================================================================
 331-
 ================================================================================================================
