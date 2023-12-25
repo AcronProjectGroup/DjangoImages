@@ -3750,38 +3750,15 @@ Output:
 http://127.0.0.1:8000/accounts/login/?next=/books/1/edit/
 
 
-
-
-
-
-
-
 ================================================================================================================
 300- add the LoginRequiredMixin to this class in books/views.py
 class BookDeleteView(LoginRequiredMixin,  generic.DeleteView):
     ...
     ...
 
-
-
-
-
-
-
-
-
-
-
-
 ================================================================================================================
 301- please logout and go to this link
 http://127.0.0.1:8000/books/1/
-
-
-
-
-
-
 
 ================================================================================================================
 302- Try to Delete this book(Object or Post)
@@ -3809,28 +3786,9 @@ Output:
     ValueError at /books/1/
 
 
-
-
-
-
-
-
-
-
-
 ================================================================================================================
 304- import this to books/views.py
 from django.contrib.auth.decorators import login_required
-
-
-
-
-
-
-
-
-
-
 
 
 ================================================================================================================
@@ -3842,8 +3800,6 @@ def book_detail_view(request, pk):
     ...
 
 
-
-
 ================================================================================================================
 306- Check again and send comment when you are logouted, should be jump to login page
 http://127.0.0.1:8000/books/
@@ -3852,6 +3808,134 @@ go to a book you should jump to like this link:
 http://127.0.0.1:8000/accounts/login/?next=/books/1/
 
 
+================================================================================================================
+307- add this to class of Book in books/models.py
+class Book(models.Model):
+    ...
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    ...
+
+================================================================================================================
+308- in Terminal
+python manage.py makemigrations
+Output:
+    It is impossible to add a non-nullable field 'user' to book without specifying a default. This is because the database needs something to populate existing rows.
+    Please select a fix:
+    1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+    2) Quit and manually define a default value in models.py.
+    Select an option: 
+
+Write again:
+1
+Output:
+    Please enter the default value as valid Python.
+    The datetime and django.utils.timezone modules are available, so it is possible to provide e.g. timezone.now as a value.
+    Type 'exit' to exit this prompt
+
+Write again
+1
+Output:
+    Migrations for 'books':
+      books/migrations/0006_book_user.py
+        - Add field user to book
+
+================================================================================================================
+309- in Terminal write
+python manage.py migrate
+
+Output:
+    Operations to perform:
+      Apply all migrations: accounts, admin, auth, books, contenttypes, sessions
+    Running migrations:
+      Applying books.0006_book_user... OK
+
+
+================================================================================================================
+310- Change this to books/admin.py
+
+@admin.register(Book)
+class BookAdmin(admin.ModelAdmin):
+    list_display = ('user', 'title', 'author',  )
+# admin.site.register(Comment, CommentAdmin)
+
+
+================================================================================================================
+311- change creatation books by your random choice in this link
+http://127.0.0.1:8000/admin/books/book/
+
+
+================================================================================================================
+312- Add this to book_detail.html
+...
+<h5 class="small my-1"><span class="text-muted">Author: </span>{{book.author|title}}</h5>
+<h5 class="small my-1"><span class="text-muted">Owner: </span>{{book.user|title}}</h5>
+...
+
+================================================================================================================
+313- Check this link or your another book should shows like this in browser
+http://127.0.0.1:8000/books/1/
+
+Like this:
+Owner: Lina
+
+================================================================================================================
+314- import this for Permissions in books/views.py
+from django.contrib.auth.mixins import UserPassesTestMixin
+
+
+================================================================================================================
+315- add this to class of BookUpdateView 
+class BookUpdateView(LoginRequiredMixin, UserPassesTestMixin,  generic.UpdateView):
+    ...
+    ...
+
+================================================================================================================
+316- Override this abstract method in BookUpdateView
+class BookUpdateView(LoginRequiredMixin, UserPassesTestMixin,  generic.UpdateView):
+    ...
+    ...
+    def test_func(self):
+        obj = self.get_object()
+        return obj.user == self.request.user
+
+
+================================================================================================================
+317- Check when you login with another user this link for editing should be jump to Forbiden
+http://127.0.0.1:8000/books/1/edit/
+
+Output:
+    403 Forbidden
+
+================================================================================================================
+317- Check your Own book create, should can be edit like this
+http://127.0.0.1:8000/books/2/
+
+
+================================================================================================================
+318- Change these code in book_detail.html
+...
+{% if book.user == user %}
+    <a href="{% url 'book_update' book.id %}" class="btn btn-warning mt-3">Edit - bearbeiten</a>
+    <a href="{% url 'book_delete' book.id %}" class="btn btn-danger mt-3">Delete - Löschen</a>
+{% endif %}
+...
+
+
+
+
+
+
+
+================================================================================================================
+319- Override this abstract method in BookDeleteView
+
+class BookDeleteView(LoginRequiredMixin, UserPassesTestMixin,  generic.DeleteView):
+#                                       +++++++++++++++++++++
+    ...
+    ...
+    def test_func(self):
+        obj = self.get_object()
+        return obj.user == self.request.user
 
 
 
@@ -3860,38 +3944,35 @@ http://127.0.0.1:8000/accounts/login/?next=/books/1/
 
 
 
+
 ================================================================================================================
-307-
-================================================================================================================
-308-
-================================================================================================================
-309-
-================================================================================================================
-310-
-================================================================================================================
-311-
-================================================================================================================
-312-
-================================================================================================================
-313-
-================================================================================================================
-314-
-================================================================================================================
-315-
-================================================================================================================
-316-
-================================================================================================================
-317-
-================================================================================================================
-317-
-================================================================================================================
-318-
-================================================================================================================
-319-
-================================================================================================================
-320-
+320- Check this link with another owner book shouldn't shows
+
+This book's owner for example is Lina:
+    
+    http://127.0.0.1:8000/books/1/
+
+
+
+
+
+
+
+
+
+
+
+
+
 ================================================================================================================
 321-
+
+
+
+
+
+
+
 ================================================================================================================
 322-
 ================================================================================================================
