@@ -1,0 +1,553 @@
+1- in Terminal
+pipenv install
+
+
+=====================================================================================
+2- in Terminal
+pipenv shell
+
+
+=====================================================================================
+3- in Terminal
+pipenv --venv
+
+Output: like this
+    /ubuntu/LINA/.local/share/virtualenvs/2_Django_PostgreSQL_Docker-MCmlPuqQ
+
+=====================================================================================
+4- in Terminal open this address and check it
+open /home/sina/.local/share/virtualenvs/2_Django_PostgreSQL_Docker-MCmlPuqQ
+
+
+=====================================================================================
+5- in Terminal
+pipenv install django
+
+
+=====================================================================================
+6- in Terminal
+pipenv requirements > requirements.txt
+
+Output: in requirements.txt file 
+    -i https://pypi.org/simple
+    asgiref==3.7.2; python_version >= '3.7'
+    django==5.0; python_version >= '3.10'
+    sqlparse==0.4.4; python_version >= '3.5'
+    typing-extensions==4.9.0; python_version < '3.11'
+
+
+=====================================================================================
+7- in Terminal
+django-admin startproject config .
+
+
+=====================================================================================
+8- in Terminal
+python manage.py migrate
+
+Output:
+    Operations to perform:
+      Apply all migrations: admin, auth, contenttypes, sessions
+    Running migrations:
+      Applying contenttypes.0001_initial... OK
+      Applying auth.0001_initial... OK
+      Applying admin.0001_initial... OK
+      Applying admin.0002_logentry_remove_auto_add... OK
+      Applying admin.0003_logentry_add_action_flag_choices... OK
+      Applying contenttypes.0002_remove_content_type_name... OK
+      Applying auth.0002_alter_permission_name_max_length... OK
+      Applying auth.0003_alter_user_email_max_length... OK
+      Applying auth.0004_alter_user_username_opts... OK
+      Applying auth.0005_alter_user_last_login_null... OK
+      Applying auth.0006_require_contenttypes_0002... OK
+      Applying auth.0007_alter_validators_add_error_messages... OK
+      Applying auth.0008_alter_user_username_max_length... OK
+      Applying auth.0009_alter_user_last_name_max_length... OK
+      Applying auth.0010_alter_group_name_max_length... OK
+      Applying auth.0011_update_proxy_permissions... OK
+      Applying auth.0012_alter_user_first_name_max_length... OK
+      Applying sessions.0001_initial... OK
+=====================================================================================
+9- in Terminal
+python manage.py runserver
+
+
+
+=====================================================================================
+10- Check browser this link , should be shows default page Django 
+http://127.0.0.1:8000/
+
+
+=====================================================================================
+11- Create Dockerfile
+Dockerfile
+
+
+=====================================================================================
+12- add these codes in Dockerfile
+FROM python:3.10
+
+ENV PYTHONDONTWRITEBYTECODE 1
+
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /code
+
+COPY requirements.txt /code/
+RUN pip install -r requirements.txt
+
+COPY . /code/
+
+=====================================================================================
+13- Create docker-compose.yml
+docker-compose.yml
+
+
+
+=====================================================================================
+14- writre in terminal 
+
+docker compose version
+
+Output: like this (You should installed Docker before this line)
+    Docker Compose version v2.21.0
+
+
+
+
+
+=====================================================================================
+15- add these in docker-compose.yml
+
+version: 'v2.21.0'
+
+services:
+  web:
+    build: .
+    command: python /code/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - 8000:8000
+
+
+
+
+
+
+
+=====================================================================================
+16- Create .dockerignore
+.dockerignore
+
+
+=====================================================================================
+17- add these in .dockerignore
+venv/
+.git
+
+
+
+=====================================================================================
+18- in Terminal 
+docker compose up
+
+Output:
+    [+] Building 43.0s (11/11) FINISHED                                                                                               docker:rootless
+    => [web internal] load .dockerignore                                                                                                        0.1s
+    => => transferring context: 50B                                                                                                             0.0s
+    => [web internal] load build definition from Dockerfile                                                                                     0.1s
+    => => transferring dockerfile: 217B                                                                                                         0.0s
+    => [web internal] load metadata for docker.io/library/python:3.10                                                                           3.1s
+    => [web auth] library/python:pull token for registry-1.docker.io                                                                            0.0s
+    => [web 1/5] FROM docker.io/library/python:3.10@sha256:ba7e6f1feea05621dec8a6525e1bb9edf30a3897bc6fd047d72f860ff0b73706                     0.0s
+    => [web internal] load build context                                                                                                        0.1s
+    => => transferring context: 144.83kB                                                                                                        0.0s
+    => CACHED [web 2/5] WORKDIR /code                                                                                                           0.0s
+    => [web 3/5] COPY requirements.txt /code/                                                                                                   0.1s
+    => [web 4/5] RUN pip install -r requirements.txt                                                                                           35.9s
+    => [web 5/5] COPY . /code/                                                                                                                  0.2s
+    => [web] exporting to image                                                                                                                 3.3s 
+    => => exporting layers                                                                                                                      3.3s 
+    => => writing image sha256:26955642b2451a5db43f91a7dc4ddca1d637c6c6df880ef481473cdc240670db                                                 0.0s 
+    => => naming to docker.io/library/2_django_postgresql_docker-web                                                                            0.0s 
+    [+] Running 2/2                                                                                                                                   
+    ✔ Network 2_django_postgresql_docker_default  Created                                                                                       0.1s 
+    ✔ Container 2_django_postgresql_docker-web-1  Created                                                                                       0.2s 
+    Attaching to 2_django_postgresql_docker-web-1
+    2_django_postgresql_docker-web-1  | Watching for file changes with StatReloader
+    2_django_postgresql_docker-web-1  | Performing system checks...
+    2_django_postgresql_docker-web-1  | 
+    2_django_postgresql_docker-web-1  | System check identified no issues (0 silenced).
+    2_django_postgresql_docker-web-1  | December 25, 2023 - 18:23:45
+    2_django_postgresql_docker-web-1  | Django version 5.0, using settings 'config.settings'
+    2_django_postgresql_docker-web-1  | Starting development server at http://0.0.0.0:8000/
+    2_django_postgresql_docker-web-1  | Quit the server with CONTROL-C.
+    2_django_postgresql_docker-web-1  | 
+
+
+=====================================================================================
+19- Write in Terminal, than write a name and blank Email for development and simple password for development
+docker compose exec web python manage.py createsuperuser
+
+Output:
+    Username (leave blank to use 'root'): 
+    Email address: 
+    Password: 
+    Password (again): 
+    This password is too short. It must contain at least 8 characters.
+    This password is too common.
+    This password is entirely numeric.
+    Bypass password validation and create user anyway? [y/N]: y
+    Superuser created successfully.
+
+=====================================================================================
+20- Go to this link and login to it
+http://127.0.0.1:8000/admin/
+
+
+
+=====================================================================================
+21- Check this link for getting latest specific version like 16.1 OR 15.1
+https://hub.docker.com/_/postgres 
+
+
+=====================================================================================
+22- add this in docker-compose.yml
+
+services:
+  ...
+  ...
+  db:
+    image: postgres:16.1
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+
+
+
+
+
+=====================================================================================
+23- Write in Terminal
+docker compose up 
+
+Output:
+    [+] Running 1/1
+    ✔ db Pulled                                                                                                                            3.2s 
+    [+] Running 2/2
+    ✔ Container 2_django_postgresql_docker-db-1   Created                                                                                  0.1s 
+    ✔ Container 2_django_postgresql_docker-web-1  Created                                                                                  0.0s 
+    Attaching to 2_django_postgresql_docker-db-1, 2_django_postgresql_docker-web-1
+    2_django_postgresql_docker-db-1   | ********************************************************************************
+    2_django_postgresql_docker-db-1   | WARNING: POSTGRES_HOST_AUTH_METHOD has been set to "trust". This will allow
+    2_django_postgresql_docker-db-1   |          anyone with access to the Postgres port to access your database without
+    2_django_postgresql_docker-db-1   |          a password, even if POSTGRES_PASSWORD is set. See PostgreSQL
+    2_django_postgresql_docker-db-1   |          documentation about "trust":
+    2_django_postgresql_docker-db-1   |          https://www.postgresql.org/docs/current/auth-trust.html
+    2_django_postgresql_docker-db-1   |          In Docker's default configuration, this is effectively any other
+    2_django_postgresql_docker-db-1   |          container on the same system.
+    2_django_postgresql_docker-db-1   | 
+    2_django_postgresql_docker-db-1   |          It is not recommended to use POSTGRES_HOST_AUTH_METHOD=trust. Replace
+    2_django_postgresql_docker-db-1   |          it with "-e POSTGRES_PASSWORD=password" instead to set a password in
+    2_django_postgresql_docker-db-1   |          "docker run".
+    2_django_postgresql_docker-db-1   | ********************************************************************************
+    2_django_postgresql_docker-db-1   | The files belonging to this database system will be owned by user "postgres".
+    2_django_postgresql_docker-db-1   | This user must also own the server process.
+    2_django_postgresql_docker-db-1   | 
+    2_django_postgresql_docker-db-1   | The database cluster will be initialized with locale "en_US.utf8".
+    2_django_postgresql_docker-db-1   | The default database encoding has accordingly been set to "UTF8".
+    2_django_postgresql_docker-db-1   | The default text search configuration will be set to "english".
+    2_django_postgresql_docker-db-1   | 
+    2_django_postgresql_docker-db-1   | Data page checksums are disabled.
+    2_django_postgresql_docker-db-1   | 
+    2_django_postgresql_docker-db-1   | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+    2_django_postgresql_docker-db-1   | creating subdirectories ... ok
+    2_django_postgresql_docker-db-1   | selecting dynamic shared memory implementation ... posix
+    2_django_postgresql_docker-db-1   | selecting default max_connections ... 100
+    2_django_postgresql_docker-db-1   | selecting default shared_buffers ... 128MB
+    2_django_postgresql_docker-db-1   | selecting default time zone ... Etc/UTC
+    2_django_postgresql_docker-db-1   | creating configuration files ... ok
+    2_django_postgresql_docker-db-1   | running bootstrap script ... ok
+    2_django_postgresql_docker-db-1   | performing post-bootstrap initialization ... ok
+    2_django_postgresql_docker-web-1  | Watching for file changes with StatReloader
+    2_django_postgresql_docker-web-1  | Performing system checks...
+    2_django_postgresql_docker-web-1  | 
+    2_django_postgresql_docker-web-1  | System check identified no issues (0 silenced).
+    2_django_postgresql_docker-web-1  | December 26, 2023 - 07:43:20
+    2_django_postgresql_docker-web-1  | Django version 5.0, using settings 'config.settings'
+    2_django_postgresql_docker-web-1  | Starting development server at http://0.0.0.0:8000/
+    2_django_postgresql_docker-web-1  | Quit the server with CONTROL-C.
+    2_django_postgresql_docker-web-1  | 
+    2_django_postgresql_docker-db-1   | initdb: warning: enabling "trust" authentication for local connections
+    2_django_postgresql_docker-db-1   | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+    2_django_postgresql_docker-db-1   | syncing data to disk ... ok
+    2_django_postgresql_docker-db-1   | 
+    2_django_postgresql_docker-db-1   | 
+    2_django_postgresql_docker-db-1   | Success. You can now start the database server using:
+    2_django_postgresql_docker-db-1   | 
+    2_django_postgresql_docker-db-1   |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+    2_django_postgresql_docker-db-1   | 
+    2_django_postgresql_docker-db-1   | waiting for server to start....2023-12-26 07:43:20.853 UTC [49] LOG:  starting PostgreSQL 16.1 (Debian 16.1-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+    2_django_postgresql_docker-db-1   | 2023-12-26 07:43:20.860 UTC [49] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+    2_django_postgresql_docker-db-1   | 2023-12-26 07:43:20.879 UTC [52] LOG:  database system was shut down at 2023-12-26 07:43:18 UTC
+    2_django_postgresql_docker-db-1   | 2023-12-26 07:43:20.888 UTC [49] LOG:  database system is ready to accept connections
+    2_django_postgresql_docker-db-1   |  done
+    2_django_postgresql_docker-db-1   | server started
+    2_django_postgresql_docker-db-1   | 
+    2_django_postgresql_docker-db-1   | /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+    2_django_postgresql_docker-db-1   | 
+    2_django_postgresql_docker-db-1   | 2023-12-26 07:43:21.014 UTC [49] LOG:  received fast shutdown request
+    2_django_postgresql_docker-db-1   | waiting for server to shut down....2023-12-26 07:43:21.021 UTC [49] LOG:  aborting any active transactions
+    2_django_postgresql_docker-db-1   | 2023-12-26 07:43:21.023 UTC [49] LOG:  background worker "logical replication launcher" (PID 55) exited with exit code 1
+    2_django_postgresql_docker-db-1   | 2023-12-26 07:43:21.023 UTC [50] LOG:  shutting down
+    2_django_postgresql_docker-db-1   | 2023-12-26 07:43:21.027 UTC [50] LOG:  checkpoint starting: shutdown immediate
+    2_django_postgresql_docker-db-1   | 2023-12-26 07:43:21.065 UTC [50] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.009 s, sync=0.005 s, total=0.042 s; sync files=2, longest=0.003 s, average=0.003 s; distance=0 kB, estimate=0 kB; lsn=0/14EA9E0, redo lsn=0/14EA9E0
+    2_django_postgresql_docker-db-1   | 2023-12-26 07:43:21.068 UTC [49] LOG:  database system is shut down
+    2_django_postgresql_docker-db-1   |  done
+    2_django_postgresql_docker-db-1   | server stopped
+    2_django_postgresql_docker-db-1   | 
+    2_django_postgresql_docker-db-1   | PostgreSQL init process complete; ready for start up.
+    2_django_postgresql_docker-db-1   | 
+    2_django_postgresql_docker-db-1   | 2023-12-26 07:43:21.146 UTC [1] LOG:  starting PostgreSQL 16.1 (Debian 16.1-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+    2_django_postgresql_docker-db-1   | 2023-12-26 07:43:21.147 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+    2_django_postgresql_docker-db-1   | 2023-12-26 07:43:21.147 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+    2_django_postgresql_docker-db-1   | 2023-12-26 07:43:21.158 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+    2_django_postgresql_docker-db-1   | 2023-12-26 07:43:21.172 UTC [63] LOG:  database system was shut down at 2023-12-26 07:43:21 UTC
+    2_django_postgresql_docker-db-1   | 2023-12-26 07:43:21.187 UTC [1] LOG:  database system is ready to accept connections
+
+
+
+
+=====================================================================================
+24- Go to config/settings.py and converto to text these two lines
+...
+DATABASES = {
+    'default': {
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+...
+
+
+
+
+=====================================================================================
+25- add these before two lines converted to text
+# Database
+# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD':'postgres',
+        'HOST': 'db',
+        'POST': 5432,
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+
+
+
+=====================================================================================
+26- Stop Server in Terminal Ctrl+C key
+Ctrl+C key
+
+
+=====================================================================================
+27- in pipenv shell in Terminal write
+pip install psycopg2-binary 
+
+Output:
+  Courtesy Notice: Pipenv found itself running within a virtual environment, so it will automatically use that environment, instead of creating its own for any project. You can set PIPENV_IGNORE_VIRTUALENVS=1 to force pipenv to ignore that environment and create its own instead. You can set PIPENV_VERBOSITY=-1 to suppress this warning.
+  Installing psycopg2-binary...
+  Resolving psycopg2-binary...
+  Added psycopg2-binary to Pipfile's [packages] ...
+  ✔ Installation Succeeded
+  Pipfile.lock (79baf8) out of date, updating to (1769e6)...
+  Locking [packages] dependencies...
+  Building requirements...
+  Resolving dependencies...
+  ✔ Success!
+  Locking [dev-packages] dependencies...
+  Updated Pipfile.lock (63c95ec6bed92a45982b4491e4f8bcfc6c95c8a9603f8013468f674c741769e6)!
+  Installing dependencies from Pipfile.lock (1769e6)...
+  To activate this project's virtualenv, run pipenv shell.
+  Alternatively, run a command inside the virtualenv with pipenv run.
+
+
+
+=====================================================================================
+28- in Terminal write 
+pipenv requirements > requirements.txt
+
+Output: 
+    -i https://pypi.org/simple
+    asgiref==3.7.2; python_version >= '3.7'
+    django==5.0; python_version >= '3.10'
+    psycopg2-binary==2.9.9; python_version >= '3.7'
+    sqlparse==0.4.4; python_version >= '3.5'
+    typing-extensions==4.9.0; python_version < '3.11'
+
+
+
+
+=====================================================================================
+29- Write in Terminal 
+docker compose up --build
+
+Ouput:
+    [+] Building 52.2s (11/11) FINISHED                                                                                          docker:rootless
+    => [web internal] load build definition from Dockerfile                                                                                0.0s
+    => => transferring dockerfile: 217B                                                                                                    0.0s
+    => [web internal] load .dockerignore                                                                                                   0.0s
+    => => transferring context: 50B                                                                                                        0.0s
+    => [web internal] load metadata for docker.io/library/python:3.10                                                                      2.8s
+    => [web auth] library/python:pull token for registry-1.docker.io                                                                       0.0s
+    => [web 1/5] FROM docker.io/library/python:3.10@sha256:ba7e6f1feea05621dec8a6525e1bb9edf30a3897bc6fd047d72f860ff0b73706                0.0s
+    => [web internal] load build context                                                                                                   0.0s
+    => => transferring context: 165.66kB                                                                                                   0.0s
+    => CACHED [web 2/5] WORKDIR /code                                                                                                      0.0s
+    => [web 3/5] COPY requirements.txt /code/                                                                                              0.1s
+    => [web 4/5] RUN pip install -r requirements.txt                                                                                      46.7s
+    => [web 5/5] COPY . /code/                                                                                                             0.2s
+    => [web] exporting to image                                                                                                            2.2s 
+    => => exporting layers                                                                                                                 2.2s 
+    => => writing image sha256:4767a0d16650bdbcabe56acbb9f22c55d90271c31ea4df538a3c94b31fb9e6fe                                            0.0s 
+    => => naming to docker.io/library/2_django_postgresql_docker-web                                                                       0.0s 
+    [+] Running 2/2                                                                                                                              
+    ✔ Container 2_django_postgresql_docker-web-1  Created                                                                                  0.1s 
+    ✔ Container 2_django_postgresql_docker-db-1   Created                                                                                  0.0s 
+    Attaching to 2_django_postgresql_docker-db-1, 2_django_postgresql_docker-web-1
+    2_django_postgresql_docker-db-1   | 
+    2_django_postgresql_docker-db-1   | PostgreSQL Database directory appears to contain a database; Skipping initialization
+    2_django_postgresql_docker-db-1   | 
+    2_django_postgresql_docker-db-1   | 2023-12-26 08:07:33.180 UTC [1] LOG:  starting PostgreSQL 16.1 (Debian 16.1-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+    2_django_postgresql_docker-db-1   | 2023-12-26 08:07:33.180 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+    2_django_postgresql_docker-db-1   | 2023-12-26 08:07:33.180 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+    2_django_postgresql_docker-db-1   | 2023-12-26 08:07:33.191 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+    2_django_postgresql_docker-db-1   | 2023-12-26 08:07:33.205 UTC [29] LOG:  database system was shut down at 2023-12-26 07:59:33 UTC
+    2_django_postgresql_docker-db-1   | 2023-12-26 08:07:33.215 UTC [1] LOG:  database system is ready to accept connections
+    2_django_postgresql_docker-web-1  | Watching for file changes with StatReloader
+    2_django_postgresql_docker-web-1  | Performing system checks...
+    2_django_postgresql_docker-web-1  | 
+    2_django_postgresql_docker-web-1  | System check identified no issues (0 silenced).
+    2_django_postgresql_docker-web-1  | 
+    2_django_postgresql_docker-web-1  | You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+    2_django_postgresql_docker-web-1  | Run 'python manage.py migrate' to apply them.
+    2_django_postgresql_docker-web-1  | December 26, 2023 - 08:07:34
+    2_django_postgresql_docker-web-1  | Django version 5.0, using settings 'config.settings'
+    2_django_postgresql_docker-web-1  | Starting development server at http://0.0.0.0:8000/
+    2_django_postgresql_docker-web-1  | Quit the server with CONTROL-C.
+    2_django_postgresql_docker-web-1  | 
+
+
+
+
+
+
+
+
+
+
+=====================================================================================
+30- Check in browser this link, should be shows default page Django
+http://127.0.0.1:8000/
+
+
+
+
+
+=====================================================================================
+31- Check this link you should get this error!
+http://127.0.0.1:8000/admin/
+
+ProgrammingError at /admin/
+relation "django_session" does not exist
+LINE 1: ...ession_data", "django_session"."expire_date" FROM "django_se...
+
+
+
+=====================================================================================
+32- in Terminal write
+docker compose exec web python manage.py migrate
+
+Output:
+    Operations to perform:
+      Apply all migrations: admin, auth, contenttypes, sessions
+    Running migrations:
+      Applying contenttypes.0001_initial... OK
+      Applying auth.0001_initial... OK
+      Applying admin.0001_initial... OK
+      Applying admin.0002_logentry_remove_auto_add... OK
+      Applying admin.0003_logentry_add_action_flag_choices... OK
+      Applying contenttypes.0002_remove_content_type_name... OK
+      Applying auth.0002_alter_permission_name_max_length... OK
+      Applying auth.0003_alter_user_email_max_length... OK
+      Applying auth.0004_alter_user_username_opts... OK
+      Applying auth.0005_alter_user_last_login_null... OK
+      Applying auth.0006_require_contenttypes_0002... OK
+      Applying auth.0007_alter_validators_add_error_messages... OK
+      Applying auth.0008_alter_user_username_max_length... OK
+      Applying auth.0009_alter_user_last_name_max_length... OK
+      Applying auth.0010_alter_group_name_max_length... OK
+      Applying auth.0011_update_proxy_permissions... OK
+      Applying auth.0012_alter_user_first_name_max_length... OK
+      Applying sessions.0001_initial... OK
+
+
+
+
+
+=====================================================================================
+33- Check this link again , 
+http://127.0.0.1:8000/admin/
+
+browser search bar should be convert to this link
+http://127.0.0.1:8000/admin/login/?next=/admin/
+
+
+
+
+
+
+=====================================================================================
+34- Wrtite in another Terminal
+docker compose exec web python manage.py createsuperuser
+
+Create a simple user + password for development mode
+Output:
+  Username (leave blank to use 'root'): 
+  Email address: 
+  Password: 
+  Password (again): 
+  This password is too short. It must contain at least 8 characters.
+  This password is too common.
+  This password is entirely numeric.
+  Bypass password validation and create user anyway? [y/N]: y
+  Superuser created successfully.
+
+
+
+
+
+
+=====================================================================================
+35- 
+=====================================================================================
+36-
+=====================================================================================
+37-
+=====================================================================================
+38-
+=====================================================================================
+=====================================================================================
+=====================================================================================
+=====================================================================================
+=====================================================================================
+=====================================================================================
+
+

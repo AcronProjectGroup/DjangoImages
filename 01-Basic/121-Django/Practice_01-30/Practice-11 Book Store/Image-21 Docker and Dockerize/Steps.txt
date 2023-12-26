@@ -4210,11 +4210,77 @@ http://127.0.0.1:8000/books/1/
 
 
 ================================================================================================================
-331-
+331- write in another Terminal
+docker ps --all
+
+Output: like this
+    CONTAINER ID   IMAGE                      COMMAND                  CREATED         STATUS                   PORTS                                       NAMES
+    69ef1a53ad5a   1-djangohajihosseini-web   "python /code/manage…"   3 minutes ago   Up 3 minutes             0.0.0.0:8000->8000/tcp, :::8000->8000/tcp   1-djangohajihosseini-web-1
+
+
+
+
+
+
+
+
+
+
 ================================================================================================================
-332-
+332- write in another Terminal
+docker images
+
+
+
+Output: like this
+    REPOSITORY                 TAG       IMAGE ID       CREATED          SIZE
+    1-djangohajihosseini-web   latest    20f4289328bf   3 minutes ago    1.06GB
+
+
+
+
+##############
+##############
+##############
+############## ATTENTION: 
+############## name REPOSITORY maybe different for you because your project directory name is different
+##############
+##############
+##############
+
+
+
+
+
+
+
+
+
+
+
+
 ================================================================================================================
-333-
+333- for another times in Terminal run 
+
+1- pipenv shell
+2- docker compose up
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ================================================================================================================
 334-
 ================================================================================================================
