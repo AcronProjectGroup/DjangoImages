@@ -1,0 +1,243 @@
+1- in Terminal
+pipenv install
+
+
+=====================================================================================
+2- in Terminal
+pipenv shell
+
+
+=====================================================================================
+3- in Terminal
+pipenv --venv
+
+Output: like this
+    /ubuntu/LINA/.local/share/virtualenvs/2_Django_PostgreSQL_Docker-MCmlPuqQ
+
+=====================================================================================
+4- in Terminal open this address and check it
+open /home/sina/.local/share/virtualenvs/2_Django_PostgreSQL_Docker-MCmlPuqQ
+
+
+=====================================================================================
+5- in Terminal
+pipenv install django
+
+
+=====================================================================================
+6- in Terminal
+pipenv requirements > requirements.txt
+
+Output: in requirements.txt file 
+    -i https://pypi.org/simple
+    asgiref==3.7.2; python_version >= '3.7'
+    django==5.0; python_version >= '3.10'
+    sqlparse==0.4.4; python_version >= '3.5'
+    typing-extensions==4.9.0; python_version < '3.11'
+
+
+=====================================================================================
+7- in Terminal
+django-admin startproject config .
+
+
+=====================================================================================
+8- in Terminal
+python manage.py migrate
+
+Output:
+    Operations to perform:
+      Apply all migrations: admin, auth, contenttypes, sessions
+    Running migrations:
+      Applying contenttypes.0001_initial... OK
+      Applying auth.0001_initial... OK
+      Applying admin.0001_initial... OK
+      Applying admin.0002_logentry_remove_auto_add... OK
+      Applying admin.0003_logentry_add_action_flag_choices... OK
+      Applying contenttypes.0002_remove_content_type_name... OK
+      Applying auth.0002_alter_permission_name_max_length... OK
+      Applying auth.0003_alter_user_email_max_length... OK
+      Applying auth.0004_alter_user_username_opts... OK
+      Applying auth.0005_alter_user_last_login_null... OK
+      Applying auth.0006_require_contenttypes_0002... OK
+      Applying auth.0007_alter_validators_add_error_messages... OK
+      Applying auth.0008_alter_user_username_max_length... OK
+      Applying auth.0009_alter_user_last_name_max_length... OK
+      Applying auth.0010_alter_group_name_max_length... OK
+      Applying auth.0011_update_proxy_permissions... OK
+      Applying auth.0012_alter_user_first_name_max_length... OK
+      Applying sessions.0001_initial... OK
+=====================================================================================
+9- in Terminal
+python manage.py runserver
+
+
+
+=====================================================================================
+10- Check browser this link , should be shows default page Django 
+http://127.0.0.1:8000/
+
+
+=====================================================================================
+11- Create Dockerfile
+Dockerfile
+
+
+=====================================================================================
+12- add these codes in Dockerfile
+FROM python:3.10
+
+ENV PYTHONDONTWRITEBYTECODE 1
+
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /code
+
+COPY requirements.txt /code/
+RUN pip install -r requirements.txt
+
+COPY . /code/
+
+=====================================================================================
+13- Create docker-compose.yml
+docker-compose.yml
+
+
+
+=====================================================================================
+14- writre in terminal 
+
+docker compose version
+
+Output: like this (You should installed Docker before this line)
+    Docker Compose version v2.21.0
+
+
+
+
+
+=====================================================================================
+15- add these in docker-compose.yml
+
+version: 'v2.21.0'
+
+services:
+  web:
+    build: .
+    command: python /code/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - 8000:8000
+
+
+
+
+
+
+
+=====================================================================================
+16- Create .dockerignore
+.dockerignore
+
+
+=====================================================================================
+17- add these in .dockerignore
+venv/
+.git
+
+
+
+=====================================================================================
+18- in Terminal 
+docker compose up
+
+Output:
+    [+] Building 43.0s (11/11) FINISHED                                                                                               docker:rootless
+    => [web internal] load .dockerignore                                                                                                        0.1s
+    => => transferring context: 50B                                                                                                             0.0s
+    => [web internal] load build definition from Dockerfile                                                                                     0.1s
+    => => transferring dockerfile: 217B                                                                                                         0.0s
+    => [web internal] load metadata for docker.io/library/python:3.10                                                                           3.1s
+    => [web auth] library/python:pull token for registry-1.docker.io                                                                            0.0s
+    => [web 1/5] FROM docker.io/library/python:3.10@sha256:ba7e6f1feea05621dec8a6525e1bb9edf30a3897bc6fd047d72f860ff0b73706                     0.0s
+    => [web internal] load build context                                                                                                        0.1s
+    => => transferring context: 144.83kB                                                                                                        0.0s
+    => CACHED [web 2/5] WORKDIR /code                                                                                                           0.0s
+    => [web 3/5] COPY requirements.txt /code/                                                                                                   0.1s
+    => [web 4/5] RUN pip install -r requirements.txt                                                                                           35.9s
+    => [web 5/5] COPY . /code/                                                                                                                  0.2s
+    => [web] exporting to image                                                                                                                 3.3s 
+    => => exporting layers                                                                                                                      3.3s 
+    => => writing image sha256:26955642b2451a5db43f91a7dc4ddca1d637c6c6df880ef481473cdc240670db                                                 0.0s 
+    => => naming to docker.io/library/2_django_postgresql_docker-web                                                                            0.0s 
+    [+] Running 2/2                                                                                                                                   
+    ✔ Network 2_django_postgresql_docker_default  Created                                                                                       0.1s 
+    ✔ Container 2_django_postgresql_docker-web-1  Created                                                                                       0.2s 
+    Attaching to 2_django_postgresql_docker-web-1
+    2_django_postgresql_docker-web-1  | Watching for file changes with StatReloader
+    2_django_postgresql_docker-web-1  | Performing system checks...
+    2_django_postgresql_docker-web-1  | 
+    2_django_postgresql_docker-web-1  | System check identified no issues (0 silenced).
+    2_django_postgresql_docker-web-1  | December 25, 2023 - 18:23:45
+    2_django_postgresql_docker-web-1  | Django version 5.0, using settings 'config.settings'
+    2_django_postgresql_docker-web-1  | Starting development server at http://0.0.0.0:8000/
+    2_django_postgresql_docker-web-1  | Quit the server with CONTROL-C.
+    2_django_postgresql_docker-web-1  | 
+
+
+=====================================================================================
+19- Write in Terminal, than write a name and blank Email for development and simple password for development
+docker compose exec web python manage.py createsuperuser
+
+Output:
+    Username (leave blank to use 'root'): 
+    Email address: 
+    Password: 
+    Password (again): 
+    This password is too short. It must contain at least 8 characters.
+    This password is too common.
+    This password is entirely numeric.
+    Bypass password validation and create user anyway? [y/N]: y
+    Superuser created successfully.
+
+=====================================================================================
+20- Go to this link and login to it
+http://127.0.0.1:8000/admin/
+
+
+
+=====================================================================================
+21-
+
+
+
+
+=====================================================================================
+22-
+=====================================================================================
+23-
+=====================================================================================
+24-
+=====================================================================================
+25-
+=====================================================================================
+26-
+=====================================================================================
+27-
+=====================================================================================
+28-
+=====================================================================================
+29-
+=====================================================================================
+30-
+=====================================================================================
+31-
+=====================================================================================
+32-
+=====================================================================================
+=====================================================================================
+=====================================================================================
+=====================================================================================
+=====================================================================================
+
