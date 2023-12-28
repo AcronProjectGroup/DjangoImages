@@ -547,21 +547,54 @@ class SignUpView(CreateView):
 
     
 ===================================================================
-43-
+43- Create this in templates directory
+registration/signup.html
+
 ===================================================================
-44-
+44-add this in templates/registration/signup.html
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Signup" >
+</form>
+
 ===================================================================
-45-
+45- Create login.html in templates/registration directory
+login.html
+
 ===================================================================
-46-
+46- add this in templates/registration/login.html
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Login" >
+</form>
+
 ===================================================================
-47-
+47- Check site , write in Terminal , check these links should be work
+docker compose up
+
+http://127.0.0.1:8000/accounts/signup/
+http://127.0.0.1:8000/accounts/login/
+
 ===================================================================
-48-
+48- add these in enf of config/settings.py
+# for user , Redirect to another url
+LOGIN_REDIRECT_URL =  'home'
+LOGOUT_REDIRECT_URL = 'home'
+
+
 ===================================================================
-49-
+49- restart server by stop docker compose and retype thi command in Terminal
+docker compose up
+
 ===================================================================
-50-
+50- Check these links after signup and logout 
+http://127.0.0.1:8000/accounts/login/
+http://127.0.0.1:8000/accounts/logout/
+
+Result should be > go to home page 
+
 ===================================================================
 51-
 ===================================================================
