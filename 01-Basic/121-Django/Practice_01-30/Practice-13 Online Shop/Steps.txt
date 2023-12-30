@@ -181,3 +181,196 @@ Output should be like this:
 docker-compose up --build
 
 Output should be like this:
+    docker-compose up --build
+    Building web
+    [+] Building 5.5s (11/11) FINISHED                                                                                                                       docker:rootless
+    => [internal] load .dockerignore                                                                                                                                   0.0s
+    => => transferring context: 2B                                                                                                                                     0.0s
+    => [internal] load build definition from Dockerfile                                                                                                                0.0s
+    => => transferring dockerfile: 204B                                                                                                                                0.0s
+    => [internal] load metadata for docker.io/library/python:3.9                                                                                                       5.2s
+    => [auth] library/python:pull token for registry-1.docker.io                                                                                                       0.0s
+    => [internal] load build context                                                                                                                                   0.0s
+    => => transferring context: 2.54kB                                                                                                                                 0.0s
+    => [1/5] FROM docker.io/library/python:3.9@sha256:30678bb79d9eeaf98ec0ce83cdcd4d6f5301484ef86873a711e69df2ca77e8ac                                                 0.0s
+    => CACHED [2/5] WORKDIR /code                                                                                                                                      0.0s
+    => CACHED [3/5] COPY requirements.txt /code/                                                                                                                       0.0s
+    => CACHED [4/5] RUN pip install -r requirements.txt                                                                                                                0.0s
+    => CACHED [5/5] COPY . /code/                                                                                                                                      0.0s
+    => exporting to image                                                                                                                                              0.0s
+    => => exporting layers                                                                                                                                             0.0s
+    => => writing image sha256:5dafce66a2d000f0f44a03ecd1aa8c7acdab8fb951b41324a98333877fe8e93b                                                                        0.0s
+    => => naming to docker.io/library/django_docker_with_postgresql_web                                                                                                0.0s
+    django_docker_with_postgresql_db_1 is up-to-date
+    django_docker_with_postgresql_web_1 is up-to-date
+    Attaching to django_docker_with_postgresql_db_1, django_docker_with_postgresql_web_1
+    db_1   | ********************************************************************************
+    db_1   | WARNING: POSTGRES_HOST_AUTH_METHOD has been set to "trust". This will allow
+    db_1   |          anyone with access to the Postgres port to access your database without
+    db_1   |          a password, even if POSTGRES_PASSWORD is set. See PostgreSQL
+    db_1   |          documentation about "trust":
+    db_1   |          https://www.postgresql.org/docs/current/auth-trust.html
+    db_1   |          In Docker's default configuration, this is effectively any other
+    db_1   |          container on the same system.
+    db_1   | 
+    db_1   |          It is not recommended to use POSTGRES_HOST_AUTH_METHOD=trust. Replace
+    db_1   |          it with "-e POSTGRES_PASSWORD=password" instead to set a password in
+    db_1   |          "docker run".
+    db_1   | ********************************************************************************
+    db_1   | The files belonging to this database system will be owned by user "postgres".
+    db_1   | This user must also own the server process.
+    db_1   | 
+    db_1   | The database cluster will be initialized with locale "en_US.utf8".
+    db_1   | The default database encoding has accordingly been set to "UTF8".
+    db_1   | The default text search configuration will be set to "english".
+    db_1   | 
+    db_1   | Data page checksums are disabled.
+    db_1   | 
+    db_1   | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+    db_1   | creating subdirectories ... ok
+    db_1   | selecting dynamic shared memory implementation ... posix
+    db_1   | selecting default max_connections ... 100
+    db_1   | selecting default shared_buffers ... 128MB
+    db_1   | selecting default time zone ... Etc/UTC
+    db_1   | creating configuration files ... ok
+    db_1   | running bootstrap script ... ok
+    db_1   | performing post-bootstrap initialization ... ok
+    db_1   | syncing data to disk ... ok
+    db_1   | 
+    db_1   | 
+    db_1   | Success. You can now start the database server using:
+    db_1   | 
+    db_1   |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+    db_1   | initdb: warning: enabling "trust" authentication for local connections
+    db_1   | You can change this by editing pg_hba.conf or using the option -A, or
+    db_1   | --auth-local and --auth-host, the next time you run initdb.
+    db_1   | 
+    db_1   | waiting for server to start....2023-12-30 14:23:49.922 UTC [49] LOG:  starting PostgreSQL 14.10 (Debian 14.10-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+    db_1   | 2023-12-30 14:23:49.928 UTC [49] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+    db_1   | 2023-12-30 14:23:49.946 UTC [50] LOG:  database system was shut down at 2023-12-30 14:23:48 UTC
+    db_1   | 2023-12-30 14:23:49.956 UTC [49] LOG:  database system is ready to accept connections
+    db_1   |  done
+    db_1   | server started
+    db_1   | 
+    db_1   | /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+    db_1   | 
+    db_1   | 2023-12-30 14:23:50.025 UTC [49] LOG:  received fast shutdown request
+    db_1   | waiting for server to shut down....2023-12-30 14:23:50.032 UTC [49] LOG:  aborting any active transactions
+    db_1   | 2023-12-30 14:23:50.034 UTC [49] LOG:  background worker "logical replication launcher" (PID 56) exited with exit code 1
+    db_1   | 2023-12-30 14:23:50.034 UTC [51] LOG:  shutting down
+    db_1   | 2023-12-30 14:23:50.077 UTC [49] LOG:  database system is shut down
+    db_1   |  done
+    db_1   | server stopped
+    db_1   | 
+    db_1   | PostgreSQL init process complete; ready for start up.
+    db_1   | 
+    db_1   | 2023-12-30 14:23:50.162 UTC [1] LOG:  starting PostgreSQL 14.10 (Debian 14.10-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+    db_1   | 2023-12-30 14:23:50.162 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+    db_1   | 2023-12-30 14:23:50.162 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+    db_1   | 2023-12-30 14:23:50.173 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+    db_1   | 2023-12-30 14:23:50.187 UTC [62] LOG:  database system was shut down at 2023-12-30 14:23:50 UTC
+    db_1   | 2023-12-30 14:23:50.197 UTC [1] LOG:  database system is ready to accept connections
+    db_1   | 2023-12-30 14:28:14.751 UTC [1] LOG:  received fast shutdown request
+    db_1   | 2023-12-30 14:28:14.758 UTC [1] LOG:  aborting any active transactions
+    db_1   | 2023-12-30 14:28:14.762 UTC [1] LOG:  background worker "logical replication launcher" (PID 68) exited with exit code 1
+    db_1   | 2023-12-30 14:28:14.764 UTC [63] LOG:  shutting down
+    db_1   | 2023-12-30 14:28:14.818 UTC [1] LOG:  database system is shut down
+    db_1   | 
+    db_1   | PostgreSQL Database directory appears to contain a database; Skipping initialization
+    db_1   | 
+    db_1   | 2023-12-30 14:29:00.299 UTC [1] LOG:  starting PostgreSQL 14.10 (Debian 14.10-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+    db_1   | 2023-12-30 14:29:00.299 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+    db_1   | 2023-12-30 14:29:00.299 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+    db_1   | 2023-12-30 14:29:00.317 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+    db_1   | 2023-12-30 14:29:00.330 UTC [27] LOG:  database system was shut down at 2023-12-30 14:28:14 UTC
+    db_1   | 2023-12-30 14:29:00.339 UTC [1] LOG:  database system is ready to accept connections
+    web_1  | Watching for file changes with StatReloader
+    web_1  | Performing system checks...
+    web_1  | 
+    web_1  | System check identified no issues (0 silenced).
+    web_1  | Exception in thread django-main-thread:
+    web_1  | Traceback (most recent call last):
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/backends/base/base.py", line 230, in ensure_connection
+    web_1  |     self.connect()
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/utils/asyncio.py", line 25, in inner
+    web_1  |     return func(*args, **kwargs)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/backends/base/base.py", line 211, in connect
+    web_1  |     self.connection = self.get_new_connection(conn_params)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/utils/asyncio.py", line 25, in inner
+    web_1  |     return func(*args, **kwargs)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/backends/postgresql/base.py", line 199, in get_new_connection
+    web_1  |     connection = Database.connect(**conn_params)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/psycopg2/__init__.py", line 122, in connect
+    web_1  |     conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+    web_1  | psycopg2.OperationalError: connection to server at "db" (172.22.0.2), port 5432 failed: Connection refused
+    web_1  |        Is the server running on that host and accepting TCP/IP connections?
+    web_1  | 
+    web_1  | 
+    web_1  | The above exception was the direct cause of the following exception:
+    web_1  | 
+    web_1  | Traceback (most recent call last):
+    web_1  |   File "/usr/local/lib/python3.9/threading.py", line 980, in _bootstrap_inner
+    web_1  |     self.run()
+    web_1  |   File "/usr/local/lib/python3.9/threading.py", line 917, in run
+    web_1  |     self._target(*self._args, **self._kwargs)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    web_1  |     fn(*args, **kwargs)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/core/management/commands/runserver.py", line 127, in inner_run
+    web_1  |     self.check_migrations()
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/core/management/base.py", line 505, in check_migrations
+    web_1  |     executor = MigrationExecutor(connections[DEFAULT_DB_ALIAS])
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/migrations/executor.py", line 18, in __init__
+    web_1  |     self.loader = MigrationLoader(self.connection)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/migrations/loader.py", line 53, in __init__
+    web_1  |     self.build_graph()
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/migrations/loader.py", line 223, in build_graph
+    web_1  |     self.applied_migrations = recorder.applied_migrations()
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/migrations/recorder.py", line 77, in applied_migrations
+    web_1  |     if self.has_table():
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/migrations/recorder.py", line 55, in has_table
+    web_1  |     with self.connection.cursor() as cursor:
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/utils/asyncio.py", line 25, in inner
+    web_1  |     return func(*args, **kwargs)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/backends/base/base.py", line 270, in cursor
+    web_1  |     return self._cursor()
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/backends/base/base.py", line 246, in _cursor
+    web_1  |     self.ensure_connection()
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/utils/asyncio.py", line 25, in inner
+    web_1  |     return func(*args, **kwargs)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/backends/base/base.py", line 230, in ensure_connection
+    web_1  |     self.connect()
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/utils.py", line 90, in __exit__
+    web_1  |     raise dj_exc_value.with_traceback(traceback) from exc_value
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/backends/base/base.py", line 230, in ensure_connection
+    web_1  |     self.connect()
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/utils/asyncio.py", line 25, in inner
+    web_1  |     return func(*args, **kwargs)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/backends/base/base.py", line 211, in connect
+    web_1  |     self.connection = self.get_new_connection(conn_params)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/utils/asyncio.py", line 25, in inner
+    web_1  |     return func(*args, **kwargs)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/backends/postgresql/base.py", line 199, in get_new_connection
+    web_1  |     connection = Database.connect(**conn_params)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/psycopg2/__init__.py", line 122, in connect
+    web_1  |     conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+    web_1  | django.db.utils.OperationalError: connection to server at "db" (172.22.0.2), port 5432 failed: Connection refused
+    web_1  |        Is the server running on that host and accepting TCP/IP connections?
+    web_1  | 
+    web_1  | Watching for file changes with StatReloader
+    web_1  | Performing system checks...
+    web_1  | 
+    web_1  | System check identified no issues (0 silenced).
+    web_1  | 
+    web_1  | You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+    web_1  | Run 'python manage.py migrate' to apply them.
+    web_1  | December 30, 2023 - 14:29:01
+    web_1  | Django version 4.0.2, using settings 'config.settings'
+    web_1  | Starting development server at http://0.0.0.0:8000/
+    web_1  | Quit the server with CONTROL-C.
+    web_1  | [30/Dec/2023 14:29:32] "GET / HTTP/1.1" 200 10697
+    web_1  | [30/Dec/2023 14:29:32] "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+    web_1  | [30/Dec/2023 14:29:32] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+    web_1  | [30/Dec/2023 14:29:32] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+    web_1  | [30/Dec/2023 14:29:32] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
+================================================
+18-
