@@ -177,7 +177,179 @@ Output should be like this:
     ------
     failed to solve: python:3.9: pulling from host registry-1.docker.io failed with status code [manifests 3.9]: 403 Forbidden
 ================================================
-17- Run strong VPN and write again in Terminal
+17- Run strong VPN and write again in Terminal 
+docker-compose up --build
+
+Output should be like this:
+    Building web
+    [+] Building 1.5s (10/10) FINISHED                                                                                                                       docker:rootless
+    => [internal] load .dockerignore                                                                                                                                   0.0s
+    => => transferring context: 2B                                                                                                                                     0.0s
+    => [internal] load build definition from Dockerfile                                                                                                                0.0s
+    => => transferring dockerfile: 204B                                                                                                                                0.0s
+    => [internal] load metadata for docker.io/library/python:3.9                                                                                                       1.3s
+    => [1/5] FROM docker.io/library/python:3.9@sha256:30678bb79d9eeaf98ec0ce83cdcd4d6f5301484ef86873a711e69df2ca77e8ac                                                 0.0s
+    => [internal] load build context                                                                                                                                   0.0s
+    => => transferring context: 2.54kB                                                                                                                                 0.0s
+    => CACHED [2/5] WORKDIR /code                                                                                                                                      0.0s
+    => CACHED [3/5] COPY requirements.txt /code/                                                                                                                       0.0s
+    => CACHED [4/5] RUN pip install -r requirements.txt                                                                                                                0.0s
+    => CACHED [5/5] COPY . /code/                                                                                                                                      0.0s
+    => exporting to image                                                                                                                                              0.0s
+    => => exporting layers                                                                                                                                             0.0s
+    => => writing image sha256:5dafce66a2d000f0f44a03ecd1aa8c7acdab8fb951b41324a98333877fe8e93b                                                                        0.0s
+    => => naming to docker.io/library/django_docker_with_postgresql_web                                                                                                0.0s
+    Creating django_docker_with_postgresql_db_1 ... done
+    Creating django_docker_with_postgresql_web_1 ... done
+    Attaching to django_docker_with_postgresql_db_1, django_docker_with_postgresql_web_1
+    db_1   | ********************************************************************************
+    db_1   | WARNING: POSTGRES_HOST_AUTH_METHOD has been set to "trust". This will allow
+    db_1   |          anyone with access to the Postgres port to access your database without
+    db_1   |          a password, even if POSTGRES_PASSWORD is set. See PostgreSQL
+    db_1   |          documentation about "trust":
+    db_1   |          https://www.postgresql.org/docs/current/auth-trust.html
+    db_1   |          In Docker's default configuration, this is effectively any other
+    db_1   |          container on the same system.
+    db_1   | 
+    db_1   |          It is not recommended to use POSTGRES_HOST_AUTH_METHOD=trust. Replace
+    db_1   |          it with "-e POSTGRES_PASSWORD=password" instead to set a password in
+    db_1   |          "docker run".
+    db_1   | ********************************************************************************
+    db_1   | The files belonging to this database system will be owned by user "postgres".
+    db_1   | This user must also own the server process.
+    db_1   | 
+    db_1   | The database cluster will be initialized with locale "en_US.utf8".
+    db_1   | The default database encoding has accordingly been set to "UTF8".
+    db_1   | The default text search configuration will be set to "english".
+    db_1   | 
+    db_1   | Data page checksums are disabled.
+    db_1   | 
+    db_1   | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+    db_1   | creating subdirectories ... ok
+    db_1   | selecting dynamic shared memory implementation ... posix
+    db_1   | selecting default max_connections ... 100
+    db_1   | selecting default shared_buffers ... 128MB
+    db_1   | selecting default time zone ... Etc/UTC
+    db_1   | creating configuration files ... ok
+    db_1   | running bootstrap script ... ok
+    db_1   | performing post-bootstrap initialization ... ok
+    web_1  | Watching for file changes with StatReloader
+    web_1  | Performing system checks...
+    web_1  | 
+    web_1  | System check identified no issues (0 silenced).
+    web_1  | Exception in thread django-main-thread:
+    web_1  | Traceback (most recent call last):
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/backends/base/base.py", line 230, in ensure_connection
+    web_1  |     self.connect()
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/utils/asyncio.py", line 25, in inner
+    web_1  |     return func(*args, **kwargs)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/backends/base/base.py", line 211, in connect
+    web_1  |     self.connection = self.get_new_connection(conn_params)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/utils/asyncio.py", line 25, in inner
+    web_1  |     return func(*args, **kwargs)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/backends/postgresql/base.py", line 199, in get_new_connection
+    web_1  |     connection = Database.connect(**conn_params)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/psycopg2/__init__.py", line 122, in connect
+    web_1  |     conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+    web_1  | psycopg2.OperationalError: connection to server at "db" (172.22.0.2), port 5432 failed: Connection refused
+    web_1  |        Is the server running on that host and accepting TCP/IP connections?
+    web_1  | 
+    web_1  | 
+    web_1  | The above exception was the direct cause of the following exception:
+    web_1  | 
+    web_1  | Traceback (most recent call last):
+    web_1  |   File "/usr/local/lib/python3.9/threading.py", line 980, in _bootstrap_inner
+    web_1  |     self.run()
+    web_1  |   File "/usr/local/lib/python3.9/threading.py", line 917, in run
+    web_1  |     self._target(*self._args, **self._kwargs)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    web_1  |     fn(*args, **kwargs)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/core/management/commands/runserver.py", line 127, in inner_run
+    web_1  |     self.check_migrations()
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/core/management/base.py", line 505, in check_migrations
+    web_1  |     executor = MigrationExecutor(connections[DEFAULT_DB_ALIAS])
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/migrations/executor.py", line 18, in __init__
+    web_1  |     self.loader = MigrationLoader(self.connection)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/migrations/loader.py", line 53, in __init__
+    web_1  |     self.build_graph()
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/migrations/loader.py", line 223, in build_graph
+    web_1  |     self.applied_migrations = recorder.applied_migrations()
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/migrations/recorder.py", line 77, in applied_migrations
+    web_1  |     if self.has_table():
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/migrations/recorder.py", line 55, in has_table
+    web_1  |     with self.connection.cursor() as cursor:
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/utils/asyncio.py", line 25, in inner
+    web_1  |     return func(*args, **kwargs)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/backends/base/base.py", line 270, in cursor
+    web_1  |     return self._cursor()
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/backends/base/base.py", line 246, in _cursor
+    web_1  |     self.ensure_connection()
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/utils/asyncio.py", line 25, in inner
+    web_1  |     return func(*args, **kwargs)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/backends/base/base.py", line 230, in ensure_connection
+    web_1  |     self.connect()
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/utils.py", line 90, in __exit__
+    web_1  |     raise dj_exc_value.with_traceback(traceback) from exc_value
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/backends/base/base.py", line 230, in ensure_connection
+    web_1  |     self.connect()
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/utils/asyncio.py", line 25, in inner
+    web_1  |     return func(*args, **kwargs)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/backends/base/base.py", line 211, in connect
+    web_1  |     self.connection = self.get_new_connection(conn_params)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/utils/asyncio.py", line 25, in inner
+    web_1  |     return func(*args, **kwargs)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/django/db/backends/postgresql/base.py", line 199, in get_new_connection
+    web_1  |     connection = Database.connect(**conn_params)
+    web_1  |   File "/usr/local/lib/python3.9/site-packages/psycopg2/__init__.py", line 122, in connect
+    web_1  |     conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+    web_1  | django.db.utils.OperationalError: connection to server at "db" (172.22.0.2), port 5432 failed: Connection refused
+    web_1  |        Is the server running on that host and accepting TCP/IP connections?
+    web_1  | 
+    db_1   | syncing data to disk ... initdb: warning: enabling "trust" authentication for local connections
+    db_1   | You can change this by editing pg_hba.conf or using the option -A, or
+    db_1   | --auth-local and --auth-host, the next time you run initdb.
+    db_1   | ok
+    db_1   | 
+    db_1   | 
+    db_1   | Success. You can now start the database server using:
+    db_1   | 
+    db_1   |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+    db_1   | 
+    db_1   | waiting for server to start....2023-12-30 14:33:45.984 UTC [49] LOG:  starting PostgreSQL 14.10 (Debian 14.10-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+    db_1   | 2023-12-30 14:33:45.990 UTC [49] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+    db_1   | 2023-12-30 14:33:46.009 UTC [50] LOG:  database system was shut down at 2023-12-30 14:33:44 UTC
+    db_1   | 2023-12-30 14:33:46.019 UTC [49] LOG:  database system is ready to accept connections
+    db_1   |  done
+    db_1   | server started
+    db_1   | 
+    db_1   | /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+    db_1   | 
+    db_1   | 2023-12-30 14:33:46.090 UTC [49] LOG:  received fast shutdown request
+    db_1   | waiting for server to shut down....2023-12-30 14:33:46.096 UTC [49] LOG:  aborting any active transactions
+    db_1   | 2023-12-30 14:33:46.098 UTC [49] LOG:  background worker "logical replication launcher" (PID 56) exited with exit code 1
+    db_1   | 2023-12-30 14:33:46.098 UTC [51] LOG:  shutting down
+    db_1   | 2023-12-30 14:33:46.141 UTC [49] LOG:  database system is shut down
+    db_1   |  done
+    db_1   | server stopped
+    db_1   | 
+    db_1   | PostgreSQL init process complete; ready for start up.
+    db_1   | 
+    db_1   | 2023-12-30 14:33:46.220 UTC [1] LOG:  starting PostgreSQL 14.10 (Debian 14.10-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+    db_1   | 2023-12-30 14:33:46.220 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+    db_1   | 2023-12-30 14:33:46.220 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+    db_1   | 2023-12-30 14:33:46.231 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+    db_1   | 2023-12-30 14:33:46.245 UTC [62] LOG:  database system was shut down at 2023-12-30 14:33:46 UTC
+    db_1   | 2023-12-30 14:33:46.255 UTC [1] LOG:  database system is ready to accept connections
+================================================
+18- write Ctrl + C key and shut it down
+Ctrl + C key
+
+Output should be like this:
+    ^CGracefully stopping... (press Ctrl+C again to force)
+    Stopping django_docker_with_postgresql_web_1 ... done
+    Stopping django_docker_with_postgresql_db_1  ... done
+================================================
+19- Run again (strong VPN activated)
 docker-compose up --build
 
 Output should be like this:
@@ -373,4 +545,278 @@ Output should be like this:
     web_1  | [30/Dec/2023 14:29:32] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
     web_1  | [30/Dec/2023 14:29:32] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
 ================================================
-18-
+================================================
+ERROR: failed: port is already allocated
+How to fix?
+1- Write in Terminal 
+lsof -i :8000
+2- Write in Terminal
+kill <PID>
+================================================
+================================================
+20- Check in browser should see default django page
+================================================
+💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠
+BEFORE migrate
+💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠
+Container
+
+21- in Terminal
+docker-compose exec web python manage.py startapp accounts 
+
+Output should be like this:
+A directory created with basic python and more files
+================================================
+22- add accounts in config/settings.py > INSTALLED_APPS list
+'accounts',
+================================================
+23-first docker rm containers and second rmi image
+docker rm conainter-name
+docker rmi image-name
+================================================
+24- create fake venv, write in Terminal
+python -m venv venv
+================================================
+25- Create .gitignore file and add this into it
+venv/ 
+================================================
+26- import this into accounts/models.py
+from django.contrib.auth.models import AbstractUser
+================================================
+27- create new class in accounts/models.py
+class CustomUser(AbstractUser):
+    pass
+================================================
+28- Create forms.py in accounts directory
+forms.py
+================================================
+29- import this in accounts/forms.py
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth import get_user_model
+================================================
+30- Create new class in accounts/forms.py
+class CustomUserCreationForm(UserCreationForm):
+    class Meta:
+        model = get_user_model()
+        fields = ('email', 'username',  )
+================================================
+31- add this in config/settings.py
+# accounts config
+AUTH_USER_MODEL =  'accounts.CustomUser'
+================================================
+32- Create new class in accounts/forms.py
+class CustomUserChangeForm(UserChangeForm):
+    class Meta:
+        model = get_user_model()
+        fields = ('email', 'username',  )
+================================================
+33- import this into accounts/admin.py
+from django.contrib.auth.admin import UserAdmin
+from .models import CustomUser
+from .forms import CustomUserCreationForm
+from .forms import CustomUserChangeForm
+================================================
+34- create new class in accounts/admin.py
+class CustomUserAdmin(UserAdmin):
+    model = CustomUser
+    add_form = CustomUserCreationForm
+    form = CustomUserChangeForm
+    list_display = ('email', 'username',  )
+================================================
+35- in Terminal 
+docker-compose exec web python manage.py makemigrations
+
+Output should be like this:
+    Migrations for 'accounts':
+      accounts/migrations/0001_initial.py
+        - Create model CustomUser
+================================================
+36- in Terminal 
+docker-compose exec web python manage.py migrate
+
+Output should be like this:
+    Operations to perform:
+      Apply all migrations: accounts, admin, auth, contenttypes, sessions
+    Running migrations:
+      Applying contenttypes.0001_initial... OK
+      Applying contenttypes.0002_remove_content_type_name... OK
+      Applying auth.0001_initial... OK
+      Applying auth.0002_alter_permission_name_max_length... OK
+      Applying auth.0003_alter_user_email_max_length... OK
+      Applying auth.0004_alter_user_username_opts... OK
+      Applying auth.0005_alter_user_last_login_null... OK
+      Applying auth.0006_require_contenttypes_0002... OK
+      Applying auth.0007_alter_validators_add_error_messages... OK
+      Applying auth.0008_alter_user_username_max_length... OK
+      Applying auth.0009_alter_user_last_name_max_length... OK
+      Applying auth.0010_alter_group_name_max_length... OK
+      Applying auth.0011_update_proxy_permissions... OK
+      Applying auth.0012_alter_user_first_name_max_length... OK
+      Applying accounts.0001_initial... OK
+      Applying admin.0001_initial... OK
+      Applying admin.0002_logentry_remove_auto_add... OK
+      Applying admin.0003_logentry_add_action_flag_choices... OK
+      Applying sessions.0001_initial... OK
+================================================
+37- in Terminal
+docker-compose exec web python manage.py createsuperuser
+
+Output should be like this:
+    Username:
+    Email address: 
+    Password: 
+    Password (again): 
+    This password is too short. It must contain at least 8 characters.
+    This password is too common.
+    This password is entirely numeric.
+    Bypass password validation and create user anyway? [y/N]: y
+    Superuser created successfully.
+================================================
+38- in Terminal
+docker-compose up --build
+
+Output should be like this:
+    Building web
+    [+] Building 4.3s (11/11) FINISHED                                                                                         docker:rootless
+    => [internal] load build definition from Dockerfile                                                                                  0.0s
+    => => transferring dockerfile: 204B                                                                                                  0.0s
+    => [internal] load .dockerignore                                                                                                     0.0s
+    => => transferring context: 2B                                                                                                       0.0s
+    => [internal] load metadata for docker.io/library/python:3.9                                                                         2.3s
+    => [auth] library/python:pull token for registry-1.docker.io                                                                         0.0s
+    => [1/5] FROM docker.io/library/python:3.9@sha256:30678bb79d9eeaf98ec0ce83cdcd4d6f5301484ef86873a711e69df2ca77e8ac                   0.0s
+    => [internal] load build context                                                                                                     0.1s
+    => => transferring context: 154.49kB                                                                                                 0.1s
+    => CACHED [2/5] WORKDIR /code                                                                                                        0.0s
+    => CACHED [3/5] COPY requirements.txt /code/                                                                                         0.0s
+    => CACHED [4/5] RUN pip install -r requirements.txt                                                                                  0.0s
+    => [5/5] COPY . /code/                                                                                                               0.3s
+    => exporting to image                                                                                                                1.3s
+    => => exporting layers                                                                                                               1.3s
+    => => writing image sha256:76e021917596aa39243cc3e195139b8caa3fcdf238ca8c203b98b667be63b7a4                                          0.0s
+    => => naming to docker.io/library/2_django_haji_web                                                                                  0.0s
+    Recreating 2_django_haji_web_1 ... 
+    Recreating 2_django_haji_web_1 ... done
+    Attaching to 2_django_haji_db_1, 2_django_haji_web_1
+    db_1   | ********************************************************************************
+    db_1   | WARNING: POSTGRES_HOST_AUTH_METHOD has been set to "trust". This will allow
+    db_1   |          anyone with access to the Postgres port to access your database without
+    db_1   |          a password, even if POSTGRES_PASSWORD is set. See PostgreSQL
+    db_1   |          documentation about "trust":
+    db_1   |          https://www.postgresql.org/docs/current/auth-trust.html
+    db_1   |          In Docker's default configuration, this is effectively any other
+    db_1   |          container on the same system.
+    db_1   | 
+    db_1   |          It is not recommended to use POSTGRES_HOST_AUTH_METHOD=trust. Replace
+    db_1   |          it with "-e POSTGRES_PASSWORD=password" instead to set a password in
+    db_1   |          "docker run".
+    db_1   | ********************************************************************************
+    db_1   | The files belonging to this database system will be owned by user "postgres".
+    db_1   | This user must also own the server process.
+    db_1   | 
+    db_1   | The database cluster will be initialized with locale "en_US.utf8".
+    db_1   | The default database encoding has accordingly been set to "UTF8".
+    db_1   | The default text search configuration will be set to "english".
+    db_1   | 
+    db_1   | Data page checksums are disabled.
+    db_1   | 
+    db_1   | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+    db_1   | creating subdirectories ... ok
+    db_1   | selecting dynamic shared memory implementation ... posix
+    db_1   | selecting default max_connections ... 100
+    db_1   | selecting default shared_buffers ... 128MB
+    db_1   | selecting default time zone ... Etc/UTC
+    db_1   | creating configuration files ... ok
+    db_1   | running bootstrap script ... ok
+    db_1   | performing post-bootstrap initialization ... ok
+    db_1   | syncing data to disk ... ok
+    db_1   | 
+    db_1   | initdb: warning: enabling "trust" authentication for local connections
+    db_1   | You can change this by editing pg_hba.conf or using the option -A, or
+    db_1   | --auth-local and --auth-host, the next time you run initdb.
+    db_1   | 
+    db_1   | Success. You can now start the database server using:
+    db_1   | 
+    db_1   |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+    db_1   | 
+    db_1   | waiting for server to start....2023-12-31 06:55:35.535 UTC [49] LOG:  starting PostgreSQL 14.10 (Debian 14.10-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+    db_1   | 2023-12-31 06:55:35.549 UTC [49] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+    db_1   | 2023-12-31 06:55:35.567 UTC [50] LOG:  database system was shut down at 2023-12-31 06:55:33 UTC
+    db_1   | 2023-12-31 06:55:35.577 UTC [49] LOG:  database system is ready to accept connections
+    db_1   |  done
+    db_1   | server started
+    db_1   | 
+    db_1   | /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+    db_1   | 
+    db_1   | waiting for server to shut down....2023-12-31 06:55:35.660 UTC [49] LOG:  received fast shutdown request
+    db_1   | 2023-12-31 06:55:35.666 UTC [49] LOG:  aborting any active transactions
+    db_1   | 2023-12-31 06:55:35.668 UTC [49] LOG:  background worker "logical replication launcher" (PID 56) exited with exit code 1
+    db_1   | 2023-12-31 06:55:35.668 UTC [51] LOG:  shutting down
+    db_1   | 2023-12-31 06:55:35.715 UTC [49] LOG:  database system is shut down
+    db_1   |  done
+    db_1   | server stopped
+    db_1   | 
+    db_1   | PostgreSQL init process complete; ready for start up.
+    db_1   | 
+    db_1   | 2023-12-31 06:55:35.796 UTC [1] LOG:  starting PostgreSQL 14.10 (Debian 14.10-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+    db_1   | 2023-12-31 06:55:35.796 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+    db_1   | 2023-12-31 06:55:35.796 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+    db_1   | 2023-12-31 06:55:35.807 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+    db_1   | 2023-12-31 06:55:35.820 UTC [62] LOG:  database system was shut down at 2023-12-31 06:55:35 UTC
+    db_1   | 2023-12-31 06:55:35.830 UTC [1] LOG:  database system is ready to accept connections
+    db_1   | 2023-12-31 06:55:36.417 UTC [1] LOG:  received fast shutdown request
+    db_1   | 2023-12-31 06:55:36.423 UTC [1] LOG:  aborting any active transactions
+    db_1   | 2023-12-31 06:55:36.425 UTC [1] LOG:  background worker "logical replication launcher" (PID 68) exited with exit code 1
+    db_1   | 2023-12-31 06:55:36.425 UTC [63] LOG:  shutting down
+    db_1   | 2023-12-31 06:55:36.469 UTC [1] LOG:  database system is shut down
+    db_1   | 
+    db_1   | PostgreSQL Database directory appears to contain a database; Skipping initialization
+    db_1   | 
+    db_1   | 2023-12-31 06:55:50.233 UTC [1] LOG:  starting PostgreSQL 14.10 (Debian 14.10-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+    db_1   | 2023-12-31 06:55:50.233 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+    db_1   | 2023-12-31 06:55:50.233 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+    db_1   | 2023-12-31 06:55:50.244 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+    db_1   | 2023-12-31 06:55:50.257 UTC [27] LOG:  database system was shut down at 2023-12-31 06:55:36 UTC
+    db_1   | 2023-12-31 06:55:50.266 UTC [1] LOG:  database system is ready to accept connections
+    web_1  | Watching for file changes with StatReloader
+    web_1  | Performing system checks...
+    web_1  | 
+    web_1  | System check identified no issues (0 silenced).
+    web_1  | December 31, 2023 - 07:00:47
+    web_1  | Django version 4.0.2, using settings 'config.settings'
+    web_1  | Starting development server at http://0.0.0.0:8000/
+    web_1  | Quit the server with CONTROL-C.
+================================================
+     💠💠💠 For All Projects 💠💠💠
+    1- in Terminal
+    docker-compose up --build
+    ================================================
+    2- in Terminal
+    Ctrl + C key
+    ================================================
+    3- in Terminal
+    docker start 2_django_haji_web_1 2_django_haji_db_1 
+    OR
+    docker start web_Name dataBase_Name
+    ================================================
+    4- in Terminal 
+    docker-compose exec web python manage.py makemigrations
+    ================================================
+    5- in Terminal 
+    docker-compose exec web python manage.py migrate
+    ================================================
+    6- in Terminal 
+    docker-compose up --build
+    ================================================
+    7- in another Terminal 
+    docker-compose exec web python manage.py createsuperuser
+    ================================================
+    8- in browser 
+    http://127.0.0.1:8000/admin/login/?next=/admin/
+
+    Output, it must be implemented correctly
+================================================
+
+39- 
+================================================
