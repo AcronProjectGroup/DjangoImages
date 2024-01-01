@@ -1172,6 +1172,16 @@ Output like this:
     To activate this project's virtualenv, run pipenv shell.
     Alternatively, run a command inside the virtualenv with pipenv run.    
 ================================================
+80- for running any command for (docker-compose exec web ...) in terminal 
+(2_Django_Haji) sina@linux:~/01-Repo/2_Django_Haji$ deactivate
+                                                   -------------
+Output:
+sina@linux:~/01-Repo/2_Django_Haji$ 
+
+🧲🧲
+From now on, execute Docker-compose commands inside this terminal,
+when the pipenv environment is not active.
+================================================
 
 
 
