@@ -559,6 +559,15 @@ kill <PID>
 💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠
 BEFORE migrate
 💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠
+⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔
+If for any reason you have to rebuild and delete containers web + databas 
+You need run again these command before to continue
+docker-compose up --build
+docker-compose exec web python manage.py makemigrations
+docker-compose exec web python manage.py migrate
+docker-compose exec web python manage.py createsuperuser
+⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔
+
 Container
 
 21- in Terminal
@@ -1348,7 +1357,290 @@ http://127.0.0.1:8000/accounts/login/
 2-
 http://127.0.0.1:8000/accounts/signup/
 ================================================
-103- 
+104- Check this link Django All Auth
+https://docs.allauth.org/en/latest/
+https://docs.allauth.org/en/latest/installation/quickstart.html
+================================================
+105- before run this command, be sure docker is running
+1- Deactivate pipenv or anothers environments in Terminal VScode 
+deactivate
+
+2- Active VPN from Iran Country
+
+3- write this code in Terminal VScode
+docker-compose exec web pip install django-allauth
+
+Output, it may look like this code:
+        Collecting django-allauth
+      Downloading django-allauth-0.59.0.tar.gz (926 kB)
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 926.1/926.1 kB 807.1 kB/s eta 0:00:00
+      Installing build dependencies ... done
+      Getting requirements to build wheel ... done
+      Installing backend dependencies ... done
+      Preparing metadata (pyproject.toml) ... done
+    Collecting requests>=2.0.0
+      Downloading requests-2.31.0-py3-none-any.whl (62 kB)
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.6/62.6 kB 3.0 MB/s eta 0:00:00
+    Collecting python3-openid>=3.0.8
+      Downloading python3_openid-3.2.0-py3-none-any.whl (133 kB)
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 133.7/133.7 kB 713.1 kB/s eta 0:00:00
+    Collecting pyjwt[crypto]>=1.7
+      Downloading PyJWT-2.8.0-py3-none-any.whl (22 kB)
+    Collecting requests-oauthlib>=0.3.0
+      Downloading requests_oauthlib-1.3.1-py2.py3-none-any.whl (23 kB)
+    Requirement already satisfied: Django>=3.2 in /usr/local/lib/python3.9/site-packages (from django-allauth) (4.2.8)
+    Requirement already satisfied: asgiref<4,>=3.6.0 in /usr/local/lib/python3.9/site-packages (from Django>=3.2->django-allauth) (3.7.2)
+    Requirement already satisfied: sqlparse>=0.3.1 in /usr/local/lib/python3.9/site-packages (from Django>=3.2->django-allauth) (0.4.2)
+    Collecting cryptography>=3.4.0
+      Downloading cryptography-41.0.7-cp37-abi3-manylinux_2_28_x86_64.whl (4.4 MB)
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.4/4.4 MB 627.6 kB/s eta 0:00:00
+    Collecting defusedxml
+      Downloading defusedxml-0.7.1-py2.py3-none-any.whl (25 kB)
+    Collecting idna<4,>=2.5
+      Downloading idna-3.6-py3-none-any.whl (61 kB)
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.6/61.6 kB 2.0 MB/s eta 0:00:00
+    Collecting certifi>=2017.4.17
+      Downloading certifi-2023.11.17-py3-none-any.whl (162 kB)
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 162.5/162.5 kB 1.7 MB/s eta 0:00:00
+    Collecting charset-normalizer<4,>=2
+      Downloading charset_normalizer-3.3.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (142 kB)
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 142.3/142.3 kB 1.9 MB/s eta 0:00:00
+    Collecting urllib3<3,>=1.21.1
+      Downloading urllib3-2.1.0-py3-none-any.whl (104 kB)
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 104.6/104.6 kB 1.1 MB/s eta 0:00:00
+    Collecting oauthlib>=3.0.0
+      Downloading oauthlib-3.2.2-py3-none-any.whl (151 kB)
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 151.7/151.7 kB 1.7 MB/s eta 0:00:00
+    Requirement already satisfied: typing-extensions>=4 in /usr/local/lib/python3.9/site-packages (from asgiref<4,>=3.6.0->Django>=3.2->django-allauth) (4.9.0)
+    Collecting cffi>=1.12
+      Downloading cffi-1.16.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (443 kB)
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 443.4/443.4 kB 1.8 MB/s eta 0:00:00
+    Collecting pycparser
+      Downloading pycparser-2.21-py2.py3-none-any.whl (118 kB)
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 118.7/118.7 kB 587.1 kB/s eta 0:00:00
+    Building wheels for collected packages: django-allauth
+      Building wheel for django-allauth (pyproject.toml) ... done
+      Created wheel for django-allauth: filename=django_allauth-0.59.0-py3-none-any.whl size=1235137 sha256=a574ad1065491148102d155488ec80ca6438c3da6929dd8e340d719a19d7ea9e
+      Stored in directory: /root/.cache/pip/wheels/5e/5e/b2/bb1e1a6a84f49eaf42ba6664a58595432b92c720f693fbf404
+    Successfully built django-allauth
+    Installing collected packages: urllib3, pyjwt, pycparser, oauthlib, idna, defusedxml, charset-normalizer, certifi, requests, python3-openid, cffi, requests-oauthlib, cryptography, django-allauth
+    Successfully installed certifi-2023.11.17 cffi-1.16.0 charset-normalizer-3.3.2 cryptography-41.0.7 defusedxml-0.7.1 django-allauth-0.59.0 idna-3.6 oauthlib-3.2.2 pycparser-2.21 pyjwt-2.8.0 python3-openid-3.2.0 requests-2.31.0 requests-oauthlib-1.3.1 urllib3-2.1.0
+    WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+
+    [notice] A new release of pip is available: 23.0.1 -> 23.3.2
+    [notice] To update, run: pip install --upgrade pip
+================================================
+⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔
+Every package you add means you are adding a vulnerability to your site. Be careful!
+⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔
+================================================
+106- Check requirements.txt should be like this
+    asgiref==3.7.2
+    Django==4.2.8
+    django-crispy-forms==2.1
+    psycopg2-binary==2.9.3
+    sqlparse==0.4.2
+    typing_extensions==4.9.0
+    tzdata==2021.5
+================================================
+107- after Installation "django-allauth" write this in that specific Terminal without any environment
+docker-compose exec web pip freeze > requirements.txt
+================================================
+108- Check requirements.txt should be like this
+    asgiref==3.7.2
+    certifi==2023.11.17
+    cffi==1.16.0
+    charset-normalizer==3.3.2
+    crispy-bootstrap4==2023.1
+    cryptography==41.0.7
+    defusedxml==0.7.1
+    Django==4.2.8
+    django-allauth==0.59.0
+    django-crispy-forms==2.1
+    idna==3.6
+    oauthlib==3.2.2
+    psycopg2-binary==2.9.3
+    pycparser==2.21
+    PyJWT==2.8.0
+    python3-openid==3.2.0
+    requests==2.31.0
+    requests-oauthlib==1.3.1
+    sqlparse==0.4.2
+    typing_extensions==4.9.0
+    tzdata==2021.5
+    urllib3==2.1.0
+================================================
+109- write this for syncing pipenv with requirements.txt
+pipenv install -r requirements.txt
+
+Help -> https://pipenv.pypa.io/zh-cn/stable/basics.html#importing-from-requirements-txt
+Output:
+    Courtesy Notice: 
+    ...
+    WARNING:pipenv.patched.pip._vendor.urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=0.3)")': /pypi/asgiref/json
+    ...
+    /home/sina/.local/lib/python3.10/site-packages/pipenv/patched/pip/_vendor/requests/structures.py:58: ResourceWarning: unclosed file <_io.FileIO name='/tmp/tmp3qztz9b5' mode='rb+' closefd=True>
+    return (casedkey for casedkey, mappedvalue in self._store.values())
+    ...
+    ResourceWarning: Enable tracemalloc to get the object allocation traceback
+    Pipfile.lock (aa9413) out of date, updating to (e2a044)...
+    Locking [packages] dependencies...
+    Building requirements...
+    Resolving dependencies...
+    ✔ Success!
+    Locking [dev-packages] dependencies...
+    Updated Pipfile.lock (df7bbdf6c6f09b2a75e0ddbe23f5c3227e4496e3c75cb67a3539683f72e2a044)!
+    Installing dependencies from Pipfile.lock (e2a044)...
+    To activate this project's virtualenv, run pipenv shell.
+    Alternatively, run a command inside the virtualenv with pipenv run.
+================================================
+110- add these into config/settings.py > INSTALLED_APPS list after previous Third Parties 
+# Third Parties
+...
+'allauth',
+'allauth.account',
+================================================
+111- add these in end of config/settings.py
+# For All Auth App
+SITE_ID = 1
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+================================================
+112- add thi in config/settings.py > MIDDLEWARE list after default django Middlewares
+MIDDLEWARE = [
+...
+...
+# Add the account middleware:
+    "allauth.account.middleware.AccountMiddleware",
+================================================
+113- Delete these in config/urls.py > urlpatterns list
+path('accounts/', include('django.contrib.auth.urls')),
+path('accounts/', include('accounts.urls')),
+================================================
+114- Write new path in config/urls.py > urlpatterns list
+path('accounts/', include('allauth.urls')),
+================================================
+115- Rename this file "registration" to account
+account
+================================================
+116- Create .dockerignore in current directory of project
+.dockerignore
+================================================
+117- write in .dockerignore 
+venv/
+Pipfile
+Pipfile.lock
+================================================
+118- Rebuild Server
+1- Run VPN
+2- write in Terminal
+docker-compose up --build
+Output should be like this:
+    Building web
+    [+] Building 87.8s (11/11) FINISHED                                                                                docker:rootless
+    ...
+    ...                                                                                                   3.0s 
+    ...
+    ...
+    eb_1  | You have 5 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): account.
+    web_1  | Django version 4.2.8, using settings 'config.settings'
+    web_1  | Starting development server at http://0.0.0.0:8000/
+    web_1  | Quit the server with CONTROL-C.
+================================================
+119- Check these two links , they must have changed.
+http://127.0.0.1:8000/accounts/login/
+http://127.0.0.1:8000/accounts/signup/
+================================================
+120- Delete these from accounts/views.py
+from django.shortcuts import render
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
+
+from .forms import CustomUserCreationForm
+
+class SignUpView(CreateView):
+    form_class = CustomUserCreationForm
+    template_name = 'registration/signup.html'
+    success_url = reverse_lazy('login')
+================================================
+121- Delete these from accounts/urls.py
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path('signup/', views.SignUpView.as_view(), name='signup'),
+]
+================================================
+122- write this end of config/settings.py under "# For All Auth App"
+# For All Auth App
+...
+ACCOUNT_SESSION_REMEMBER = True
+================================================
+123- Create logout.html in tempaltes/account directory
+logout.html
+================================================
+124- Copy all login.html
+Paste in logout.html
+================================================
+125- Change logout.html like these
+{% extends '_base.html' %}
+
+{% block page_title %}
+    Logout
+{% endblock %}
+
+{% block content %}
+    <h1>Logout</h1>
+    <h2>Are you sure want to logout?</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Are you sure?">
+    </form>
+{% endblock %}
+================================================
+126- Try to login should get this error after login
+http://127.0.0.1:8000/accounts/login/
+
+Error Output:
+    ProgrammingError at /accounts/login/
+    relation "account_emailaddress" does not exist
+    LINE 1: SELECT 1 AS "a" FROM "account_emailaddress" WHERE ("account_...
+                                ^
+================================================
+127- in Terminal
+docker-compose exec web python manage.py migrate
+
+ATTENTION: Don't need to makemigrations command use
+
+Output, it may look like this code:
+    Operations to perform:
+      Apply all migrations: account, accounts, admin, auth, contenttypes, sessions
+    Running migrations:
+      Applying account.0001_initial... OK
+      Applying account.0002_email_max_length... OK
+      Applying account.0003_alter_emailaddress_create_unique_verified_email... OK
+      Applying account.0004_alter_emailaddress_drop_unique_email... OK
+      Applying account.0005_emailaddress_idx_upper_email... OK
+================================================
+(optional) 128- Maybe need to restart server maybe not
+in Terminal (without --build )
+docker-compose up 
+================================================
+129- Check and login again. It must be implemented correctly.
+http://127.0.0.1:8000/accounts/login/
+================================================
+130- Check for logout correctly. It must be implemented correctly.
+http://127.0.0.1:8000/accounts/logout/
+================================================
+131- 
+================================================
 ================================================
 ================================================
 ================================================
