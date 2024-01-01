@@ -1182,11 +1182,178 @@ sina@linux:~/01-Repo/2_Django_Haji$
 From now on, execute Docker-compose commands inside this terminal,
 when the pipenv environment is not active.
 ================================================
+81- Create _base.html in templates directory
+_base.html
+================================================
+82- write html:5 in file _base.html and Press Enter(return)
+Output should be like these:
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+    </body>
+    </html>
+================================================
+83- search in browser "bootstrap"
+https://www.google.com/search?channel=fs&client=ubuntu-sn&q=bootstrap
+================================================
+84- Copy "Bootstrap CSS" from this link
+https://getbootstrap.com/docs/5.3/getting-started/introduction/
+It may look like this code:
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+================================================
+85- Paste that in head tag of _base.html
+...
+<head>
+    ...
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+...
+================================================
+86- Copy <script> tag for our JavaScript bundle from this link
+https://getbootstrap.com/docs/5.3/getting-started/introduction/
+It may look like this code:
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+================================================
+87- Paste that end of body tag in _base.html
+...
+<body>    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+...
+================================================
+88- Change title of _base.html like this
+<title>{% block page_title %}{% endblock %}</title>
+================================================
+89- inside body tag of _base.html add this
+<body>
+    {% block content %}
+    {% endblock %}
+    ...
+================================================
+90- change inside home.html like this
+{% extends '_base.html' %}
+{% block page_title %}
+    Home
+{% endblock %}
+{% block content %}
+    Home Page is Here Dear Sina :)
+{% endblock %}
+================================================
+91- Copy all of home.html 
+Paste on login.html
+================================================
+92- Change login.html like these
+{% extends '_base.html' %}
+{% block page_title %}
+    Login
+{% endblock %}
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Login">
+    </form>
+{% endblock %}
+================================================
+93- Copy all login.html
+Paste on signup.html
+================================================
+94- Change signup.html like these
+{% extends '_base.html' %}
+{% block page_title %}
+    Signup
+{% endblock %}
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Signup">
+    </form>
+{% endblock %}
+================================================
+95- Check site in broswer all fonts should be changed
+http://127.0.0.1:8000/
+================================================
+96- in end of config/settings.py
+# crispy forms settings
+CRISPY_TEMPLATE_PACK = 'bootstrap'
+================================================
+97- add this in after {extends} login.html like this
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+...
+================================================
+98- Change this line in login.html like this
+...
+{{ form|crispy }}
+...
+================================================
+99- Apply the previous two steps to the signup.html page
+...
+{% load crispy_forms_tags %}
+...
+{{ form|crispy }}
+...
+================================================
+100- Check these
+100-1 Check this link for dependencies of crispy_forms:
+    https://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
 
+100-2 Install crispy-bootstrap4 from this link
+    https://pypi.org/project/crispy-bootstrap4/
+    1- in another Terminal vscode 
+    2- don't activate pipenv or another environments
+    for docker command is like this: 
+        docker-compose exec web pip install crispy-bootstrap4
+    Output it may look like this code:
+        Collecting crispy-bootstrap4
+            Downloading crispy_bootstrap4-2023.1-py3-none-any.whl (22 kB)
+        Requirement already satisfied: django>=4.2 in /usr/local/lib/python3.9/site-packages (from crispy-bootstrap4) (4.2.8)
+        Requirement already satisfied: django-crispy-forms>=2.0 in /usr/local/lib/python3.9/site-packages (from crispy-bootstrap4) (2.1)
+        Requirement already satisfied: asgiref<4,>=3.6.0 in /usr/local/lib/python3.9/site-packages (from django>=4.2->crispy-bootstrap4) (3.7.2)
+        Requirement already satisfied: sqlparse>=0.3.1 in /usr/local/lib/python3.9/site-packages (from django>=4.2->crispy-bootstrap4) (0.4.2)
+        Requirement already satisfied: typing-extensions>=4 in /usr/local/lib/python3.9/site-packages (from asgiref<4,>=3.6.0->django>=4.2->crispy-bootstrap4) (4.9.0)
+        Installing collected packages: crispy-bootstrap4
+        Successfully installed crispy-bootstrap4-2023.1
+        WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
 
-
-
+        [notice] A new release of pip is available: 23.0.1 -> 23.3.2
+        [notice] To update, run: pip install --upgrade pip
+================================================
+101- add this in config/settings.py INSTALLED_APPS list 
+...
+# Third Parties
+'crispy_forms',
+"crispy_bootstrap4",
+...
+================================================
+102- add this in config/settings.py like this
+...
+# crispy forms settings
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+================================================
+103- Check these links should be changed
+1-
+http://127.0.0.1:8000/accounts/login/
+2-
+http://127.0.0.1:8000/accounts/signup/
+================================================
+103- 
+================================================
+================================================
+================================================
+================================================
+================================================
 Rebuild Server
 docker-compose up --build
-
 Output should be like this:
