@@ -1639,8 +1639,11 @@ http://127.0.0.1:8000/accounts/login/
 130- Check for logout correctly. It must be implemented correctly.
 http://127.0.0.1:8000/accounts/logout/
 ================================================
-131- 
+131- add these under all auth: config/settings.py
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 ================================================
+132- Check this link The site forces the user to enter a password once.
+http://127.0.0.1:8000/accounts/signup/
 ================================================
 ================================================
 ================================================
