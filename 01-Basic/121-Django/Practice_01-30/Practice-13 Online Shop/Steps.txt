@@ -53,7 +53,7 @@ Output:
     * [new branch]      main -> main
     Branch 'main' set up to track remote branch 'main' from 'origin'.
 ================================================
-10- Check you repository link, make sure that will changed
+10- Check your repository link, make sure that will changed
 ================================================
 11- paste everything from directory you cloned in step 1 from this link https://github.com/hadiMh/Django_Docker_with_PostgreSql
 ================================================
@@ -574,7 +574,7 @@ Container
 docker-compose exec web python manage.py startapp accounts 
 
 Output should be like this:
-A directory created with basic python and more files
+    A directory created with basic python and more files
 ================================================
 22- add accounts in config/settings.py > INSTALLED_APPS list
 'accounts',
@@ -797,7 +797,7 @@ Output should be like this:
     web_1  | Starting development server at http://0.0.0.0:8000/
     web_1  | Quit the server with CONTROL-C.
 ================================================
-     💠💠💠 For All Projects 💠💠💠
+💠💠💠 For All Projects 💠💠💠
     1- in Terminal
     docker-compose up --build
     ================================================
@@ -1062,12 +1062,12 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 ================================================
 72- make sure server is true running like this
-...
-web_1  | System check identified no issues (0 silenced).
-web_1  | December 31, 2023 - 19:01:42
-web_1  | Django version 4.0.2, using settings 'config.settings'
-web_1  | Starting development server at http://0.0.0.0:8000/
-web_1  | Quit the server with CONTROL-C.
+...Output: 
+    web_1  | System check identified no issues (0 silenced).
+    web_1  | December 31, 2023 - 19:01:42
+    web_1  | Django version 4.0.2, using settings 'config.settings'
+    web_1  | Starting development server at http://0.0.0.0:8000/
+    web_1  | Quit the server with CONTROL-C.
 ================================================
 73- Check these links should be redirected after login/logout
 http://127.0.0.1:8000/accounts/login/
@@ -1075,7 +1075,7 @@ http://127.0.0.1:8000/accounts/logout/
 ================================================
 
 🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑
-You Can TEST erverithing in this step 
+You Can write TEST for everything in this step in test.py file Apps 
 🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑
 
 ================================================
@@ -1122,23 +1122,25 @@ Active VPN and write again, Be sure don't active venv like this below:
     [notice] To update, run: pip install --upgrade pip
 ================================================
 75- Check requirements.txt must be like this 
-asgiref==3.5.0
-Django==4.0.2
-psycopg2-binary==2.9.3
-sqlparse==0.4.2
-tzdata==2021.5
+Inside of file:
+    asgiref==3.5.0
+    Django==4.0.2
+    psycopg2-binary==2.9.3
+    sqlparse==0.4.2
+    tzdata==2021.5
 ================================================
 76- in another Terminal  (Server should be acticeted now)
 docker-compose exec web pip freeze > requirements.txt
 ================================================
 77- Check requirements.txt must be Changed like this 
-asgiref==3.7.2
-Django==4.2.8
-django-crispy-forms==2.1
-psycopg2-binary==2.9.3
-sqlparse==0.4.2
-typing_extensions==4.9.0
-tzdata==2021.5
+Inside of file:
+    asgiref==3.7.2
+    Django==4.2.8
+    django-crispy-forms==2.1
+    psycopg2-binary==2.9.3
+    sqlparse==0.4.2
+    typing_extensions==4.9.0
+    tzdata==2021.5
 ================================================
 78- write this into config/settings.py in INSTALLED_APPS > after Djangop default Apps
 # Third Parties
@@ -1185,9 +1187,9 @@ Output like this:
 (2_Django_Haji) sina@linux:~/01-Repo/2_Django_Haji$ deactivate
                                                    -------------
 Output:
-sina@linux:~/01-Repo/2_Django_Haji$ 
+    sina@linux:~/01-Repo/2_Django_Haji$ 
 
-🧲🧲
+🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲
 From now on, execute Docker-compose commands inside this terminal,
 when the pipenv environment is not active.
 ================================================
@@ -1208,7 +1210,7 @@ Output should be like these:
     </html>
 ================================================
 83- search in browser "bootstrap"
-https://www.google.com/search?channel=fs&client=ubuntu-sn&q=bootstrap
+https://www.google.com/search?channel=fs&client=YOUR_OS-sn&q=bootstrap
 ================================================
 84- Copy "Bootstrap CSS" from this link
 https://getbootstrap.com/docs/5.3/getting-started/introduction/
@@ -1352,22 +1354,22 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 ================================================
 103- Check these links should be changed
-1-
+103-1
 http://127.0.0.1:8000/accounts/login/
-2-
+103-2
 http://127.0.0.1:8000/accounts/signup/
 ================================================
-104- Check this link Django All Auth
+104- Check these link Django All Auth
 https://docs.allauth.org/en/latest/
 https://docs.allauth.org/en/latest/installation/quickstart.html
 ================================================
 105- before run this command, be sure docker is running
-1- Deactivate pipenv or anothers environments in Terminal VScode 
+105-1 Deactivate pipenv or anothers environments in Terminal VScode 
 deactivate
 
-2- Active VPN from Iran Country
+105-2 Active VPN from Iran Country
 
-3- write this code in Terminal VScode
+105-3 write this code in Terminal VScode
 docker-compose exec web pip install django-allauth
 
 Output, it may look like this code:
@@ -1431,7 +1433,8 @@ Output, it may look like this code:
     [notice] To update, run: pip install --upgrade pip
 ================================================
 ⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔
-Every package you add means you are adding a vulnerability to your site. Be careful!
+Be careful!
+Every package you add means you are adding a vulnerability to your site.
 ⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔
 ================================================
 106- Check requirements.txt should be like this
@@ -1669,7 +1672,50 @@ Output:
     web_1  | -------------------------------------------------------------------------------
 
 ================================================
-135- 
+135- write in config/settings.py after # For All Auth App Settings 
+...
+ACCOUNT_USERNAME_REQUIRED = False
+================================================
+136- write in config/settings.py after # For All Auth App Settings
+...
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+================================================
+137- write in config/settings.py after # For All Auth App Settings
+...
+ACCOUNT_EMAIL_REQUIRED = True
+================================================
+138- write in config/settings.py after # For All Auth App Settings
+...
+ACCOUNT_UNIQUE_EMAIL = True
+================================================
+139- Rebuild Server
+docker-compose up --build
+================================================
+140- Check this link, should be shows just two things = (Email + Password once)
+http://127.0.0.1:8000/accounts/signup/
+================================================
+141- in broswer go to admin panel 
+http://127.0.0.1:8000/admin/
+================================================
+142- in broswer go to users
+http://127.0.0.1:8000/admin/accounts/customuser/
+================================================
+143- Check account Username , You created in step 133 , Should be like this
+Username == anything
+Email == anything@gmail.com
+================================================
+144- 
+================================================
+================================================
+================================================
+================================================
+================================================
+================================================
+================================================
+================================================
+================================================
+================================================
+================================================
 ================================================
 ================================================
 Rebuild Server
