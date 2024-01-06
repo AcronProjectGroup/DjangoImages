@@ -1704,10 +1704,220 @@ http://127.0.0.1:8000/admin/accounts/customuser/
 Username == anything
 Email == anything@gmail.com
 ================================================
-144- 
+144- Install this in another Terminal (Docker should be running right now) 
+docker-compose exec web pip install "environs[django]"
+
+Output:
+    Collecting environs[django]
+    Downloading environs-10.0.0-py3-none-any.whl (12 kB)
+    Collecting python-dotenv
+    Downloading python_dotenv-1.0.0-py3-none-any.whl (19 kB)
+    Collecting marshmallow>=3.0.0
+    Downloading marshmallow-3.20.1-py3-none-any.whl (49 kB)
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 49.4/49.4 kB 405.7 kB/s eta 0:00:00
+    Collecting dj-email-url
+    Downloading dj_email_url-1.0.6-py2.py3-none-any.whl (6.3 kB)
+    Collecting dj-database-url
+    Downloading dj_database_url-2.1.0-py3-none-any.whl (7.7 kB)
+    Collecting django-cache-url
+    Downloading django_cache_url-3.4.5-py2.py3-none-any.whl (4.8 kB)
+    Collecting packaging>=17.0
+    Downloading packaging-23.2-py3-none-any.whl (53 kB)
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 53.0/53.0 kB 298.7 kB/s eta 0:00:00
+    Requirement already satisfied: typing-extensions>=3.10.0.0 in /usr/local/lib/python3.9/site-packages (from dj-database-url->environs[django]) (4.9.0)
+    Requirement already satisfied: Django>=3.2 in /usr/local/lib/python3.9/site-packages (from dj-database-url->environs[django]) (4.2.8)
+    Requirement already satisfied: sqlparse>=0.3.1 in /usr/local/lib/python3.9/site-packages (from Django>=3.2->dj-database-url->environs[django]) (0.4.2)
+    Requirement already satisfied: asgiref<4,>=3.6.0 in /usr/local/lib/python3.9/site-packages (from Django>=3.2->dj-database-url->environs[django]) (3.7.2)
+    Installing collected packages: django-cache-url, dj-email-url, python-dotenv, packaging, marshmallow, environs, dj-database-url
+    Successfully installed dj-database-url-2.1.0 dj-email-url-1.0.6 django-cache-url-3.4.5 environs-10.0.0 marshmallow-3.20.1 packaging-23.2 python-dotenv-1.0.0
+    WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+
+    [notice] A new release of pip is available: 23.0.1 -> 23.3.2
+    [notice] To update, run: pip install --upgrade pip
+
 ================================================
+145- add previous step in requirements.txt by this command in Terminal 
+docker-compose exec web pip freeze > requirements.txt
+
+Output:
+    asgiref==3.7.2
+    certifi==2023.11.17
+    cffi==1.16.0
+    charset-normalizer==3.3.2
+    crispy-bootstrap4==2023.1
+    cryptography==41.0.7
+    defusedxml==0.7.1
+    dj-database-url==2.1.0
+    dj-email-url==1.0.6
+    Django==4.2.8
+    django-allauth==0.59.0
+    django-cache-url==3.4.5
+    django-crispy-forms==2.1
+    environs==10.0.0
+    idna==3.6
+    marshmallow==3.20.1
+    oauthlib==3.2.2
+    packaging==23.2
+    psycopg2-binary==2.9.3
+    pycparser==2.21
+    PyJWT==2.8.0
+    python-dotenv==1.0.0
+    python3-openid==3.2.0
+    requests==2.31.0
+    requests-oauthlib==1.3.1
+    sqlparse==0.4.2
+    typing_extensions==4.9.0
+    tzdata==2021.5
+    urllib3==2.1.0
+
 ================================================
+146- write this in config/settings.py after imports 
+from environs import Env
 ================================================
+147- install again for pipenv, write in Terminal
+pipenv install -r requirements.txt
+
+Output of 'Pipfile' file:
+    [[source]]
+    url = "https://pypi.org/simple"
+    verify_ssl = true
+    name = "pypi"
+
+    [packages]
+    asgiref = "==3.7.2"
+    django = "==4.2.8"
+    django-crispy-forms = "==2.1"
+    psycopg2-binary = "==2.9.3"
+    sqlparse = "==0.4.2"
+    typing-extensions = "==4.9.0"
+    tzdata = "==2021.5"
+    certifi = "==2023.11.17"
+    cffi = "==1.16.0"
+    charset-normalizer = "==3.3.2"
+    crispy-bootstrap4 = "==2023.1"
+    cryptography = "==41.0.7"
+    defusedxml = "==0.7.1"
+    django-allauth = "==0.59.0"
+    idna = "==3.6"
+    oauthlib = "==3.2.2"
+    pycparser = "==2.21"
+    pyjwt = "==2.8.0"
+    python3-openid = "==3.2.0"
+    requests = "==2.31.0"
+    requests-oauthlib = "==1.3.1"
+    urllib3 = "==2.1.0"
+    dj-database-url = "==2.1.0"
+    dj-email-url = "==1.0.6"
+    django-cache-url = "==3.4.5"
+    environs = "==10.0.0"
+    marshmallow = "==3.20.1"
+    packaging = "==23.2"
+    python-dotenv = "==1.0.0"
+
+    [dev-packages]
+
+    [requires]
+    python_version = "3.10"
+
+================================================
+148- write these in config/settings.py, after step 146
+# For Environment Variables
+env = Env()
+env.read_env()
+================================================
+149- Cut the values of SECRET_KEY without these signs '' like this
+django-insecure-b764$#(&o4o((cvy!z^nsseq5@erq#e^0%5r5a(%c24*f^*sde
+================================================
+150- change value of SECRET_KEY like this
+SECRET_KEY = env('DJANGO_SECRET_KEY')
+================================================
+151- create new dependency in docker-compose.yml file after ports:...
+...
+depends_on:
+    - db
+================================================
+152- create new environment in docker-compose.yml file after depends_on:...
+...
+environment:
+    - 'DJANGO_SECRET_KEY=django-insecure-b764$#(&o4o((cvy!z^nsseq5@erq#e^0%5r5a(%c24*f^*sde'
+================================================
+153- If in values of SECRET_KEY was a $ sign repeat $ again after it like this
+django-insecure-b764$$#(&o4o((cvy!z^nsseq5@erq#e^0%5r5a(%c24*f^*sde
+                    --
+================================================
+154- Rebuild Server
+docker-compose up --build
+
+Output: 
+    Building web
+    [+] Building 19.5s (8/10)                                                                                          docker:rootless
+     => [internal] load build definition from Dockerfile                                                                          0.0s
+     => => transferring dockerfile: 204B                                                                                          0.0s
+     => [internal] load .dockerignore                                                                                             0.0s
+     => => transferring context: 66B                                                                                              0.0s
+     => [internal] load metadata for docker.io/library/python:3.9                                                                 2.6s
+     => [auth] library/python:pull token for registry-1.docker.io                                                                 0.0s
+     => [internal] load build context                                                                                             0.1s
+     => => transferring context: 87.83kB                                                                                          0.0s
+     => [1/5] FROM docker.io/library/python:3.9@sha256:30678bb79d9eeaf98ec0ce83cdcd4d6f5301484ef86873a711e69df2ca77e8ac           0.0s
+     => CACHED [2/5] WORKDIR /code                                                                                                0.0s
+     => [3/5] COPY requirements.txt /code/                                                                                        0.1s
+     => [4/5] RUN pip install -r requirements.txt                                                                                16.6s
+     => => #   Downloading asgiref-3.7.2-py3-none-any.whl (24 kB)                                                                     
+     => => # Collecting certifi==2023.11.17                                                                                           
+     => => #   Downloading certifi-2023.11.17-py3-none-any.whl (162 kB)                                                               
+     => => #      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 162.5/162.5 kB 54.5 kB/s eta 0:00:00                                         
+     => => # Collecting cffi==1.16.0                                                                                                  
+     => => #   Downloading cffi-1.16.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (443 kB)                              
+    => => #   Downloading charset_normalizer-3.3.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (142 kB)                 
+     => => #      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 142.3/142.3 kB 156.8 kB/s eta 0:00:00                                         
+     => => # Collecting crispy-bootstrap4==2023.1                                                                                     
+     => => #   Downloading crispy_bootstrap4-2023.1-py3-none-any.whl (22 kB)                                                          
+    ...
+     => => #   Downloading Django-4.2.8-py3-none-any.whl (8.0 MB)                                                                     
+     => => #      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.0/8.0 MB 110.5 kB/s eta 0:00:00                                          
+     => => # Collecting django-allauth==0.59.0                                                                                        
+     => => #   Downloading django-allauth-0.59.0.tar.gz (926 kB)                                                                      
+     => => #      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 926.1/926.1 kB 143.4 kB/s eta 0:00:00                                         
+     => => #   Installing build dependencies: started  
+      ...
+      => => #   Downloading marshmallow-3.20.1-py3-none-any.whl (49 kB)                                                                
+     => => #      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 49.4/49.4 kB 130.6 kB/s eta 0:00:00                                         
+     => => # Collecting oauthlib==3.2.2                                                                                               
+     => => #   Downloading oauthlib-3.2.2-py3-none-any.whl (151 kB)                                                                   
+     => => #      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 151.7/151.7 kB 318.5 kB/s eta 0:00:00                                         
+     => => # Collecting packaging==23.2                                                                                               
+    > => # Collecting psycopg2-binary==2.9.3                                                                                        
+     => => #   Downloading psycopg2_binary-2.9.3-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.0 MB)  
+      => => # Collecting typing_extensions==4.9.0                                                                                      
+     => => #   Downloading typing_extensions-4.9.0-py3-none-any.whl (32 kB)                                                           
+     => => # Collecting tzdata==2021.5                                                 
+
+      => [5/5] COPY . /code/                                                                                                       0.2s
+     => exporting to image                                                                                                        2.8s 
+     => => exporting layers                                                                                                       2.8s 
+     => => writing image sha256:6b3dc84666a34429dad21417c3ec74124ecb24968a2a59c328f7d88d7435643b                                  0.0s 
+     => => naming to docker.io/library/2_django_haji_web                                                                          0.0s 
+    Starting 2_django_haji_db_1 ... done
+    Recreating 2_django_haji_web_1 ... done
+    Attaching to 2_django_haji_db_1, 2_django_haji_web_1
+    Starting 2_django_haji_db_1 ... done
+    Recreating 2_django_haji_web_1 ... done
+    Attaching to 2_django_haji_db_1, 2_django_haji_web_1
+    db_1   | 
+    db_1   | PostgreSQL Database directory appears to contain a database; Skipping initialization
+    db_1   | 
+    db_1   | 2024-01-06 17:40:10.396 UTC [1] LOG:  starting PostgreSQL 14.10 (Debian 14.10-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+    ...
+    web_1  | System check identified no issues (0 silenced).
+    web_1  | January 06, 2024 - 17:40:12
+    web_1  | Django version 4.2.8, using settings 'config.settings'
+    web_1  | Starting development server at http://0.0.0.0:8000/
+    web_1  | Quit the server with CONTROL-C.
+    web_1  | 
+
+================================================
+155- 
 ================================================
 ================================================
 ================================================
