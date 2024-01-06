@@ -53,7 +53,7 @@ Output:
     * [new branch]      main -> main
     Branch 'main' set up to track remote branch 'main' from 'origin'.
 ================================================
-10- Check you repository link, make sure that will changed
+10- Check your repository link, make sure that will changed
 ================================================
 11- paste everything from directory you cloned in step 1 from this link https://github.com/hadiMh/Django_Docker_with_PostgreSql
 ================================================
@@ -574,7 +574,7 @@ Container
 docker-compose exec web python manage.py startapp accounts 
 
 Output should be like this:
-A directory created with basic python and more files
+    A directory created with basic python and more files
 ================================================
 22- add accounts in config/settings.py > INSTALLED_APPS list
 'accounts',
@@ -797,7 +797,7 @@ Output should be like this:
     web_1  | Starting development server at http://0.0.0.0:8000/
     web_1  | Quit the server with CONTROL-C.
 ================================================
-     💠💠💠 For All Projects 💠💠💠
+💠💠💠 For All Projects 💠💠💠
     1- in Terminal
     docker-compose up --build
     ================================================
@@ -1062,12 +1062,12 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 ================================================
 72- make sure server is true running like this
-...
-web_1  | System check identified no issues (0 silenced).
-web_1  | December 31, 2023 - 19:01:42
-web_1  | Django version 4.0.2, using settings 'config.settings'
-web_1  | Starting development server at http://0.0.0.0:8000/
-web_1  | Quit the server with CONTROL-C.
+...Output: 
+    web_1  | System check identified no issues (0 silenced).
+    web_1  | December 31, 2023 - 19:01:42
+    web_1  | Django version 4.0.2, using settings 'config.settings'
+    web_1  | Starting development server at http://0.0.0.0:8000/
+    web_1  | Quit the server with CONTROL-C.
 ================================================
 73- Check these links should be redirected after login/logout
 http://127.0.0.1:8000/accounts/login/
@@ -1075,7 +1075,7 @@ http://127.0.0.1:8000/accounts/logout/
 ================================================
 
 🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑
-You Can TEST erverithing in this step 
+You Can write TEST for everything in this step in test.py file Apps 
 🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑
 
 ================================================
@@ -1122,23 +1122,25 @@ Active VPN and write again, Be sure don't active venv like this below:
     [notice] To update, run: pip install --upgrade pip
 ================================================
 75- Check requirements.txt must be like this 
-asgiref==3.5.0
-Django==4.0.2
-psycopg2-binary==2.9.3
-sqlparse==0.4.2
-tzdata==2021.5
+Inside of file:
+    asgiref==3.5.0
+    Django==4.0.2
+    psycopg2-binary==2.9.3
+    sqlparse==0.4.2
+    tzdata==2021.5
 ================================================
 76- in another Terminal  (Server should be acticeted now)
 docker-compose exec web pip freeze > requirements.txt
 ================================================
 77- Check requirements.txt must be Changed like this 
-asgiref==3.7.2
-Django==4.2.8
-django-crispy-forms==2.1
-psycopg2-binary==2.9.3
-sqlparse==0.4.2
-typing_extensions==4.9.0
-tzdata==2021.5
+Inside of file:
+    asgiref==3.7.2
+    Django==4.2.8
+    django-crispy-forms==2.1
+    psycopg2-binary==2.9.3
+    sqlparse==0.4.2
+    typing_extensions==4.9.0
+    tzdata==2021.5
 ================================================
 78- write this into config/settings.py in INSTALLED_APPS > after Djangop default Apps
 # Third Parties
@@ -1185,9 +1187,9 @@ Output like this:
 (2_Django_Haji) sina@linux:~/01-Repo/2_Django_Haji$ deactivate
                                                    -------------
 Output:
-sina@linux:~/01-Repo/2_Django_Haji$ 
+    sina@linux:~/01-Repo/2_Django_Haji$ 
 
-🧲🧲
+🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲
 From now on, execute Docker-compose commands inside this terminal,
 when the pipenv environment is not active.
 ================================================
@@ -1208,7 +1210,7 @@ Output should be like these:
     </html>
 ================================================
 83- search in browser "bootstrap"
-https://www.google.com/search?channel=fs&client=ubuntu-sn&q=bootstrap
+https://www.google.com/search?channel=fs&client=YOUR_OS-sn&q=bootstrap
 ================================================
 84- Copy "Bootstrap CSS" from this link
 https://getbootstrap.com/docs/5.3/getting-started/introduction/
@@ -1352,22 +1354,22 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 ================================================
 103- Check these links should be changed
-1-
+103-1
 http://127.0.0.1:8000/accounts/login/
-2-
+103-2
 http://127.0.0.1:8000/accounts/signup/
 ================================================
-104- Check this link Django All Auth
+104- Check these link Django All Auth
 https://docs.allauth.org/en/latest/
 https://docs.allauth.org/en/latest/installation/quickstart.html
 ================================================
 105- before run this command, be sure docker is running
-1- Deactivate pipenv or anothers environments in Terminal VScode 
+105-1 Deactivate pipenv or anothers environments in Terminal VScode 
 deactivate
 
-2- Active VPN from Iran Country
+105-2 Active VPN from Iran Country
 
-3- write this code in Terminal VScode
+105-3 write this code in Terminal VScode
 docker-compose exec web pip install django-allauth
 
 Output, it may look like this code:
@@ -1431,7 +1433,8 @@ Output, it may look like this code:
     [notice] To update, run: pip install --upgrade pip
 ================================================
 ⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔
-Every package you add means you are adding a vulnerability to your site. Be careful!
+Be careful!
+Every package you add means you are adding a vulnerability to your site.
 ⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔
 ================================================
 106- Check requirements.txt should be like this
@@ -1644,6 +1647,300 @@ ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 ================================================
 132- Check this link The site forces the user to enter a password once.
 http://127.0.0.1:8000/accounts/signup/
+================================================
+133- Create new user for testing Email in Terminal
+================================================
+134- Check Terminal was running docker in previous step should printed like these 
+Output:
+    Content-Type: text/plain; charset="utf-8"
+    web_1  | MIME-Version: 1.0
+    web_1  | Content-Transfer-Encoding: 7bit
+    web_1  | Subject: [127.0.0.1:8000] Please Confirm Your Email Address
+    web_1  | From: webmaster@localhost
+    web_1  | To: sina123@gmail.com
+    web_1  | Date: Sat, 06 Jan 2024 12:38:30 -0000
+    web_1  | Message-ID: <170454471087.7.680544991892890370@34b036ac3a88>
+    web_1  | 
+    web_1  | Hello from 127.0.0.1:8000!
+    web_1  | 
+    web_1  | You're receiving this email because user sina123 has given your email address to register an account on 127.0.0.1:8000.
+    web_1  | 
+    web_1  | To confirm this is correct, go to http://127.0.0.1:8000/accounts/confirm-email/MQ:1rM5wc:p_97lpE4omz7ZpeEwFrxQtb7ToFyFebjxzQuGecS1-Y/
+    web_1  | 
+    web_1  | Thank you for using 127.0.0.1:8000!
+    web_1  | 127.0.0.1:8000
+    web_1  | -------------------------------------------------------------------------------
+
+================================================
+135- write in config/settings.py after # For All Auth App Settings 
+...
+ACCOUNT_USERNAME_REQUIRED = False
+================================================
+136- write in config/settings.py after # For All Auth App Settings
+...
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+================================================
+137- write in config/settings.py after # For All Auth App Settings
+...
+ACCOUNT_EMAIL_REQUIRED = True
+================================================
+138- write in config/settings.py after # For All Auth App Settings
+...
+ACCOUNT_UNIQUE_EMAIL = True
+================================================
+139- Rebuild Server
+docker-compose up --build
+================================================
+140- Check this link, should be shows just two things = (Email + Password once)
+http://127.0.0.1:8000/accounts/signup/
+================================================
+141- in broswer go to admin panel 
+http://127.0.0.1:8000/admin/
+================================================
+142- in broswer go to users
+http://127.0.0.1:8000/admin/accounts/customuser/
+================================================
+143- Check account Username , You created in step 133 , Should be like this
+Username == anything
+Email == anything@gmail.com
+================================================
+144- Install this in another Terminal (Docker should be running right now) 
+docker-compose exec web pip install "environs[django]"
+
+Output:
+    Collecting environs[django]
+    Downloading environs-10.0.0-py3-none-any.whl (12 kB)
+    Collecting python-dotenv
+    Downloading python_dotenv-1.0.0-py3-none-any.whl (19 kB)
+    Collecting marshmallow>=3.0.0
+    Downloading marshmallow-3.20.1-py3-none-any.whl (49 kB)
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 49.4/49.4 kB 405.7 kB/s eta 0:00:00
+    Collecting dj-email-url
+    Downloading dj_email_url-1.0.6-py2.py3-none-any.whl (6.3 kB)
+    Collecting dj-database-url
+    Downloading dj_database_url-2.1.0-py3-none-any.whl (7.7 kB)
+    Collecting django-cache-url
+    Downloading django_cache_url-3.4.5-py2.py3-none-any.whl (4.8 kB)
+    Collecting packaging>=17.0
+    Downloading packaging-23.2-py3-none-any.whl (53 kB)
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 53.0/53.0 kB 298.7 kB/s eta 0:00:00
+    Requirement already satisfied: typing-extensions>=3.10.0.0 in /usr/local/lib/python3.9/site-packages (from dj-database-url->environs[django]) (4.9.0)
+    Requirement already satisfied: Django>=3.2 in /usr/local/lib/python3.9/site-packages (from dj-database-url->environs[django]) (4.2.8)
+    Requirement already satisfied: sqlparse>=0.3.1 in /usr/local/lib/python3.9/site-packages (from Django>=3.2->dj-database-url->environs[django]) (0.4.2)
+    Requirement already satisfied: asgiref<4,>=3.6.0 in /usr/local/lib/python3.9/site-packages (from Django>=3.2->dj-database-url->environs[django]) (3.7.2)
+    Installing collected packages: django-cache-url, dj-email-url, python-dotenv, packaging, marshmallow, environs, dj-database-url
+    Successfully installed dj-database-url-2.1.0 dj-email-url-1.0.6 django-cache-url-3.4.5 environs-10.0.0 marshmallow-3.20.1 packaging-23.2 python-dotenv-1.0.0
+    WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+
+    [notice] A new release of pip is available: 23.0.1 -> 23.3.2
+    [notice] To update, run: pip install --upgrade pip
+
+================================================
+145- add previous step in requirements.txt by this command in Terminal 
+docker-compose exec web pip freeze > requirements.txt
+
+Output:
+    asgiref==3.7.2
+    certifi==2023.11.17
+    cffi==1.16.0
+    charset-normalizer==3.3.2
+    crispy-bootstrap4==2023.1
+    cryptography==41.0.7
+    defusedxml==0.7.1
+    dj-database-url==2.1.0
+    dj-email-url==1.0.6
+    Django==4.2.8
+    django-allauth==0.59.0
+    django-cache-url==3.4.5
+    django-crispy-forms==2.1
+    environs==10.0.0
+    idna==3.6
+    marshmallow==3.20.1
+    oauthlib==3.2.2
+    packaging==23.2
+    psycopg2-binary==2.9.3
+    pycparser==2.21
+    PyJWT==2.8.0
+    python-dotenv==1.0.0
+    python3-openid==3.2.0
+    requests==2.31.0
+    requests-oauthlib==1.3.1
+    sqlparse==0.4.2
+    typing_extensions==4.9.0
+    tzdata==2021.5
+    urllib3==2.1.0
+
+================================================
+146- write this in config/settings.py after imports 
+from environs import Env
+================================================
+147- install again for pipenv, write in Terminal
+pipenv install -r requirements.txt
+
+Output of 'Pipfile' file:
+    [[source]]
+    url = "https://pypi.org/simple"
+    verify_ssl = true
+    name = "pypi"
+
+    [packages]
+    asgiref = "==3.7.2"
+    django = "==4.2.8"
+    django-crispy-forms = "==2.1"
+    psycopg2-binary = "==2.9.3"
+    sqlparse = "==0.4.2"
+    typing-extensions = "==4.9.0"
+    tzdata = "==2021.5"
+    certifi = "==2023.11.17"
+    cffi = "==1.16.0"
+    charset-normalizer = "==3.3.2"
+    crispy-bootstrap4 = "==2023.1"
+    cryptography = "==41.0.7"
+    defusedxml = "==0.7.1"
+    django-allauth = "==0.59.0"
+    idna = "==3.6"
+    oauthlib = "==3.2.2"
+    pycparser = "==2.21"
+    pyjwt = "==2.8.0"
+    python3-openid = "==3.2.0"
+    requests = "==2.31.0"
+    requests-oauthlib = "==1.3.1"
+    urllib3 = "==2.1.0"
+    dj-database-url = "==2.1.0"
+    dj-email-url = "==1.0.6"
+    django-cache-url = "==3.4.5"
+    environs = "==10.0.0"
+    marshmallow = "==3.20.1"
+    packaging = "==23.2"
+    python-dotenv = "==1.0.0"
+
+    [dev-packages]
+
+    [requires]
+    python_version = "3.10"
+
+================================================
+148- write these in config/settings.py, after step 146
+# For Environment Variables
+env = Env()
+env.read_env()
+================================================
+149- Cut the values of SECRET_KEY without these signs '' like this
+django-insecure-b764$#(&o4o((cvy!z^nsseq5@erq#e^0%5r5a(%c24*f^*sde
+================================================
+150- change value of SECRET_KEY like this
+SECRET_KEY = env('DJANGO_SECRET_KEY')
+================================================
+151- create new dependency in docker-compose.yml file after ports:...
+...
+depends_on:
+    - db
+================================================
+152- create new environment in docker-compose.yml file after depends_on:...
+...
+environment:
+    - 'DJANGO_SECRET_KEY=django-insecure-b764$#(&o4o((cvy!z^nsseq5@erq#e^0%5r5a(%c24*f^*sde'
+================================================
+153- If in values of SECRET_KEY was a $ sign repeat $ again after it like this
+django-insecure-b764$$#(&o4o((cvy!z^nsseq5@erq#e^0%5r5a(%c24*f^*sde
+                    --
+================================================
+154- Rebuild Server
+docker-compose up --build
+
+Output: 
+    Building web
+    [+] Building 19.5s (8/10)                                                                                          docker:rootless
+     => [internal] load build definition from Dockerfile                                                                          0.0s
+     => => transferring dockerfile: 204B                                                                                          0.0s
+     => [internal] load .dockerignore                                                                                             0.0s
+     => => transferring context: 66B                                                                                              0.0s
+     => [internal] load metadata for docker.io/library/python:3.9                                                                 2.6s
+     => [auth] library/python:pull token for registry-1.docker.io                                                                 0.0s
+     => [internal] load build context                                                                                             0.1s
+     => => transferring context: 87.83kB                                                                                          0.0s
+     => [1/5] FROM docker.io/library/python:3.9@sha256:30678bb79d9eeaf98ec0ce83cdcd4d6f5301484ef86873a711e69df2ca77e8ac           0.0s
+     => CACHED [2/5] WORKDIR /code                                                                                                0.0s
+     => [3/5] COPY requirements.txt /code/                                                                                        0.1s
+     => [4/5] RUN pip install -r requirements.txt                                                                                16.6s
+     => => #   Downloading asgiref-3.7.2-py3-none-any.whl (24 kB)                                                                     
+     => => # Collecting certifi==2023.11.17                                                                                           
+     => => #   Downloading certifi-2023.11.17-py3-none-any.whl (162 kB)                                                               
+     => => #      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 162.5/162.5 kB 54.5 kB/s eta 0:00:00                                         
+     => => # Collecting cffi==1.16.0                                                                                                  
+     => => #   Downloading cffi-1.16.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (443 kB)                              
+    => => #   Downloading charset_normalizer-3.3.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (142 kB)                 
+     => => #      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 142.3/142.3 kB 156.8 kB/s eta 0:00:00                                         
+     => => # Collecting crispy-bootstrap4==2023.1                                                                                     
+     => => #   Downloading crispy_bootstrap4-2023.1-py3-none-any.whl (22 kB)                                                          
+    ...
+     => => #   Downloading Django-4.2.8-py3-none-any.whl (8.0 MB)                                                                     
+     => => #      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.0/8.0 MB 110.5 kB/s eta 0:00:00                                          
+     => => # Collecting django-allauth==0.59.0                                                                                        
+     => => #   Downloading django-allauth-0.59.0.tar.gz (926 kB)                                                                      
+     => => #      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 926.1/926.1 kB 143.4 kB/s eta 0:00:00                                         
+     => => #   Installing build dependencies: started  
+      ...
+      => => #   Downloading marshmallow-3.20.1-py3-none-any.whl (49 kB)                                                                
+     => => #      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 49.4/49.4 kB 130.6 kB/s eta 0:00:00                                         
+     => => # Collecting oauthlib==3.2.2                                                                                               
+     => => #   Downloading oauthlib-3.2.2-py3-none-any.whl (151 kB)                                                                   
+     => => #      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 151.7/151.7 kB 318.5 kB/s eta 0:00:00                                         
+     => => # Collecting packaging==23.2                                                                                               
+    > => # Collecting psycopg2-binary==2.9.3                                                                                        
+     => => #   Downloading psycopg2_binary-2.9.3-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.0 MB)  
+      => => # Collecting typing_extensions==4.9.0                                                                                      
+     => => #   Downloading typing_extensions-4.9.0-py3-none-any.whl (32 kB)                                                           
+     => => # Collecting tzdata==2021.5                                                 
+
+      => [5/5] COPY . /code/                                                                                                       0.2s
+     => exporting to image                                                                                                        2.8s 
+     => => exporting layers                                                                                                       2.8s 
+     => => writing image sha256:6b3dc84666a34429dad21417c3ec74124ecb24968a2a59c328f7d88d7435643b                                  0.0s 
+     => => naming to docker.io/library/2_django_haji_web                                                                          0.0s 
+    Starting 2_django_haji_db_1 ... done
+    Recreating 2_django_haji_web_1 ... done
+    Attaching to 2_django_haji_db_1, 2_django_haji_web_1
+    Starting 2_django_haji_db_1 ... done
+    Recreating 2_django_haji_web_1 ... done
+    Attaching to 2_django_haji_db_1, 2_django_haji_web_1
+    db_1   | 
+    db_1   | PostgreSQL Database directory appears to contain a database; Skipping initialization
+    db_1   | 
+    db_1   | 2024-01-06 17:40:10.396 UTC [1] LOG:  starting PostgreSQL 14.10 (Debian 14.10-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+    ...
+    web_1  | System check identified no issues (0 silenced).
+    web_1  | January 06, 2024 - 17:40:12
+    web_1  | Django version 4.2.8, using settings 'config.settings'
+    web_1  | Starting development server at http://0.0.0.0:8000/
+    web_1  | Quit the server with CONTROL-C.
+    web_1  | 
+
+================================================
+155- write new environment Variable in docker-compose after DJANGO_SECRET_KEY=...
+...
+- 'DJANGO_DEBUG=True'
+================================================
+156- change value of DEBUG in config/settings.py like this
+DEBUG = env.bool('DJANGO_DEBUG')
+================================================
+157- change value of ALLOWED_HOSTS list in config/settings.py like this
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', ]
+================================================
+158- Restart Server in Termial
+docker-compose up 
+================================================
+159- Check this link in broswer
+http://127.0.0.1:8000/asdasdasd
+
+Output:
+    Page not found (404)
+
+================================================
+160- 
+================================================
+================================================
+================================================
 ================================================
 ================================================
 ================================================
