@@ -1917,9 +1917,27 @@ Output:
     web_1  | 
 
 ================================================
-155- 
+155- write new environment Variable in docker-compose after DJANGO_SECRET_KEY=...
+...
+- 'DJANGO_DEBUG=True'
 ================================================
+156- change value of DEBUG in config/settings.py like this
+DEBUG = env.bool('DJANGO_DEBUG')
 ================================================
+157- change value of ALLOWED_HOSTS list in config/settings.py like this
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', ]
+================================================
+158- Restart Server in Termial
+docker-compose up 
+================================================
+159- Check this link in broswer
+http://127.0.0.1:8000/asdasdasd
+
+Output:
+    Page not found (404)
+
+================================================
+160- 
 ================================================
 ================================================
 ================================================
