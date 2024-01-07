@@ -1937,13 +1937,54 @@ Output:
     Page not found (404)
 
 ================================================
-160- 
+160- Create new Gmail for this tutorial(Check list)
 ================================================
+161- go in that Gmail account
 ================================================
+162- go in manage my account
 ================================================
+163- find in security
 ================================================
+⛔⛔⛔⛔
+164- find 'Less secure app access' -> Turn On Access
+⛔⛔⛔⛔ Don't use this method for long time.
+this method may harmful for your Gmail account.
+⛔⛔⛔⛔
 ================================================
+⛔⛔⛔⛔
+DON'T Push to Git
+165- write in config/settings.py after EMAIL_BACKEND
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'your_gmail_username@gmail.com'
+EMAIL_HOST_PASSWORD = 'your_gmail_password'
 ================================================
+166- Restart Server
+docker-compose up 
+================================================
+167- go in this link 
+https://temp-mail.org/en/
+================================================
+168- Copy that temporary fake email
+================================================
+169- create a new user in this link
+http://127.0.0.1:8000/accounts/signup/
+================================================
+170- change in config/settings.py after EMAIL_BACKEND
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# for using Email service, you need these below codes
+    # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    # EMAIL_HOST = 'smtp.gmail.com'
+    # EMAIL_PORT = 587
+    # EMAIL_USE_TLS = True
+    # EMAIL_HOST_USER = 'your_gmail_username@gmail.com'
+    # EMAIL_HOST_PASSWORD = 'your_gmail_password'
+
+================================================
+171- 
 ================================================
 ================================================
 Rebuild Server
