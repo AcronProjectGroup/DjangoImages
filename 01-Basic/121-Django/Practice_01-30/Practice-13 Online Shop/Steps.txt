@@ -845,10 +845,10 @@ class HomePageView(TemplateView):
 class AboutUsPageView(TemplateView):
     template_name = 'pages/aboutus.html'
 ================================================
-43- Create tempaltes/home.html in current directory of project
-tempaltes/home.html
+43- Create templates/home.html in current directory of project
+templates/home.html
 ================================================
-44- write in tempaltes/home.html
+44- write in templates/home.html
 Home Page is Here Dear Sina :)
 ================================================
 45- write this in config/settings.py TEMPLATES list
@@ -898,10 +898,10 @@ Output should be like this:
     web_1  | Starting development server at http://0.0.0.0:8000/
     web_1  | Quit the server with CONTROL-C.
 ================================================
-47- Create tempaltes/pages/aboutus.html in pages directory
+47- Create templates/pages/aboutus.html in pages directory
 templates/pages/aboutus.html
 ================================================
-48- Write in tempaltes/pages/aboutus.html
+48- Write in templates/pages/aboutus.html
 About Us Sina LalehBakhsh from Earth
 ================================================
 49- import this in config/urls.py
@@ -1586,7 +1586,7 @@ urlpatterns = [
 ...
 ACCOUNT_SESSION_REMEMBER = True
 ================================================
-123- Create logout.html in tempaltes/account directory
+123- Create logout.html in templates/account directory
 logout.html
 ================================================
 124- Copy all login.html
@@ -2036,10 +2036,10 @@ http://127.0.0.1:8000/accounts/confirm-email/Ng:1rMRYI:KrRbe8hLp5Wkv1UYvzkecCACh
 
 Output maybe is terrible!!
 ================================================
-179- Create this file in tempaltes/account -> email_confirm.html
+179- Create this file in templates/account -> email_confirm.html
 email_confirm.html
 ================================================
-180- Write these inside tempaltes/account/email_confirm.html
+180- Write these inside templates/account/email_confirm.html
     {% extends "_base.html" %}
     {% load i18n %}
     {% load account %}
@@ -2083,7 +2083,41 @@ email_confirm.html
 181- Click on this link again, should be changed
 http://127.0.0.1:8000/accounts/confirm-email/Ng:1rMRYI:KrRbe8hLp5Wkv1UYvzkecCAChq8IUTtTmGV4sKgh-zU/
 ================================================
-182- 
+182- Write these inside of _base.html
+<body>
+    <a href="{% url 'account_login' %}">Login</a> - <a href="{% url 'account_signup' %}">Signup</a>
+
+    {% block content %}
+    {% endblock %}
+    ...
+
+================================================
+183- Change home.html like this
+{% block content %}
+    <h1>
+        Home Page is Here Dear Sina :)
+    </h1>
+{% endblock %}
+================================================
+184- First logout from this link
+http://127.0.0.1:8000/accounts/logout
+================================================
+185- Check this link in broswer, should added these two link = login and signup
+http://127.0.0.1:8000/
+================================================
+186- Check these to links should jump to ligin/signup page
+================================================
+187- Change aboutus.html like this
+{% extends '_base.html' %}
+About Us Sina LalehBakhsh from Earth
+================================================
+188- Change _base.html like this
+...
+    <a href="{% url 'account_login' %}">Login</a> - <a href="{% url 'account_signup' %}">Signup</a> - <a href="{% url 'aboutus' %}">aboutus</a>
+...
+================================================
+================================================
+================================================
 ================================================
 ================================================
 ================================================
