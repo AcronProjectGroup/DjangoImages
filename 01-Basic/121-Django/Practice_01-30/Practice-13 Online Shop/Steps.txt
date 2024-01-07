@@ -2116,6 +2116,15 @@ About Us Sina LalehBakhsh from Earth
     <a href="{% url 'account_login' %}">Login</a> - <a href="{% url 'account_signup' %}">Signup</a> - <a href="{% url 'aboutus' %}">aboutus</a>
 ...
 ================================================
+189- Change this _base.html like this
+<body>
+    {% if user.is_authenticated %}
+    <p>login by {{ user.email }} - <a href="{% url 'account_logout' %}">Logout</a></p>
+    {% else %}
+        <a href="{% url 'account_login' %}">Login</a> - <a href="{% url 'account_signup' %}">Signup</a> - <a href="{% url 'aboutus' %}">aboutus</a>
+    {% endif %}
+    ...
+
 ================================================
 ================================================
 ================================================
