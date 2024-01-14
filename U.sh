@@ -1,6 +1,6 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 121-Django/Practice_01-30/Practice-13 Online Shop Image-05 Environment Variables
+git commit -m " 💠 121-Django/Practice_01-30/Practice-13 Online Shop Image-11 create new app for products
 1- write in a directory Terminal 
 2- Create private/public repository in your account github
 3- in Terminal -> echo '# OnlineShope' >> README.md
@@ -205,6 +205,93 @@ Every package you add means you are adding a vulnerability to your site.
 157- change value of ALLOWED_HOSTS list in config/settings.py like this
 158- Restart Server in Termial
 159- Check this link in broswer
+160- Create new Gmail for this tutorial(Check list)
+161- go in that Gmail account
+162- go in manage my account
+163- find in security
+⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔
+164- find 'Less secure app access' -> Turn On Access
+165- write in config/settings.py after EMAIL_BACKEND
+166- Restart Server
+167- go in this link 
+168- Copy that temporary fake email
+169- create a new user in this link
+170- change in config/settings.py after EMAIL_BACKEND
+171- Create this directory in templates/account -> email
+172- Create this file in templates/account -> email_confirmation_subject.txt
+173- Create this file in templates/account/email -> email_confirmation_message.txt
+174- Write these codes inside of templates/account/email/email_confirmation_subject.txt
+175- Write these codes inside of templates/account/email/email_confirmation_message.txt
+176- Create  new user again in this link in browser
+177- Check Terminal , should got Email content like this
+178- Click on this link from previous step
+179- Create this file in tempaltes/account -> email_confirm.html
+180- Write these inside tempaltes/account/email_confirm.html
+181- Click on this link again, should be changed
+182- Write these inside of _base.html
+183- Change home.html like this
+184- First logout from this link
+185- Check this link in broswer, should added these two link = login and signup
+186- Check these to links should jump to ligin/signup page
+187- Change aboutus.html like this
+188- Change _base.html like this
+189- Change this _base.html like this
+190- Write in Terminal -> docker-compose exec web python manage.py startapp products
+191- Install products app in config/settings.py > INSTALLED_APPS list
+192- Go into products/apps.py, Copy ProductsConfig function
+193- change Install app address in config/settings.py > INSTALLED_APPS list. You can also write like this.
+194- Create new model in products/models.py
+195- Write in another Termial -> docker-compose exec web python manage.py makemigrations products
+196- Check this address products/migrations/0001_initial.py
+197- Write in another Termial -> docker-compose exec web python manage.py migrate
+198- import this into products/views.py
+199- Create new class into products/views.py
+200- Create product_list.html file in products/templates/products/product_list.html -> templates/products/product_list.html
+201- Write these into templates/products/product_list.html
+202- Create urls.py in products directory(App) -> urls.py
+203- import these into products/urls.py
+204- Creat new urlpatterns list inside products/urls.py
+205- Create new path inside config/urls.py after paths in urlpatterns list -> ... path('products/', include('products.urls')),
+206- Restart server in Termial -> docker-compose up
+207- Check this link , It must be implemented correctly. 
+208- add these codes in content block inside of product_list.html
+209- import into products/admin.py 
+210- Create new class in products/admin.py
+211- Restart server in Termial -> docker-compose up
+212- Create new product in this link -> http://127.0.0.1:8000/admin/products/product/add/
+213- go to products/models.py add the magic method end of Product class like this
+214- check this link should pretty shows title products you created in previous steps -> http://127.0.0.1:8000/admin/products/product/
+215- add list_display in products/admin.py in class of ProductAdmin
+216- check this link should pretty shows title products you created in previous steps -> http://127.0.0.1:8000/admin/products/product/
+217- Check this link should be shows all products you created before -> http://127.0.0.1:8000/products/
+218- change products/views.py/ProductListView class like this
+219- Restart Server -> docker-compose up
+220- deactive a product in this link -> http://127.0.0.1:8000/admin/products/product/
+221- go back in this link the deactivate product most be don't shows. -> http://127.0.0.1:8000/products/
+222- Create new class for detail view of products in products/views.py
+223- Create this file in products/templates/products/product_detail.html -> product_detail.html
+224- write inside of product_detail.html these codes
+225- Change this line in product_list.html
+226- import ProductDetailView in products/urls.py -> from .views import ProductDetailView
+227- Create new path in products/urls.py -> path('<int:pk>/', ProductDetailView.as_view(), name='product_detail'),
+228- Check this link, Output, it must be implemented correctly: -> http://127.0.0.1:8000/products/1/
+229- import into products/models.py -> from django.shortcuts import reverse
+230- add end of Product class into products/models.py
+231- add this to product_list.html -> <a href='{{ product.get_absolute_url }}'>
+232- Restart Server in Terminal -> docker-compose up
+233- Check this link and Click on a product you created, it should will be jump to detail view itself. -> http://127.0.0.1:8000/products/
+234- import this in config/settings.py -> import os
+235- Add this after STATIC_URL in config/settings.py
+236- Create new directory in current directory project -> static
+237- Create new directory in static/css
+238- Copy and Paste your CSS files in static/css directory
+239- add these in HEAD tag of _base.html
+240- Add this to First line of _base.html -> {% load static %}
+241- Add these to product_list.html
+242- Go to this link, broswer content must be messy -> http://127.0.0.1:8000/products/
+243- Change this line in _base.html
+245- Rebuild Server
+246- Add Images to static directory
 
 "
 git push -u origin main 
