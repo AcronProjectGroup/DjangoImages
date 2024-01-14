@@ -1,6 +1,6 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 121-Django/Practice_01-30/Practice-13 Online Shop Image-10 create new app for products
+git commit -m " 💠 121-Django/Practice_01-30/Practice-13 Online Shop Image-11 create new app for products
 1- write in a directory Terminal 
 2- Create private/public repository in your account github
 3- in Terminal -> echo '# OnlineShope' >> README.md
@@ -268,6 +268,30 @@ Every package you add means you are adding a vulnerability to your site.
 219- Restart Server -> docker-compose up
 220- deactive a product in this link -> http://127.0.0.1:8000/admin/products/product/
 221- go back in this link the deactivate product most be don't shows. -> http://127.0.0.1:8000/products/
+222- Create new class for detail view of products in products/views.py
+223- Create this file in products/templates/products/product_detail.html -> product_detail.html
+224- write inside of product_detail.html these codes
+225- Change this line in product_list.html
+226- import ProductDetailView in products/urls.py -> from .views import ProductDetailView
+227- Create new path in products/urls.py -> path('<int:pk>/', ProductDetailView.as_view(), name='product_detail'),
+228- Check this link, Output, it must be implemented correctly: -> http://127.0.0.1:8000/products/1/
+229- import into products/models.py -> from django.shortcuts import reverse
+230- add end of Product class into products/models.py
+231- add this to product_list.html -> <a href='{{ product.get_absolute_url }}'>
+232- Restart Server in Terminal -> docker-compose up
+233- Check this link and Click on a product you created, it should will be jump to detail view itself. -> http://127.0.0.1:8000/products/
+234- import this in config/settings.py -> import os
+235- Add this after STATIC_URL in config/settings.py
+236- Create new directory in current directory project -> static
+237- Create new directory in static/css
+238- Copy and Paste your CSS files in static/css directory
+239- add these in HEAD tag of _base.html
+240- Add this to First line of _base.html -> {% load static %}
+241- Add these to product_list.html
+242- Go to this link, broswer content must be messy -> http://127.0.0.1:8000/products/
+243- Change this line in _base.html
+245- Rebuild Server
+246- Add Images to static directory
 
 "
 git push -u origin main 
