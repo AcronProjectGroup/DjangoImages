@@ -1,6 +1,6 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 121-Django/Practice_01-30/Practice-13 Online Shop Image-11 create new app for products
+git commit -m " 💠 121-Django/Practice_01-30/Practice-13 Online Shop Image-12 create new app for products
 1- write in a directory Terminal 
 2- Create private/public repository in your account github
 3- in Terminal -> echo '# OnlineShope' >> README.md
@@ -292,10 +292,23 @@ Every package you add means you are adding a vulnerability to your site.
 243- Change this line in _base.html
 245- Rebuild Server
 246- Add Images to static directory
+247- Change this in _base.html
+248- Paste Your Fonts directory in static directory
+249- Restart Server
+250- add these into _base.html before {% block content %}
+251- content of product_list.html
+252- content of _base.html for now
+253- Copy/Paste js files in static directory
+254- Change this line in product_list.html
+255- Check your products. It must be implemented correctly.
+256- Change this line in product_list.html
+257- Change this in product_detail.html
+258- Check this link -> http://127.0.0.1:8000/products/1/
 
 "
 git push -u origin main 
 
 # with ScreenShot for showing demo png file
+
 
 
