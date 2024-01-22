@@ -1,6 +1,6 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 121-Django/Practice_01-30/Practice-13 Online Shop Image-12 create new app for products
+git commit -m " 💠 121-Django/Practice_01-30/Practice-13 Online Shop Image-13 about frontend 
 1- write in a directory Terminal 
 2- Create private/public repository in your account github
 3- in Terminal -> echo '# OnlineShope' >> README.md
@@ -304,6 +304,15 @@ Every package you add means you are adding a vulnerability to your site.
 256- Change this line in product_list.html
 257- Change this in product_detail.html
 258- Check this link -> http://127.0.0.1:8000/products/1/
+259- import this into products/models.py
+260- Create new model for comments this into products/models.py
+261- make sure server is running + write in another Terminal
+262- make sure server is running + write in another Terminal
+263- import into products/admin.py
+264- add this into products/admin.py
+265- Restart Server
+266- Check browser links
+267- Create two comments for two different products
 
 "
 git push -u origin main 
