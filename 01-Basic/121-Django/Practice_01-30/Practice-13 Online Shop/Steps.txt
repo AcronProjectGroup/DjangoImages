@@ -3797,12 +3797,44 @@ class ProductAdmin(admin.ModelAdmin):
     ]
 
 ================================================
-270- Go in product details in this link shuold be shows detail of comments
+270- Change product_detail.html on line number 113 : <ul class="review__list">
+ <ul class="review__list">
+    {% for comment in product.comments.all %}
+        <li class="review__item">
+            <div class="review__container">
+                <div class="review__text">
+                    <div class="d-flex flex-sm-row flex-row">
+                        <img src="{% static 'img/others/comment-1.jpg' %}" alt="Review Avatar" class="review__avatar p-3" >
+                        <div>
+                            <div class="review__meta">
+                                <strong class="review__author px-4">{{ comment.author.username }}</strong>
+                                <span class="review__dash">-</span>
+                                <span class="review__published-date">{{ comment.date_time_created }}</span>
+                            </div>
+                            <div class="product-rating">
+                                <div class="m-0 star-rating star-five">
+                                    <span>Rated <strong class="rating">{{ product.star }}</strong> out of 5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="review__description text-right px-4">
+                        {{ comment.body }}
+                    </p>
+                </div>
+            </div>
+            
+        </li>
+    {% endfor %}
+</ul>
 
 ================================================
-271-
+271- add {% load static %} to product_detail.html
+{% load static %}
 ================================================
-272-
+272- Go in product details in this link shuold be shows detail of comments
+http://127.0.0.1:8000/products/2/
+http://127.0.0.1:8000/products/1/
 ================================================
 ================================================
 ================================================
