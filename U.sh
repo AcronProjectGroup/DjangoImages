@@ -318,6 +318,42 @@ Every package you add means you are adding a vulnerability to your site.
 270- Change product_detail.html on line number 113 : <ul class="review__list">
 271- add {% load static %} to product_detail.html
 272- Go in product details in this link shuold be shows detail of comments
+273- Create new file in products directory
+274- import these in products/forms.py
+275- Create new class in products/forms.py
+276- add these bunch of codes into ProductDetailView class in products/views.py
+277- import into first of products/views.py
+278- change these bunch of code in product_detail.html
+279- Check this link 
+280- add these bunch of codes in product_detail.html
+281- Check this link 
+282- check in settings.py crispy_forms should be installed
+283- write after {% load static %} in product_detail.html
+284- change this in product_detail.html
+285- Check this link 
+286- import in products/views.py
+287- Create new class in products/views.py
+288- import in products/urls.py
+289- Create new path in products/urls.py
+290- add this into product_detail.html
+291- create a comment + should get an error
+292- add  this in class of Comment into products/models.py
+293- add new comment and check it
+294- change this line in product_detail.html
+295- Create new Custom Manager in products/models.py with a new class
+296- add this in class of Comment into products/models.py
+297- Create new directory in products
+298- Create new file in products/templatetags
+299- Create new file in products/templatetags
+300- add into in products/templatetags/comment_tags.py
+301- create new decorator into products/templatetags/comment_tags.py
+302- add this in first product_detail.html
+303- this in first product_detail.html
+304- check this link
+305- Restart server , + (sure you have deactive bunch of comments and in this shouldn't be shows)
+306- this in first product_detail.html
+307- change this into products/admin.py -> about StackedInline
+308- add this in products/models.py -> about Verbose Name
 
 "
 git push -u origin main 

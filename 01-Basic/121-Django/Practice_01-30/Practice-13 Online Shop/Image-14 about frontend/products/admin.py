@@ -5,7 +5,7 @@ from .models import Comment
 
 
 
-class CommentsInLine(admin.TabularInline):
+class CommentsInLine(admin.StackedInline):
     model = Comment
     fields = ['author', 'body', 'star', 'active', ]
 
@@ -21,7 +21,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 @admin.register(Comment)
-class ProductAdmin(admin.ModelAdmin):
+class CommentAdmin(admin.ModelAdmin):
     list_display = ['product', 'author', 'body', 'star', 'active', ]
 
 
