@@ -1,6 +1,6 @@
 #!/bin/bash
 git add .
-git commit -m " 💠 121-Django/Practice_01-30/Practice-13 Online Shop Image-14 about frontend 
+git commit -m " 💠 121-Django/Practice_01-30/Practice-13 Online Shop Image-15   i18n 
 1- write in a directory Terminal 
 2- Create private/public repository in your account github
 3- in Terminal -> echo '# OnlineShope' >> README.md
@@ -315,7 +315,7 @@ Every package you add means you are adding a vulnerability to your site.
 267- Create two comments for two different products
 268- Create new class in products/admin.py
 269- add this in 'class ProductAdmin' > products/admin.py 
-270- Change product_detail.html on line number 113 : <ul class="review__list">
+270- Change product_detail.html on line number 113 : <ul class='review__list'>
 271- add {% load static %} to product_detail.html
 272- Go in product details in this link shuold be shows detail of comments
 273- Create new file in products directory
@@ -354,11 +354,51 @@ Every package you add means you are adding a vulnerability to your site.
 306- this in first product_detail.html
 307- change this into products/admin.py -> about StackedInline
 308- add this in products/models.py -> about Verbose Name
+309- Change this into config/settings.py
+310- Add this into config/settings.py -> USE_L10N = True # Localization
+311- Change this line in product_detail.html -> <span class='reply-title pull-right'>{% translate 'Write your comment' %}</span>
+312- add this in first of product_detail.html -> {% load i18n %}
+313- Change this line in product_detail.html -> <input type='submit' value='{% translate 'Submit' }'>
+314-  Change this line in product_detail.html -> <span>{% translate 'Product Description' %}</span>
+315- Create new file in products directory -> locale
+316- Write in Terminal -> cd products
+317- Write in Terminal + venv have to activated -> django-admin makemessages -l fa
+318- Write in Terminal (You need to install msguniq on your system. For a debian system, you can likely do this with sudo apt-get install gettext.)
+319- Write in Terminal + venv have to activated (again) --->> django-admin makemessages -l fa
+320- Go to this address -> products/locale/fa/LC_MESSAGES/django.po
+321- change this line in products/locale/fa/LC_MESSAGES/django.po
+322- Write in Terminal + venv have to activated -> django-admin compilemessages
+323- Press Ctrl + P and write
+324- go and sure created this file in this address -> products/locale/fa/LC_MESSAGES/django.mo
+325- Restart Server and run again
+326- go this link should be Traslated your selections
+327- Now, You can change between two these in config/settings.py
+328- Change this in product_detail.html -> <h1 class='page-title'>{% translate 'product detail of' %} «{{ product.title }}»</h1>
+329- In Terminal -> django-admin makemessages -l fa
+330- look at this fil is added translatation automaticaly in -> products/locale/fa/LC_MESSAGES/django.mo || Why added automated this fil ?
+331- Write in Terminal + venv have to activated -> django-admin compilemessages
+332- This is just for Test. Create a function in products/views.py
+333- import into products/views.py -> from django.http import HttpResponse
+334- add new path in products/urls.py -> path('hello/', test_translation),
+335- import into products/urls.py -> from .views import test_translation
+336- Check this link, should be shows 'HELLO' -->>  http://127.0.0.1:8000/products/hello
+337-  import into products/urls.py  -->>  from django.utils.translation import gettext as _
+338- Change this in function of test_translation
+339- In Terminal -->> django-admin makemessages -l fa
+340- Go inside this address products/locale/fa/LC_MESSAGES/django.mo , add a translate for 'HELLO'
+341- In Terminal -->> django-admin compilemessages
+342- Change Language inside config/settings.py to 'fa'
+343- Check this link, this link should be shows -->> سلام  -->> http://127.0.0.1:8000/products/hello/
+344- import this into models.py ->  from django.utils.translation import gettext_lazy as _
+345- Change this in class of Comment in products/models.py
+346- In Terminal (in products directory Terminal) -->  django-admin makemessages -l fa
+347- Translate in file products/locale/fa/LC_MESSAGES/django.mo , add a translate for 'Test'
+348- In Terminal (in products directory Terminal)
+349- add <br> tag after this line in product_detail.html
+350- Go this link and check comment table
+351- add this in products/models.py
 
 "
 git push -u origin main 
 
 # with ScreenShot for showing demo png file
-
-
-

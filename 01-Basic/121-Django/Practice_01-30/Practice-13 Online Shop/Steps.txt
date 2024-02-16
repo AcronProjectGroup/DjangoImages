@@ -4069,20 +4069,231 @@ class Comment(models.Model):
     ...
     ...
 ================================================
-309-
+309- Change this into config/settings.py
+...
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa'
+
+# TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
+...
 ================================================
+310- Add this into config/settings.py -> USE_L10N = True # Localization
+...
+USE_I18N = True
+USE_L10N = True # Localization
+...
 ================================================
+311- Change this line in product_detail.html 
+<span class="reply-title pull-right">{% translate 'Write your comment' %}</span>
 ================================================
+312- add this in first of product_detail.html 
+{% load i18n %}
 ================================================
+313- Change this line in product_detail.html
+<input type="submit" value="{% translate 'Submit' %}">
 ================================================
+314- Change this line in product_detail.html
+<span>{% translate 'Product Description' %}</span>
 ================================================
+315- Create new file in products directory 
+locale
 ================================================
+316- Write in Terminal
+cd products
 ================================================
+317- Write in Terminal + venv have to activated
+django-admin makemessages -l fa
+
+Output: (for first time in your new Machine(computer))
+    CommandError: Can't find msguniq. Make sure you have GNU gettext tools 0.15 or newer installed.
 ================================================
+318- Write in Terminal (You need to install msguniq on your system. For a debian system, you can likely do this with sudo apt-get install gettext.)
+sudo apt-get install gettext
+
+Output:
+    Reading package lists... Done
+    Building dependency tree... Done
+    Reading state information... Done
+    Suggested packages:
+    gettext-doc autopoint libasprintf-dev libgettextpo-dev
+    The following NEW packages will be installed:
+    gettext
+    0 upgraded, 1 newly installed, 0 to remove and 32 not upgraded.
+    Need to get 868 kB of archives.
+    After this operation, 2,699 kB of additional disk space will be used.
+    Get:1 http://ae.archive.ubuntu.com/ubuntu jammy/main amd64 gettext amd64 0.21-4ubuntu4 [868 kB]
+    Fetched 868 kB in 6s (155 kB/s)                        
+    Selecting previously unselected package gettext.
+    (Reading database ... 240897 files and directories currently installed.)
+    Preparing to unpack .../gettext_0.21-4ubuntu4_amd64.deb ...
+    Unpacking gettext (0.21-4ubuntu4) ...
+    Setting up gettext (0.21-4ubuntu4) ...
+    Processing triggers for man-db (2.10.2-1) ...
+    Processing triggers for install-info (6.8-4build1) ...
+    Processing triggers for libc-bin (2.35-0ubuntu3.6) ...
+
+
+
 ================================================
+319- Write in Terminal + venv have to activated (again)
+django-admin makemessages -l fa
+
+Output:
+    processing locale fa
 ================================================
+320- Go to this address -> products/locale/fa/LC_MESSAGES/django.po
 ================================================
+321- change this line in products/locale/fa/LC_MESSAGES/django.po
+...
+msgstr "توضیحات محصول"
+...
+msgstr "نظر خود را بنویسید"
+...
 ================================================
+322- Write in Terminal + venv have to activated
+django-admin compilemessages
+
+Output:
+    processing file django.po in /home/sina/01-Repo/2_Django_Haji/products/locale/fa/LC_MESSAGES
+================================================
+323- Press Ctrl + P and write
+> reload
+
+Output:
+    Vscode most be reloaded
+
+================================================
+324- go and sure created this file in this address -> products/locale/fa/LC_MESSAGES/django.mo
+================================================
+325- Restart Server and run again
+docker-compose up
+================================================
+326- go this link should be Traslated your selections
+http://127.0.0.1:8000/products/1/
+http://127.0.0.1:8000/products/2/
+================================================
+327- Now, You can change between two these in config/settings.py
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa'
+
+OR
+LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'fa'
+================================================
+Fuzzy Translation
+================================================
+328- Change this in product_detail.html
+<h1 class="page-title">{% translate 'product detail of' %} «{{ product.title }}»</h1>
+================================================
+329- In Terminal
+django-admin makemessages -l fa
+
+Output:
+    processing locale fa
+================================================
+Why added automated this fil ?
+================================================
+330- look at this fil is added translation automaticaly in -> products/locale/fa/LC_MESSAGES/django.mo
+#: templates/products/product_detail.html:21
+#, fuzzy
+#| msgid "Product Description"
+msgid "product detail of"
+msgstr "توضیحات محصول"
+================================================
+331- Write in Terminal + venv have to activated
+django-admin compilemessages
+
+Output:
+    processing file django.po in /home/sina/01-Repo/2_Django_Haji/products/locale/fa/LC_MESSAGES
+================================================
+332- This is just for Test. Create a function in products/views.py
+def test_translation(request):
+    result = 'HELLO'
+    return HttpResponse(result)
+================================================
+333- import into products/views.py
+from django.http import HttpResponse
+================================================
+334- add new path in products/urls.py
+path('hello/', test_translation),
+================================================
+335- import into products/urls.py
+from .views import test_translation
+================================================
+336- Check this link, should be shows 'HELLO'
+http://127.0.0.1:8000/products/hello
+================================================
+337-  import into products/urls.py
+from django.utils.translation import gettext as _
+================================================
+338- Change this in function of test_translation
+def test_translation(request):
+    result = _('HELLO')
+    ...
+    ...
+================================================
+339- In Terminal 
+django-admin makemessages -l fa
+================================================
+340- Go inside this address products/locale/fa/LC_MESSAGES/django.mo , add a translate for "HELLO"
+...
+#: views.py:13
+msgid "HELLO"
+msgstr "سلام"
+...
+================================================
+341- In Terminal 
+django-admin compilemessages
+================================================
+342- Change Language inside config/settings.py to 'fa'
+LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'fa'
+
+TO -->
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa'
+================================================
+343- Check this link, this link should be shows -->> سلام  
+http://127.0.0.1:8000/products/hello/
+================================================
+344- import this into models.py
+from django.utils.translation import gettext_lazy as _
+================================================
+345- Change this in class of Comment in products/models.py
+class Comment(models.Model):
+    ...
+    body = models.TextField(verbose_name=_('Text'))
+    ...
+================================================
+346- In Terminal (in products directory Terminal)
+django-admin makemessages -l fa
+================================================
+347- Translate in file products/locale/fa/LC_MESSAGES/django.mo , add a translate for 'Test'
+#: models.py:44
+msgid "Text"
+msgstr "متن دیدگاه"
+================================================
+348- In Terminal (in products directory Terminal)
+django-admin compilemessages
+================================================
+349- add <br> tag after this line in product_detail.html
+<span class="reply-title pull-right">{% translate 'Write your comment' %}</span>
+<br>
+================================================
+350- Go this link and check comment table
+http://127.0.0.1:8000/products/1/
+================================================
+351- add this in products/models.py
+PRODUCT_STARS = [
+        ('1', _('Very bad')),
+        ('2', _('Bad')),
+        ('3', _('Ordinary')),
+        ('4', _('Good')),
+        ('5', _('Perfect')),
+)
+================================================
+
 ================================================
 ================================================
 ================================================
