@@ -396,6 +396,7 @@ Every package you add means you are adding a vulnerability to your site.
 348- In Terminal (in products directory Terminal)
 349- add <br> tag after this line in product_detail.html
 350- Go this link and check comment table
+351- add this in products/models.py
 
 "
 git push -u origin main 
