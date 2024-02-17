@@ -521,7 +521,6 @@ Output should be like this:
 </form>
 ================================================
 66- Rebuild Server  
-🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋 
 When don't write --build in above command, 
 after running that you don't need to check docker images for remove previous Images 
 
@@ -582,12 +581,10 @@ http://127.0.0.1:8000/accounts/login/
 http://127.0.0.1:8000/accounts/logout/
 ================================================
 
-🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑
-You Can write TEST for everything in this step in test.py file Apps 
-🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑🥑
+        You Can write TEST for everything in this step in test.py file Apps 
 
 ================================================
-74- in another Terminal (Server should be acticeted now)
+74- in another Terminal (Server should be activated now)
 docker-compose exec web pip install django-crispy-forms
 
 If VPN be OFF
@@ -637,7 +634,7 @@ Inside of file:
     sqlparse==0.4.2
     tzdata==2021.5
 ================================================
-76- in another Terminal  (Server should be acticeted now)
+76- in another Terminal  (Server should be activated now)
 docker-compose exec web pip freeze > requirements.txt
 ================================================
 77- Check requirements.txt must be Changed like this 
@@ -654,42 +651,25 @@ Inside of file:
 # Third Parties
 'crispy_forms',
 ================================================
-79- for convinience way to after this step, write this in Terminal
+79- for convenience way to after this step, write this in Terminal
 pipenv install
 
 Output like this:
-    Creating a virtualenv for this project...
-    Pipfile: /home/sina/01-Repo/2_Django_Haji/Pipfile
-    Using default python from /usr/bin/python3 (3.10.12) to create virtualenv...
+    ...
     ⠙ Creating virtual environment...created virtual environment CPython3.10.12.final.0-64 in 122ms
-    creator CPython3Posix(dest=/home/sina/.local/share/virtualenvs/2_Django_Haji-xugyoog1, clear=False, no_vcs_ignore=False, global=False)
-    seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=/home/sina/.local/share/virtualenv)
-        added seed packages: pip==23.3.2, setuptools==69.0.3, wheel==0.42.0
-    activators BashActivator,CShellActivator,FishActivator,NushellActivator,PowerShellActivator,PythonActivator
-
+    ...
     ✔ Successfully created virtual environment!
-    Virtualenv location: /home/sina/.local/share/virtualenvs/2_Django_Haji-xugyoog1
-    requirements.txt found in /home/sina/01-Repo/2_Django_Haji instead of Pipfile! Converting...
-    ⠧ Importing requirements...WARNING:pipenv.patched.pip._vendor.urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=0.3)")': /pypi/asgiref/json
-    ⠧ Importing requirements...WARNING:pipenv.patched.pip._vendor.urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=0.3)")': /pypi/django/json
-    ⠧ Importing requirements...WARNING:pipenv.patched.pip._vendor.urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=0.3)")': /pypi/django-crispy-forms/json
-    ⠇ Importing requirements...WARNING:pipenv.patched.pip._vendor.urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=0.3)")': /pypi/psycopg2-binary/json
-    ⠇ Importing requirements...WARNING:pipenv.patched.pip._vendor.urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=0.3)")': /pypi/sqlparse/json
-    ⠇ Importing requirements...WARNING:pipenv.patched.pip._vendor.urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=0.3)")': /pypi/typing-extensions/json
-    ⠇ Importing requirements...WARNING:pipenv.patched.pip._vendor.urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=0.3)")': /pypi/tzdata/json
+    ...
+    ...
+    ⠧ 
+    ...
+    ⠇ 
+    ...
     ✔ Success!
-    Warning: Your Pipfile now contains pinned versions, if your requirements.txt did. 
-    We recommend updating your Pipfile to specify the "*" version, instead.
-    Pipfile.lock not found, creating...
-    Locking [packages] dependencies...
-    Building requirements...
-    Resolving dependencies...
+    ...
+    ...
     ✔ Success!
-    Locking [dev-packages] dependencies...
-    Updated Pipfile.lock (c3549fe1e50dc55fa9c8b23687cbaf61969bb805143bc87643d6de546faa9413)!
-    Installing dependencies from Pipfile.lock (aa9413)...
-    To activate this project's virtualenv, run pipenv shell.
-    Alternatively, run a command inside the virtualenv with pipenv run.    
+    ...
 ================================================
 80- for running any command for (docker-compose exec web ...) in terminal 
 (2_Django_Haji) sina@linux:~/01-Repo/2_Django_Haji$ deactivate
@@ -697,9 +677,11 @@ Output like this:
 Output:
     sina@linux:~/01-Repo/2_Django_Haji$ 
 
-🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲🧲
-From now on, execute Docker-compose commands inside this terminal,
-when the pipenv environment is not active.
+================================================
+        
+        From now on, execute Docker-compose commands inside this terminal,
+        when the pipenv environment is not active.
+
 ================================================
 81- Create _base.html in templates directory
 _base.html
@@ -940,10 +922,10 @@ Output, it may look like this code:
     [notice] A new release of pip is available: 23.0.1 -> 23.3.2
     [notice] To update, run: pip install --upgrade pip
 ================================================
-⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔
-Be careful!
-Every package you add means you are adding a vulnerability to your site.
-⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔
+
+    Be careful!
+    Every package you add means you are adding a vulnerability to your site.
+    
 ================================================
 106- Check requirements.txt should be like this
     asgiref==3.7.2
@@ -1453,14 +1435,11 @@ Output:
 ================================================
 163- find in security
 ================================================
-⛔⛔⛔⛔
+⛔⛔⛔⛔ Don't use this method for long time. ⛔⛔⛔⛔
 164- find 'Less secure app access' -> Turn On Access
-⛔⛔⛔⛔ Don't use this method for long time.
-this method may harmful for your Gmail account.
-⛔⛔⛔⛔
+     this method may harmful for your Gmail account.
 ================================================
-⛔⛔⛔⛔
-DON'T Push to Git
+⛔⛔⛔⛔ DON'T Push to Git ⛔⛔⛔⛔
 165- write in config/settings.py after EMAIL_BACKEND
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -3849,35 +3828,100 @@ Output:
     ...
     [notice] To update, run: pip install --upgrade pip
 ================================================
-356-
+356- in Terminal
+docker-compose exec web python -m pip freeze > requirements.txt
 ================================================
-357-
+357- add Rosetta in INSTALLED_APPS in config/settings.py
+INSTALLED_APPS = [
+    ...
+    # Third Parties
+    ...
+    'rosetta',
+    ...
+]
+
 ================================================
-358-
+358- Create new path in config/urls.py
+...
+# Rosetta (i18n)
+path('rosetta/', include('rosetta.urls')),
+...
 ================================================
-359-
+359- go in this link everything is Right to Left for Farsi Persons
+http://127.0.0.1:8000/admin/
 ================================================
-360-
+360- go to this link to see rosetta panel, should be reach that without any errors
+http://127.0.0.1:8000/rosetta/files/project/
 ================================================
-361-
+361- Add this lines after "LANGUAGE_CODE = 'fa'" > config/settings.py
+...
+LANGUAGE_CODE = 'fa'
+LANGUAGES = (
+    ('en', 'English'),
+    ('fa', 'Persian'),
+    ('de', 'German'),
+)
+...
 ================================================
-362-
+362- Restart Server
 ================================================
-363-
+363- go to this link, http://127.0.0.1:8000/rosetta/files/django/ have to three sections of LANGUAGES
+http://127.0.0.1:8000/rosetta/files/django/
 ================================================
-364-
+364- Visit this link and brows in that
+http://127.0.0.1:8000/rosetta/files/third-party/
+AND
+http://127.0.0.1:8000/rosetta/files/third-party/fa/1/
+
 ================================================
-365-
+
+                messages
+
 ================================================
-366-
+365- Go to this link and learn with that
+https://docs.djangoproject.com/en/5.0/ref/contrib/messages/
+OR
+https://docs.djangoproject.com/en/5.0/ref/contrib/messages/#displaying-messages
 ================================================
-367-
+366- Copy/Paste this into _base.html after header tag
+...
+...
+<!-- Header End -->
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+...
+...
 ================================================
-368-
+367- import this into products/views.py
+from django.contrib import messages
 ================================================
-369-
+368- add this line into test_translation(request) function
+def test_translation(request):
+    ...
+    messages.success(request, 'This is a success message for you.')
+    ...
 ================================================
-370-
+369- Create testHello.html in products/templates/products/
+testHello.html
+================================================
+370- add this into it -> testHello.html
+{% extends '_base.html' %}
+{% block content %}
+{% endblock %}
+================================================
+================================================
+================================================
+================================================
+================================================
+================================================
+================================================
+================================================
+================================================
 ================================================
 ================================================
 ================================================
