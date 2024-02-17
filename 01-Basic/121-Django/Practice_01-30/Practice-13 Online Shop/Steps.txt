@@ -3899,8 +3899,9 @@ https://docs.djangoproject.com/en/5.0/ref/contrib/messages/#displaying-messages
 ================================================
 367- import this into products/views.py
 from django.contrib import messages
+from django.shortcuts import render
 ================================================
-368- add this line into test_translation(request) function
+368- add this line into products/views.py >> test_translation(request) function
 def test_translation(request):
     ...
     messages.success(request, 'This is a success message for you.')
@@ -3914,8 +3915,62 @@ testHello.html
 {% block content %}
 {% endblock %}
 ================================================
+371- Change this in products/views.py  >> test_translation(request) function
+def test_translation(request):
+    ...
+    ...
+    return render(request, 'products/testHello.html')
 ================================================
+372- visit and check this link, sould have a message in top
+http://127.0.0.1:8000/products/hello/
+
+message:
+    This is a success message for you.
 ================================================
+373- Change this in _base.html
+{% if messages %}
+    <div class="container">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+================================================
+374- visit and check this link, sould have a message in top
+http://127.0.0.1:8000/products/hello/
+================================================
+375- add this in the end of config/settings.py
+...
+...
+# For messages framework
+from django.contrib.messages import constants as messages_constants
+MESSAGES_TAGS = {
+    messages_constants.ERROR: 'danger',
+}
+================================================
+
+
+                Shopping cart
+                Sessions
+                Cookies
+                http: stateless memory
+
+================================================
+376-  
+================================================
+377-
+================================================
+378-
+================================================
+379-
+================================================
+380-
+================================================
+381-
+================================================
+382-
+================================================
+383-
 ================================================
 ================================================
 ================================================
