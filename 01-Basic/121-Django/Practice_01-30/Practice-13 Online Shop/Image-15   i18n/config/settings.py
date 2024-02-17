@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap4",
     'allauth',
     'allauth.account',
+    'rosetta',
 
     # Custom Created
     'accounts',
@@ -133,6 +134,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # LANGUAGE_CODE = 'en-us'
 LANGUAGE_CODE = 'fa'
+LANGUAGES = (
+    ('en', 'English'),
+    ('fa', 'Persian'),
+    ('de', 'German'),
+)
 
 # TIME_ZONE = 'UTC'
 TIME_ZONE = 'Asia/Tehran'
@@ -197,10 +203,11 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     # EMAIL_HOST_PASSWORD = 'your_gmail_password'
 
 
-
-
-
-
+# For messages framework
+from django.contrib.messages import constants as messages_constants
+MESSAGES_TAGS = {
+    messages_constants.ERROR: 'danger',
+}
 
 
 
