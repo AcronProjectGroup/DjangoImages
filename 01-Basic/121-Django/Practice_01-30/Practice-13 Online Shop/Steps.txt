@@ -3956,24 +3956,865 @@ MESSAGES_TAGS = {
                 http: stateless memory
 
 ================================================
-376-  
+376- Delete this function in products/views.py
+...
+from django.contrib import messages
+from django.shortcuts import render
+...
+def test_translation(request):
+    result = _('HELLO')
+    messages.success(request, 'This is a success message for you.')
+    return render(request, 'products/testHello.html')
+...
 ================================================
-377-
+377- Delete this path in products/urls.py
+...
+from .views import test_translation
+...
+path('hello/', test_translation),
+...
 ================================================
-378-
+378- Restart Server, Should be run without any errors
+Output:
+    ...
+    web_1  | Django version 4.2.8, using settings 'config.settings'
+    web_1  | Starting development server at http://0.0.0.0:8000/
+    web_1  | Quit the server with CONTROL-C.
 ================================================
-379-
+379- Create new app, write in another Terminal write(docker was running by default)
+docker-compose exec web python manage.py startapp cart
 ================================================
-380-
+380- Add in INSTALLED_APPS in config/settings.py
+INSTALLED_APPS = [
+    ...
+    ...
+    # Custom Created
+    'cart.apps.CartConfig',
+]
 ================================================
-381-
+381- Create cart.py in cart app
+cart.py
 ================================================
-382-
+382- Create Cart class in cart.py
+class Cart:
+    def __init__(self, request):
+        self.request = request
+        self.session = request.session
+        cart = self.session.get('cart')
+        if not cart:
+            self.session['cart'] = {}
+            cart = self.session['cart']
+        self.cart = cart 
+
 ================================================
-383-
+383- add this method into class Cart
+# ---------------------------------================
+def add(self, product, quantity=1):
+    product_id = str(product.id)
+    if product_id not in self.cart:
+        self.cart[product_id] = {'quantity': quantity}
+    else:
+        self.cart[product_id]['quantity'] += quantity
+    self.save()
+# ---------------------------------================
+def save(self):
+    self.session.modified = True
+
 ================================================
+384- add docstring to these methods and Cart class
+def __init__(self, request):
+    """ Initialize the cart """
+    ...
+# ---------------------------------================
+def add(self, product, quantity=1):
+    """ Add the specified to the cart if was exists """
+    ...
+# ---------------------------------================
+def save(self):
+    """ changes session as modified and store it """
+    ...
+
 ================================================
+385- add a method for remove a product in Cart class
+# ---------------------------------================
+def remove(self, product):
+    """ Remove a product from the cart """
+    product_id = str(product.id)
+    if product_id in self.cart:
+        del self.cart[product_id]
+        self.save()
 ================================================
+386- Import this into cart/cart.py
+from products.models import Product
+================================================
+387- add a method for iteration a product in Cart class
+# ---------------------------------================
+def __iter__(self):
+    product_ids = self.cart.keys()
+    products = Product.objects.filter(id__in=product_ids)
+    cart = self.cart.copy()
+    for product in products:
+        cart[str(product.id)]['product_obj'] = product
+    for item in cart.values():
+        yield item
+================================================
+388- Overwrite this method in class Cart
+...
+# ---------------------------------================
+def __len__(self):
+    return len(self.cart.keys())            
+================================================
+389- add a method for clear all products for after purchase
+...
+# ---------------------------------================
+def clear(self):
+    del self.session['cart']
+    self.save()
+================================================
+390- add a method To collect prices in class Cart
+# ---------------------------------================
+def get_total_price(self):
+    product_ids = self.cart.keys()
+    products = Product.objects.filter(id__in=product_ids)
+    return sum([product.price for product in products])
+================================================
+391- create forms.py in cart directory
+forms.py
+================================================
+392- add these content in cart/forms.py
+from django import forms
+class AddToCartProductForm(forms.Form):
+    QUANTITY_CHOICES = [(i, str(i)) for i in range(1, 30)]
+    quantity = forms.TypedChoiceField(choices=QUANTITY_CHOICES, coerce=int)
+
+================================================
+393- create this cart/--> templates/cart/cart_detail.html
+templates/cart_detail.html
+================================================
+394- content of cart_detail.html
+{% extends '_base.html' %}
+{% block page_title %}cart{% endblock %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load comment_tags %}
+{% load i18n %}
+{% block content %}
+    <!-- Main Content Wrapper Start -->
+        <div class="main-content-wrapper">
+            <div class="page-content-inner ptb--80">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 mb-md--50">
+                            <form class="cart-form" action="#">
+                                <div class="row no-gutters">
+                                    <div class="col-12">
+                                        <div class="table-content table-responsive">
+                                            <table class="table text-center">
+                                                <thead>
+                                                    <tr>
+                                                        <th>&nbsp;</th>
+                                                        <th>عکس محصول</th>
+                                                        <th class="text-left">نام محصول</th>
+                                                        <th>قیمت</th>
+                                                        <th>مقدار</th>
+                                                        <th>مجموع</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="product-remove text-left"><a href=""><i class="flaticon flaticon-cross"></i></a></td>
+                                                        <td class="product-thumbnail text-left">
+                                                            <img src="assets/img/products/prod-10-70x88.jpg" alt="Product Thumnail">
+                                                        </td>
+                                                        <td class="product-name wide-column">
+                                                            <h3>
+                                                                <a href="product-details.html">محصول شماره یک</a>
+                                                            </h3>
+                                                        </td>
+                                                        <td class="product-price">
+                                                            <span class="product-price-wrapper">
+                                                                <span class="money">۱۴۸,۰۰۰ تومان</span>
+                                                            </span>
+                                                        </td>
+                                                        <td class="product-quantity">
+                                                            <div class="quantity">
+                                                                <input type="number" class="quantity-input" name="qty" id="qty-1" value="2" min="1">
+                                                            </div>
+                                                        </td>
+                                                        <td class="product-total-price">
+                                                            <span class="product-price-wrapper">
+                                                                <span class="money">۲۹۶,۰۰۰ تومان</span>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="product-remove text-left"><a href=""><i class="flaticon flaticon-cross"></i></a></td>
+                                                        <td class="product-thumbnail text-left">
+                                                            <img src="assets/img/products/prod-10-70x88.jpg" alt="Product Thumnail">
+                                                        </td>
+                                                        <td class="product-name wide-column">
+                                                            <h3>
+                                                                <a href="product-details.html">محصول شماره دو</a>
+                                                            </h3>
+                                                        </td>
+                                                        <td class="product-price">
+                                                            <span class="product-price-wrapper">
+                                                                <span class="money">۵۰,۰۰۰ تومان</span>
+                                                            </span>
+                                                        </td>
+                                                        <td class="product-quantity">
+                                                            <div class="quantity">
+                                                                <input type="number" class="quantity-input" name="qty" id="qty-1" value="1" min="1">
+                                                            </div>
+                                                        </td>
+                                                        <td class="product-total-price">
+                                                            <span class="product-price-wrapper">
+                                                                <span class="money">۵۰,۰۰۰ تومان</span>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>  
+                                    </div>
+                                </div>
+                                <div class="row no-gutters border-top pt--20 mt--20">
+                                    <div class="col-sm-6 text-sm-right">
+                                        <button type="submit" class="cart-form__btn">خالی کردن سبد خرید</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="cart-collaterals">
+                                <div class="cart-totals">
+                                    <h5 class="font-size-14 font-bold mb--15">مجموع</h5>
+                                    <div class="cart-calculator">
+                                        <div class="cart-calculator__item">
+                                            <div class="cart-calculator__item--head">
+                                                <span>مجموع</span>
+                                            </div>
+                                            <div class="cart-calculator__item--value">
+                                                <span>۳۴۶,۰۰۰ تومان</span>
+                                            </div>
+                                        </div>
+                                        <div class="cart-calculator__item order-total">
+                                            <div class="cart-calculator__item--head">
+                                                <span>جمع کل</span>
+                                            </div>
+                                            <div class="cart-calculator__item--value">
+                                                <span class="product-price-wrapper">
+                                                    <span class="money">۳۴۶,۰۰۰ تومان</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="checkout.html" class="btn btn-fullwidth btn-bg-red btn-color-white btn-hover-2">
+                                    ثبت سفارش
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- Main Content Wrapper Start -->
+{% endblock %}
+================================================
+395- create this file in cart/urls.py
+urls.py
+================================================
+396- content of cart/templates/urls.py
+from django.urls import path
+from .views import cart_detail_view
+urlpatterns = [
+    path('', cart_detail_view, name='cart_detail'),
+]
+================================================
+397- add this path in config/urls.py
+...
+...
+path('products/', include('products.urls')),
+path('cart/', include('cart.urls')),
+...
+...
+================================================
+398- content of cart/views.py
+from django.shortcuts import render
+def cart_detail_view(request):
+    return render(request, 'cart/cart_detail.html',  )
+
+================================================
+399- link in browser, check, should be right 
+http://127.0.0.1:8000/cart/
+================================================
+400- import this in cart/views.py
+from .cart import Cart
+================================================
+401- add these line into cart_detail_view function in cart/views.py
+def cart_detail_view(request):
+    cart = Cart(request)
+    return render(request, 'cart/cart_detail.html',  {'cart': cart})
+================================================
+402- delete this in cart_detail.html
+ <tr>
+    <td class="product-remove text-left"><a href=""><i class="flaticon flaticon-cross"></i></a></td>
+    <td class="product-thumbnail text-left">
+        <img src="assets/img/products/prod-10-70x88.jpg" alt="Product Thumnail">
+    </td>
+    <td class="product-name wide-column">
+        <h3>
+            <a href="product-details.html">محصول شماره دو</a>
+        </h3>
+    </td>
+    <td class="product-price">
+        <span class="product-price-wrapper">
+            <span class="money">۵۰,۰۰۰ تومان</span>
+        </span>
+    </td>
+    <td class="product-quantity">
+        <div class="quantity">
+            <input type="number" class="quantity-input" name="qty" id="qty-1" value="1" min="1">
+        </div>
+    </td>
+    <td class="product-total-price">
+        <span class="product-price-wrapper">
+            <span class="money">۵۰,۰۰۰ تومان</span>
+        </span>
+    </td>
+</tr>
+
+
+================================================
+403- import these into cart/views.py
+from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
+
+from products.models import Product
+from .forms import AddToCartProductForm
+
+================================================
+404- create new variable in cart/urls.py
+app_name = 'cart'
+================================================
+405- Create new function in cart/views.py
+def add_to_cart_view(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    form = AddToCartProductForm(request.POST)    
+    if form.is_valid():
+        cleaned_data = form.cleaned_data
+        quantity = cleaned_data['quantity']
+        cart.add(product, quantity)
+    return redirect('cart:cart_detail')
+
+================================================
+406- go in cart_detail.html and create for loop like this in line 33
+{% for item in cart %}
+    <tr>
+        <td class="product-remove text-left">
+            <a href="">
+                <i class="flaticon flaticon-cross"></i>
+            </a>
+        </td>
+        <td class="product-thumbnail text-left">
+            <img src="assets/img/products/prod-10-70x88.jpg" alt="Product Thumnail">
+        </td>
+        <td class="product-name wide-column">
+            <h3>
+                <a href="product-details.html">محصول شماره یک</a>
+            </h3>
+        </td>
+        <td class="product-price">
+            <span class="product-price-wrapper">
+                <span class="money">۱۴۸,۰۰۰ تومان</span>
+            </span>
+        </td>
+        <td class="product-quantity">
+            <div class="quantity">
+                <input type="number" class="quantity-input" name="qty" id="qty-1" value="2" min="1">
+            </div>
+        </td>
+        <td class="product-total-price">
+            <span class="product-price-wrapper">
+                <span class="money">۲۹۶,۰۰۰ تومان</span>
+            </span>
+        </td>
+    </tr>
+{% endfor %}
+
+================================================
+407- change this table row like this (in step 406) 
+<a href="product-details.html">{{ item.product_obj.title }}</a>
+
+================================================
+408- check this link in broswer should be see empty cart
+http://127.0.0.1:8000/cart/
+
+Output:
+    is empty cart page!!
+================================================
+409- import into products/views.py
+from cart.forms import AddToCartProductForm
+================================================
+410- add this after context['comment_form'] in ProductDetailView into products/views.py
+class ProductDetailView(generic.DeleteView):
+    ...
+    def get_context_data(self, **kwargs):
+    ...
+    context['comment_form'] = CommentForm()
+    # ADD BELOW LINE AFTER ABOVE LINE --------------============
+    context['add_to_cart_form'] = AddToCartProductForm()
+    ...
+================================================
+411- Delete these lines from 49 to 56 in product_detail.html
+<div class="quantity-wrapper d-flex justify-content-start">
+    <div class="quantity">
+        <input type="number" class="quantity-input" name="qty" id="qty" value="1" min="1">
+    </div>
+</div>
+<button type="button" class="btn btn-small btn-bg-red btn-color-white btn-hover-2" onclick="window.location.href='cart.html'">
+    اضافه به سبد خرید
+</button>
+
+================================================
+412- Add these instead of past step(411) 
+<div class="product-action d-flex align-items-sm-center align-content-center mb--30">
+    <!-- BELOW LINES /-->
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ add_to_cart_form.as_p }}
+        <button type="submit">{% translate 'Add to Cart' %}</button>
+    </form>
+</div>
+
+================================================
+413- import into cart/urls.py
+from .views import add_to_cart_view
+================================================
+414- Create new path in cart/urls.py
+path('add/<int:product_id>/', add_to_cart_view, name='cart_add'),
+================================================
+415- Change this in line 50 of product_detail.html
+<form action="{% url 'cart:cart_add' product.id %}" method="POST">
+================================================
+416- Check a product and add it to cart with this link: should redirect to cart page correctly
+http://127.0.0.1:8000/products/2/
+================================================
+417- delete/Change price in line 50 of cart_detail.html
+<span class="money">{{ item.product_obj.price }}</span>
+================================================
+418- Check this link should be correct for each product price, true numbers
+http://127.0.0.1:8000/cart/
+================================================
+419- Delete/Change value tag in line 60 of cart_detail.html
+<span class="money">{{ item.product_obj.price }}</span>
+================================================
+420- Change line 55 of cart_detail.html like this
+<input 
+    type="number" 
+    class="quantity-input" 
+    name="qty" 
+    id="qty-1" 
+    value="{{ item.quantity }}" 
+    min="1"
+>
+================================================
+421- Check this link should be correct for numbers of product price in purchase process
+http://127.0.0.1:8000/cart/
+================================================
+422- Change line 52 number of product_detail.html
+{{ add_to_cart_form|crispy }}
+================================================
+423- Delete line number 52 of product_detail.html this
+{{ add_to_cart_form|crispy }}
+================================================
+424- add this in line number 53 of product_detail.html this
+<input 
+    type="number" 
+    class="quantity-input" 
+    name="quantity" 
+    id="quantity" 
+    value="1" 
+    min="1"
+    max="30"
+>
+
+================================================
+425- change this line in cart/forms.py
+QUANTITY_CHOICES = [(i, str(i)) for i in range(1, 31)]
+================================================
+426- Check this link and write more than 30 number for buy a product, should don't let to pass
+http://127.0.0.1:8000/products/2/
+================================================
+427- Delete again these lines from cart/views.py
+...
+from cart.forms import AddToCartProductForm
+...
+context['add_to_cart_form'] = AddToCartProductForm()
+...
+================================================
+            
+            Delete Items in Cart
+
+================================================
+428- Create new function in cart/views.py
+def remove_from_cart(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    cart.remove(product)
+    return redirect('cart:cart_detail')
+
+================================================
+429- change this line in cart_detail.html (from line number 36)
+<a href="{% url 'cart:cart_remove' item.product_obj.id %}">
+================================================
+430- import to urls.py
+from .views import remove_from_cart
+================================================
+431- create new path in cart/urls.py
+path('remove/<int:product_id>/', remove_from_cart, name='cart_remove'),
+================================================
+432- delete a product , shuold be delete it
+http://127.0.0.1:8000/products/2/
+================================================
+433- change this in cart_detail.html (from line number 45)
+<a href="{{ item.product_obj.get_absolute_url }}">
+================================================
+434- add this line in AddToCartProductForm in cart/forms.py
+class AddToCartProductForm(forms.Form):
+    ...
+    ...
+    inplace = forms.BooleanField(required=False, widget=forms.HiddenInput)
+
+================================================
+435- change this method in cart/cart.py
+def add(self, product, quantity=1, replace_current_quantity=False):
+================================================
+436- add this condition in add method in cart/cart.py before else
+def add(self, product, quantity=1, replace_current_quantity=False):
+    ...
+    ...
+    if replace_current_quantity:
+        self.cart[product_id]['quantity'] = quantity
+    else:
+        self.cart[product_id]['quantity'] += quantity
+    ...
+
+================================================
+437- change this in cart/views.py
+def add_to_cart_view(request, product_id):
+    ...
+    if form.is_valid():
+        ...
+        # BELOW LINE
+        cart.add(product, quantity, replace_current_quantity=cleaned_data['inplace'])
+        ...
+    ...
+
+================================================
+438-  in cart/views.py
+def cart_detail_view(request):
+    ...
+    ...
+    for item in cart:
+        item['product_update_quantity_form'] = AddToCartProductForm(initial={
+            'quantity': item['quantity'],
+            'inplace': True,
+        })
+    ...
+
+================================================
+439- create new form in cart_detail.html in line number 56 
+<form action="">
+    <div class="quantity">
+        <input 
+            type="number" 
+            class="quantity-input" 
+            name="qty" 
+            id="qty-1" 
+            value="{{ item.quantity }}" 
+            min="1"
+        >
+    </div>
+</form>
+
+================================================
+440- final changes of form cart_detail.html in line number 56
+<form method="POST" action="{% url 'cart:cart_add' item.product_obj.id %}">
+    {% csrf_token %}
+    <div class="quantity">
+        <input 
+            type="number" 
+            class="quantity-input" 
+            name="qty" 
+            id="qty-1" 
+            value="{{ item.quantity }}" 
+            min="1"
+        >
+        {{ item.product_update_quantity_form.inplace }}
+        <button type="submit">{% translate 'Update' %}</button>
+    </div>
+</form>
+
+================================================
+441- delete form of cart_detail.html in line number 17 and 89
+line 17 delete it 
+<form class="cart-form" action="#">
+...
+
+line 89 delete it
+</form>
+
+================================================
+442- change this in line number 61 of cart_detail.html
+...
+name="quantity" 
+...
+================================================
+443- Restart Server
+================================================
+444- check this link and change number a product in purchase process, should be replace number
+================================================
+445- change line number 20 in cart.py with this
+self.cart[product_id] = {'quantity': 0}
+================================================
+446- change linke number 40 in cart_detail.html
+<img src="assets/img/products/prod-10-70x88.jpg">
+================================================
+447- change linke number 25 in cart_detail.html
+<th>نام محصول</th>
+================================================
+448- change link number 42 in cart_detail.html
+<td class="product-name">
+================================================
+449- get out side this two lines from last div in line from 66/67 number line to 67/68 cart_detail.html
+<div class="quantity">
+    <input 
+        type="number" 
+        class="quantity-input" 
+        name="quantity" 
+        id="qty-1" 
+        value="{{ item.quantity }}" 
+        min="1"
+    >
+</div>
+{{ item.product_update_quantity_form.inplace }}
+<button type="submit">{% translate 'Update' %}</button>
+================================================
+450- change  number 55 in cart_detail.html
+<form class="d-flex" method="POST" action="{% url 'cart:cart_add' item.product_obj.id %}">
+================================================
+451- change number 68 in cart_detail.html
+<button class="small" type="submit"><i class="fa fa-refresh"></i></button>
+================================================
+452- add this line to cart.py in class Cart in def __iter__
+class Cart:
+    ...
+    def __iter__(self):
+        ...
+        for item in cart.values():
+            # THIS LINE 
+            item['total_price'] = item['product_obj'].price * item['quantity']
+            ...            
+================================================
+453- change line number 73 in cart_detail.html
+<span class="money">{{ item.total_price }}</span>
+================================================
+454- Check last changes in this link
+http://127.0.0.1:8000/cart/
+================================================
+455- Change all in the class Cart in get_total_price method cart.py
+class Cart:
+    ...
+    ...
+    def get_total_price(self):
+        product_ids = self.cart.keys()
+        return sum(item['quantity'] * item['product_obj'].price for item in self.cart.values())
+================================================
+456- Delete this in cart_detail.html
+ <div class="cart-calculator__item">
+    <div class="cart-calculator__item--head">
+        <span>مجموع</span>
+    </div>
+    <div class="cart-calculator__item--value">
+        <span>۳۴۶,۰۰۰ تومان</span>
+    </div>
+</div>
+================================================
+457- change line number 100 in cart_detail.html
+<span class="money">{{ cart.get_total_price }} تومان</span>
+================================================
+458- Check last changes in this link
+http://127.0.0.1:8000/cart/
+================================================
+459- add table in 'if' condition in cart_detail.html
+{% if cart %}
+    <table class="table text-center">
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>عکس محصول</th>
+                <th>نام محصول</th>
+                <th>قیمت</th>
+                <th>مقدار</th>
+                <th>مجموع</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in cart %}
+                <tr>
+                    <td class="product-remove text-left">
+                        <a href="{% url 'cart:cart_remove' item.product_obj.id %}">
+                            <i class="flaticon flaticon-cross"></i>
+                        </a>
+                    </td>
+                    <td class="product-thumbnail text-left">
+                        <img src="assets/img/products/prod-10-70x88.jpg">
+                    </td>
+                    <td class="product-name">
+                        <h3>
+                            <a href="{{ item.product_obj.get_absolute_url }}">
+                                {{ item.product_obj.title }}
+                            </a>
+                        </h3>
+                    </td>
+                    <td class="product-price">
+                        <span class="product-price-wrapper">
+                            <span class="money">{{ item.product_obj.price }}</span>
+                        </span>
+                    </td>
+                    <td class="product-quantity">
+                        <form class="d-flex" method="POST" action="{% url 'cart:cart_add' item.product_obj.id %}">
+                            {% csrf_token %}
+                            <div class="quantity">
+                                <input 
+                                    type="number" 
+                                    class="quantity-input" 
+                                    name="quantity" 
+                                    id="qty-1" 
+                                    value="{{ item.quantity }}" 
+                                    min="1"
+                                >
+                            </div>
+                            {{ item.product_update_quantity_form.inplace }}
+                            <button class="small" type="submit"><i class="fa fa-refresh"></i></button>
+                        </form>
+                    </td>
+                    <td class="product-total-price">
+                        <span class="product-price-wrapper">
+                            <span class="money">{{ item.total_price }}</span>
+                        </span>
+                    </td>
+                </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% else %}
+    <p>{% translate 'Cart is Empty! Please add some products to the cart' %}</p>
+    <a href="{% url 'product_list' %}">{% translate 'Go shopping' %}</a>
+{% endif %}
+
+================================================
+460- import this to cart/views.py 
+from django.views.decorators.http import require_POST
+================================================
+461- add this line before add_to_cart_view function in cart/views.py
+@require_POST
+def add_to_cart_view(request, product_id):
+    ...
+================================================
+462- import these to cart.py
+from django.contrib import messages
+from django.utils.translation import gettext as _
+================================================
+463- add this in line number 28 before 'self.save()' in 'add' method > cart.py
+messages.success(self.request, _('Product successfuly added to cart'))
+================================================
+464- add this in line before 'self.save()' > cart.py
+class Cart:
+    ...
+    def remove(self, product):
+        ...
+        if product_id in self.cart:
+            ...
+            messages.success(self.request, _('Product successfully deleted to cart'))
+            self.save()
+================================================
+465- create locale directory in cart directory
+locale
+================================================
+466- in Terminal go in cart directory
+django-admin makemessages -l fa
+================================================
+467- go in this link than translate that messages you need to show
+http://127.0.0.1:8000/rosetta/files/third-party/fa/1/
+================================================
+468- Logout from user
+================================================
+469- go to this link and write a comment
+http://127.0.0.1:8000/products/comment/2/
+
+Output should be like this:
+    Cannot assign "<SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7f8a3c647fa0>>": "Comment.author" must be a "CustomUser" instance.
+================================================
+470- add in line number 163 in product_detail.html
+{% if user.is_authenticated %}
+    <span class="reply-title pull-right">{% translate 'Write your comment' %}</span>
+    <form action="{% url 'comment_create' product.id %}" method="POST">
+        {% csrf_token %}
+        {{ comment_form|crispy }}
+        <input type="submit" value="{% translate 'Submit' %}">
+    </form>
+{% else %}
+    <p>
+        {% translate 'To submit a comment please' %}
+        <a href="{% url 'account_login' %}">{% translate 'Login' %}</a>
+    </p>
+{% endif %}
+
+================================================
+471- in Terminal go in products directory
+django-admin makemessages -l fa
+================================================
+472- restart server
+================================================
+473- login with an user (admin is best)
+================================================
+474- add this after <span> in line number 164 in product_detail.html
+<span class="reply-title pull-right">{% translate 'Write your comment' %}</span>
+<br>
+================================================
+475- go in _base.html add this after <ul class='user-info-menu'> tag in line number 96
+<ul class="user-info-menu">
+    {% if user.is_authenticated %}
+        <li>
+            <a class="text-right" href="{% url 'account_logout' %}">{% translate 'Logout' %}</a>
+        </li>
+        <li>
+            <a class="text-right" href="profile.html">{% translate 'Profile' %}</a>
+        </li>
+    {% else %}
+        <li>
+            <a class="text-right" href="{% url 'account_login' %}">{% translate 'Login' %}</a>
+        </li>
+        <li>
+            <a class="text-right" href="{% url 'account_signup' %}">{% translate 'Signup' %}</a>
+        </li>
+    {% endif %}
+</ul>
+
+================================================
+476- add this in first of _base.html
+{% load i18n %}
+================================================
+477- in Terminal go in products directory
+django-admin makemessages -l fa
+================================================
+478- go to this link and translate to what you want
+http://127.0.0.1:8000/rosetta/files/third-party/
 ================================================
 ================================================
 ================================================
