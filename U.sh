@@ -430,8 +430,110 @@ messages
 374- visit and check this link, sould have a message in top -> http://127.0.0.1:8000/products/hello/
 375- add this in the end of config/settings.py
 Shopping cart
+376- Delete this function in products/views.py
+377- Delete this path in products/urls.py
+378- Restart Server, Should be run without any errors
+379- Create new app, write in another Terminal write(docker was running by default) --> docker-compose exec web python manage.py startapp cart
+380- Add in INSTALLED_APPS in config/settings.py
+381- Create cart.py in cart app --> cart.py
+382- Create Cart class in cart.py
+383- add this method into class Cart
+384- add docstring to these methods and Cart class
+385- add a method for remove a product in Cart class
+386- Import this into cart/cart.py --> from products.models import Product
+387- add a method for iteration a product in Cart class
+388- Overwrite this method in class Cart
+389- add a method for clear all products for after purchase
+390- add a method To collect prices in class Cart
+391- create forms.py in cart directory --> forms.py
+392- add these content in cart/forms.py
+393- create this cart/--> templates/cart/cart_detail.html
+394- content of cart_detail.html
+395- create this file in cart/urls.py
+396- content of cart/templates/urls.py
+397- add this path in config/urls.py
+398- content of cart/views.py
+399- link in browser, check, should be right 
+400- import this in cart/views.py
+401- add these line into cart_detail_view function in cart/views.py
+402- delete this in cart_detail.html
+403- import these into cart/views.py
+404- create new variable in cart/urls.py --> app_name = 'cart'
+405- Create new function in cart/views.py
+406- go in cart_detail.html and create for loop like this in line 33
+407- change this table row like this (in step 406)  -->>   <a href='product-details.html'>{{ item.product_obj.title }}</a>
+408- check this link in broswer should be see empty cart -->> http://127.0.0.1:8000/cart/
+409- import into products/views.py
+410- add this after context['comment_form'] in ProductDetailView into products/views.py
+411- Delete these lines from 49 to 56 in product_detail.html
+412- Add these instead of past step(411) 
+413- import into cart/urls.py  --> from .views import add_to_cart_view
+414- Create new path in cart/urls.py  --> path('add/<int:product_id>', add_to_cart_view, name='cart_add'),
+415- Change this in line 50 of product_detail.html  --> <form action='{% url 'cart:cart_add' product.id %}' method='POST'>
+416- Check a product and add it to cart with this link: should redirect to cart page correctly  --> http://127.0.0.1:8000/products/2/
+417- delete/Change price in line 50 of cart_detail.html  --> <span class='money'>{{ item.product_obj.price }}</span>
+418- Check this link should be correct for each product price, true numbers  --> http://127.0.0.1:8000/cart/
+419- Delete/Change value tag in line 60 of cart_detail.html  --> <span class='money'>{{ item.product_obj.price }}</span>
+420- Change line 50 of cart_detail.html like this
+421- Check this link should be correct for numbers of product price in purchase process  --> http://127.0.0.1:8000/cart/
+422- Change line 52 number of product_detail.html  --> {{ add_to_cart_form|crispy }}
+423- Delete line number 52 of product_detail.html this  --> {{ add_to_cart_form|crispy }}
+424- add this in line number 53 of product_detail.html this
+425- change this line in cart/forms.py  --> QUANTITY_CHOICES = [(i, str(i)) for i in range(1, 31)]
+426- Check this link and write more than 30 number for buy a product, should don't let to pass --> http://127.0.0.1:8000/products/2/
+427- Delete again these lines from cart/views.py
+Delete Items in Cart
+428- Create new function in cart/views.py
+429- change this line in cart_detail.html (from line number 36) --> <a href='{% url 'cart:cart_remove' item.product_obj.id %}'>
+430- import to urls.py --> from .views import remove_from_cart
+431- create new path in cart/urls.py --> path('remove/<int:product_id>/', remove_from_cart, name='cart_remove'),
+432- delete a product , shuold be delete it --> http://127.0.0.1:8000/products/2/
+433- change this in cart_detail.html (from line number 45) --> <a href='{{ item.product_obj.get_absolute_url }}'>
+434- add this line in AddToCartProductForm in cart/forms.py  -->     inplace = forms.BooleanField(required=False, widget=forms.HiddenInput)
+435- change this method in cart/cart.py
+436- add this condition in add method in cart/cart.py before else
+437- change this in cart/views.py  -->  cart.add(product, quantity, replace_current_quantity=cleaned_data['inplace'])
+438-  in cart/views.py
+439- create new form in cart_detail.html in line number 56 
+440- final changes of form cart_detail.html in line number 56
+441- delete form of cart_detail.html in line number 17 and 89
+442- change this in line number 61 of cart_detail.html
+443- Restart Server
+444- check this link and change number a product in purchase process, should be replace number
+445- change line number 20 in cart.py with this
+446- change linke number 40 in cart_detail.html
+447- change linke number 25 in cart_detail.html
+448- change linke number 42 in cart_detail.html
+449- get out side this two lines from last div in line from 66/67 number line to 67/68 cart_detail.html
+450- change  number 55 in cart_detail.html
+451- change number 68 in cart_detail.html
+452- add this line to cart.py in class Cart in def __iter__
+453- change line number 73 in cart_detail.html
+454- Check last changes in this link
+455- Change all in the class Cart in get_total_price method cart.py
+456- Delete this in cart_detail.html
+457- change line number 100 in cart_detail.html
+458- Check last changes in this link
+459- add table in 'if' condition in cart_detail.html
+460- import this to cart/views.py -> from django.views.decorators.http import require_POST
+461- add this line before add_to_cart_view function in cart/views.py
+462- import these to cart.py --> from django.contrib import messages   from django.utils.translation import gettext as _
+463- add this in line number 28 before 'self.save()' in 'add' method > cart.py  --> messages.success(self.request, _('Product successfuly added to cart'))
+464- add this in line before 'self.save()' > cart.py -->   messages.success(self.request, _('Product successfully deleted to cart'))
+465- create locale directory in cart directory  --> locale
+466- in Terminal go in cart directory  --> django-admin makemessages -l fa
+467- go in this link than translate that messages you need to show  --> http://127.0.0.1:8000/rosetta/files/third-party/fa/1/
+468- Logout from user
+469- go to this link and write a comment  -->  http://127.0.0.1:8000/products/comment/2/
+470- add in line number 163 in product_detail.html
+471- in Terminal go in products directory  --> django-admin makemessages -l fa
+472- restart server
+473- login with an user (admin is best)
+474- add this after <span> in line number 164 in product_detail.html
+475- go in _base.html add this after <ul class='user-info-menu'> tag in line number 96
+476- add this in first of _base.html
+477- in Terminal go in products directory
+478- go to this link and translate to what you want
 
 "
-git push -u origin main 
-
-# with ScreenShot for showing demo png file
+git push -u origin main # with ScreenShot for showing demo png file
