@@ -5,7 +5,6 @@ git commit -m " 💠 121-Django/Practice_01-30/Practice-13 Online Shop Image-16 
                 Shopping cart           
                 Sessions
                 Cookies
-                
                 http: stateless memory
 
 1- write in a directory Terminal 
