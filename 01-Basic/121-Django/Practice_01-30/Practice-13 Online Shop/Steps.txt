@@ -4816,12 +4816,61 @@ django-admin makemessages -l fa
 478- go to this link and translate to what you want
 http://127.0.0.1:8000/rosetta/files/third-party/
 ================================================
+
+               Context Processors
+
 ================================================
+479- Create context_processors.py in cart directory
+context_processors.py
 ================================================
+480- Create new function in context_processors.py
+def cart(request):
+    return {'cart': Cart(request)}
 ================================================
+481- Import this in context_processors.py
+from .cart import Cart
 ================================================
+482- add this in config/settings.py in TEMPLATES in context_processors end of that
+TEMPLATES = [
+    ...
+        'OPTIONS': {
+            'context_processors': [
+                ...
+                # Custom Context Processors
+                'cart.context_processors.cart',
+            ],
+        },
+    ...
+]
 ================================================
+483- add this in _base.html in line number 90
+<sup class="mini-cart-count">{{ cart|length }}</sup>
 ================================================
+484- Restart Server Ctrl+C than 
+docker-compose up
+================================================
+485- Add a product for example check all pages most be shows number of products you want to buy for example
+http://127.0.0.1:8000/
+http://127.0.0.1:8000/products/
+http://127.0.0.1:8000/products/1/
+http://127.0.0.1:8000/products/2/
+http://127.0.0.1:8000/cart/
+================================================
+486- Change this line in cart.py
+...
+def __len__(self):
+    return sum(item['quantity'] for item in self.cart.values())            
+...
+================================================
+487- Restart Server Ctrl+C than 
+docker-compose up
+================================================
+488- check again these links
+http://127.0.0.1:8000/
+http://127.0.0.1:8000/products/
+http://127.0.0.1:8000/products/1/
+http://127.0.0.1:8000/products/2/
+http://127.0.0.1:8000/cart/
 ================================================
 ================================================
 ================================================
