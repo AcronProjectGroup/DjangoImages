@@ -535,6 +535,17 @@ Delete Items in Cart
 476- add this in first of _base.html
 477- in Terminal go in products directory
 478- go to this link and translate to what you want
+Context Processors
+479- Create context_processors.py in cart directory -->  context_processors.py
+480- Create new function in context_processors.py
+481- Import this in context_processors.py --> from .cart import Cart
+482- add this in config/settings.py in TEMPLATES in context_processors end of that
+483- add this in _base.html in line number 90
+484- Restart Server Ctrl+C than 
+485- Add a product for example check all pages most be shows number of products you want to buy for example
+486- Change this line in cart.py   --->>      return sum(item['quantity'] for item in self.cart.values())
+487- Restart Server Ctrl+C than --->>> docker-compose up
+488- check again these links --->>> http://127.0.0.1:8000/   OR http://127.0.0.1:8000/products/
 
 "
 git push -u origin main # with ScreenShot for showing demo png file

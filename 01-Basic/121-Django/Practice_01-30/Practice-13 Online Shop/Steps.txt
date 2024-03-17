@@ -4816,13 +4816,113 @@ django-admin makemessages -l fa
 478- go to this link and translate to what you want
 http://127.0.0.1:8000/rosetta/files/third-party/
 ================================================
+
+               Context Processors
+
 ================================================
+479- Create context_processors.py in cart directory
+context_processors.py
 ================================================
+480- Create new function in context_processors.py
+def cart(request):
+    return {'cart': Cart(request)}
 ================================================
+481- Import this in context_processors.py
+from .cart import Cart
 ================================================
+482- add this in config/settings.py in TEMPLATES in context_processors end of that
+TEMPLATES = [
+    ...
+        'OPTIONS': {
+            'context_processors': [
+                ...
+                # Custom Context Processors
+                'cart.context_processors.cart',
+            ],
+        },
+    ...
+]
 ================================================
+483- add this in _base.html in line number 90
+<sup class="mini-cart-count">{{ cart|length }}</sup>
 ================================================
+484- Restart Server Ctrl+C than 
+docker-compose up
 ================================================
+485- Add a product for example check all pages most be shows number of products you want to buy for example
+http://127.0.0.1:8000/
+http://127.0.0.1:8000/products/
+http://127.0.0.1:8000/products/1/
+http://127.0.0.1:8000/products/2/
+http://127.0.0.1:8000/cart/
+================================================
+486- Change this line in cart.py
+...
+def __len__(self):
+    return sum(item['quantity'] for item in self.cart.values())            
+...
+================================================
+487- Restart Server Ctrl+C than 
+docker-compose up
+================================================
+488- check again these links
+http://127.0.0.1:8000/
+http://127.0.0.1:8000/products/
+http://127.0.0.1:8000/products/1/
+http://127.0.0.1:8000/products/2/
+http://127.0.0.1:8000/cart/
+================================================
+489- Cut than Change than Copy this code and Create file with name ... in ... directory 
+<!-- Mini Cart Start -->
+    <aside class="mini-cart" id="miniCart">
+        <div class="mini-cart-wrapper">
+            <a href="" class="btn-close"><i class="flaticon flaticon-cross"></i></a>
+            <div class="mini-cart-inner">
+                <h3 class="mini-cart__heading mb--40 mb-lg--30 text-right">{% translate 'Cart' %}</h3>
+                <div class="mini-cart__content">
+                    <ul class="mini-cart__list text-right">
+                        {% for item in cart %}
+                            <li class="mini-cart__product d-flex justify-content-between">
+                                <div class="mini-cart__product__image">
+                                    <a href="#">
+                                        <img src="assets/img/products/prod-1-100x100.jpg">
+                                    </a>
+                                </div>
+                                <div class="mini-cart__product__content pt-2">
+                                    <span class="mini-cart__product__title d-flex flex-row justify-content-between">
+                                        <a href="                            </span>
+                                    <span class="mini-cart__product__quantity">
+                                        <span>{{ item.product_obj.price }}</span> &#215; <span>{{ item.quantity }}</span>
+                                    </span>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="mini-cart__total">
+                        <span>{% translate 'Total' %}</span>
+                        <span class="ammount">{{ cart.get_total_price }}</span>
+                    </div>
+                    <div class="mini-cart__buttons">
+                        <a href="cart.html" class="btn btn-fullwidth btn-bg-sand mb--20">{% translate 'Go to cart' %}</a>
+                        <a href="checkout.html" class="btn btn-fullwidth btn-bg-sand">{% translate 'Checkout' %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+<!-- Mini Cart End -->
+================================================
+490-
+================================================
+491-
+================================================
+492-
+================================================
+493-
+================================================
+494-
+================================================
+495-
 ================================================
 ================================================
 ================================================
